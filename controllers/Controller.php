@@ -46,12 +46,11 @@ if (isset($_POST['username'])) {
 
 	$uname = $_POST['username'];
 	$row = array(
-		'password' => 'password',
-		'role_as' => '0'
+		'password' => 'password'
 	);
 	$tbl = 'users';
 	$option = null;
-	$where = "email = '$uname'";
+	$where = "email = '$uname' AND role_as IN (0,1,2,3)";
 
 	$result = $obj->select_data($row, $tbl, $option, $where);
 	$ress = mysqli_fetch_assoc($result);

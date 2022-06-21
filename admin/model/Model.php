@@ -8,7 +8,7 @@ class Model
 	}
 	public function insert_data($data, $tbl)
 	{
-		$field = array_keys($data);
+		$field = array_keys($data); 
 		$fields = implode(", ", $field);
 		$value = array_values($data);
 		$values = "'" . implode("', '", $value) . "'";
@@ -19,6 +19,7 @@ class Model
 	}
 	public function select_data($rows = null, $tbl, $option = null, $where = null)
 	{
+		$join =$group_by=$having=$order_by=$limit=$offset='';
 		if ($rows != null) {
 			$row_fields = implode(', ', $rows);
 			$sel = 'SELECT ' . $row_fields . ' FROM ' . $tbl;
@@ -27,7 +28,7 @@ class Model
 			$sel = 'SELECT ' . $rows . ' FROM ' . $tbl;
 		}
 		if ($option != null) {
-			$join = '';
+			
 			foreach ($option as  $key => $value) {
 				$val = $key;
 				if ($val == "join") {
@@ -80,7 +81,10 @@ class Model
 		}
 		echo $sel;
 		$sql = $this->db->query($sel) or die("query failed");
-		return $sql;
+		while($r=$sql->fetch_object()){  
+			$row[]=$r; 
+		}   
+		return $row;
 	}
 	public function delete_data($tbl, $data)
 	{

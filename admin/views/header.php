@@ -1,3 +1,8 @@
+<?php 
+	if(!isset($_SESSION['admin'])){
+		header("location:".$this->base_url);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
