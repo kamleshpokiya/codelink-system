@@ -26,8 +26,15 @@
     <link rel="stylesheet" href="<?php echo site_url; ?>css/style.css"> 
     <link rel="shortcut icon" href="<?php echo site_url; ?>images/favicon.png" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-    
     <script src="<?php echo site_url; ?>js/jquery-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+      .error{
+        color:red; 
+        margin-top:15px;
+      
+      }
+    </style>
   </head>
   <body>
     <div class="container-scroller">

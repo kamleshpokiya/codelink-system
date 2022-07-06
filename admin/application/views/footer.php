@@ -11,7 +11,7 @@
 </div>
 <!-- page-body-wrapper ends -->
 </div>
-<!-- container-scroller -->  
+<!-- container-scroller -->
 <!-- plugins:js -->
 <script src="<?php echo site_url; ?>vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
@@ -28,7 +28,7 @@
 <script src="<?php echo site_url; ?>js/hoverable-collapse.js"></script>
 <script src="<?php echo site_url; ?>js/misc.js"></script>
 <script src="<?php echo site_url; ?>js/settings.js"></script>
-<script src="<?php echo site_url; ?>js/todolist.js"></script>  
+<script src="<?php echo site_url; ?>js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="<?php echo site_url; ?>js/dashboard.js"></script>
