@@ -1,6 +1,6 @@
 <?php
 //base url
-define("base_url","http://localhost/codelink-mvc/");
-define("site_url","http://localhost/codelink-mvc/public/assets/")
+define("base_url","http://localhost/codelink-system/");
+define("site_url","http://localhost/codelink-system/public/assets/")
 ?>
 

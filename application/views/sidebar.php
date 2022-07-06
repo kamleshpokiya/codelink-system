@@ -33,6 +33,14 @@
         <span class="menu-title">Leaves</span>
       </a>
     </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="<?php echo base_url; ?>Policy/viewPolicies">
+        <span class="menu-icon">
+          <i class="mdi mdi-table-large"></i>
+        </span>
+        <span class="menu-title">Policies</span>
+      </a>
+    </li>
 
   </ul>
 </nav>
@@ -60,7 +68,7 @@
                                                         } else {
                                                           echo site_url . 'images/carousel/' . $data['users']['profile_pic'];
                                                         }
-                                                      }else{
+                                                      } else {
                                                         echo site_url . 'images/carousel/profile_default.png';
                                                       } ?>">
               <p class="mb-0 d-none d-sm-block navbar-profile-name"><?php if (isset($data['users']['first_name'])) {
@@ -103,4 +111,6 @@
       </button>
     </div>
   </nav>
-  <!-- partial -->
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <!-- partial -->
