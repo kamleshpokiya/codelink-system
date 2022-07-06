@@ -31,16 +31,27 @@ if (isset($_SESSION['admin'])) {
         <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
+            <?php
+                            if (isset($_SESSION['msg']) && $_SESSION != '') {
+                            ?>
+                                <div class="alert alert-success " role="alert">
+                                     <?php echo $_SESSION['msg']; ?>
+                                </div>
+                            <?php
+                                unset($_SESSION['msg']);
+                            }
+                            ?>
               <h3 class="card-title text-left mb-3">Login</h3>
-              <form method="post">
+              <form method="post" autocomplete="TRUE">
                 <div class="form-group">
-                  <label>Email *</label>
-                  <input type="text" name="email" value="<?php if (isset($_COOCKIE['email'])) {
+                  <label>Email * </label> 
+                  <input type="text" name="email"  value="<?php if (isset($_COOCKIE['email'])) {
                                                             echo $_COOCKIE['email'];
                                                           } ?>" class="form-control p_input">
+
                 </div>
                 <div class="form-group">
-                  <label>Password *</label>
+                  <label>Password *  </label> 
                   <input type="password" name="password" value="<?php if (isset($_COOCKIE['password'])) {
                                                                   echo $_COOCKIE['password'];
                                                                 } ?>" class="form-control p_input">

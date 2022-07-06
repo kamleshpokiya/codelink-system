@@ -11,7 +11,7 @@
 </div>
 <!-- page-body-wrapper ends -->
 </div>
-<!-- container-scroller -->
+<!-- container-scroller -->  
 <!-- plugins:js -->
 <script src="<?php echo site_url; ?>vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
@@ -28,7 +28,7 @@
 <script src="<?php echo site_url; ?>js/hoverable-collapse.js"></script>
 <script src="<?php echo site_url; ?>js/misc.js"></script>
 <script src="<?php echo site_url; ?>js/settings.js"></script>
-<script src="<?php echo site_url; ?>js/todolist.js"></script>
+<script src="<?php echo site_url; ?>js/todolist.js"></script>  
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="<?php echo site_url; ?>js/dashboard.js"></script>
@@ -38,6 +38,10 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!--end bootstrap js-->
+<!--data table jsplugin -->
+<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo site_url; ?>js/datatable.js"></script>
+<!--end data table js plugin -->
 </body>
 
 </html>

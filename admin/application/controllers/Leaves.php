@@ -9,10 +9,10 @@ class Leaves extends loadFile
         session_start();
         $this->db = $this->model('Model');
     }
-
+//leave details 
     public function leaves()
     {
-        $select = array("leaves.id", "users.first_name", "leaves.leave_type", "leaves.after_before_leave", "leaves.leave_desc", "leaves.credit_leave", "leaves.extra_leave","leaves.from_date","leaves.to_date","leaves.admin_reason","leaves.status");
+        $select = array("leaves.id", "users.first_name", "leaves.leave_type", "leaves.half_leave_type", "leaves.leave_subject", "leaves.from_credit", "leaves.from_non_credit","leaves.total","leaves.leave_from","leaves.leave_to","leaves.comments","leaves.status","leaves.date");
         $tbl = 'leaves';
         $option = array(
             "join" => array(
@@ -32,14 +32,15 @@ class Leaves extends loadFile
         $records = $this->db->select_data($select, $tbl, $option, $where);
         $this->view("leaves", array("title" => "this is leaves", "data" => $records));
     }
+    //approve by admin 
     public function approve_leave($id)
     {
         $leave_id = $id;
         $this->view("approve_leave", array("title" => "approve leave"));
         if (isset($_POST['edit'])) {
             $leave_status = $this->db->escape_string($_POST['status']);
-            $description = $this->db->escape_string($_POST['description']);
-            $set = array("status" => $leave_status, "admin_reason" => $description);
+            $comment = $this->db->escape_string($_POST['comment']);
+            $set = array("status" => $leave_status, "comments" => $comment);
             $condition = array("id" => $leave_id);
             $upd = $this->db->update_data('leaves', $set, $condition);
             if ($upd) {
@@ -47,6 +48,7 @@ class Leaves extends loadFile
             }
         }
     }
+    //delete leaves
     public function delete_leaves()
     {
         if (isset($_REQUEST['did'])) {

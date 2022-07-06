@@ -6,20 +6,21 @@
                <div class="card-body">
                   <h4 class="card-title">User Leaves</h4>
                   <div class="table-responsive">
-                     <table class="table">
+                     <table class="mytable table">
                         <thead>
                            <tr>
-                              <th> SR No.</th>
                               <th> Employee name</th>
                               <th> Leave type</th>
-                              <th> (After/Before) Leave </th>
-                              <th> Description</th>
+                              <th> (After/Before) launch Leave </th>
+                              <th> Leave Subject</th>
                               <th> Credit leave</th>
-                              <th> Extra leave</th>
+                              <th> Non-credit leave</th>
+                              <th> Total leave</th>
                               <th> From Date</th>
                               <th> To date</th>
                               <th> Admin reason</th>
                               <th> Status</th>
+                              <th> Date</th>
                               <th> Edit </th>
                               <th> Delete </th>
                            </tr>
@@ -31,17 +32,18 @@
                               foreach ($records as $key) {
                            ?>
                                  <tr>
-                                    <td><?php echo $key->id; ?></td>
                                     <td><?php echo $key->first_name; ?></td>
-                                    <td><?php echo $key->leave_type; ?></td>
-                                    <td><?php echo $key->after_before_leave; ?></td>
-                                    <td><?php echo $key->leave_desc; ?></td>
-                                    <td><?php echo $key->credit_leave; ?></td>
-                                    <td><?php echo $key->extra_leave; ?></td>
-                                    <td><?php echo $key->from_date; ?></td>
-                                    <td><?php echo $key->to_date; ?></td>
-                                    <td><?php echo $key->admin_reason; ?></td>
-                                    <td><?php echo $key->status; ?></td>
+                                    <td><?php if($key->leave_type == 1){echo "fullday";}else{echo "halfday";} ?></td>
+                                    <td><?php if($key->half_leave_type == 1){echo "pre-lunch";}elseif($key->half_leave_type == 2){echo "post-lunch";}else{echo "-";} ?></td>
+                                    <td><?php echo $key->leave_subject; ?></td>
+                                    <td><?php echo $key->from_credit; ?></td>
+                                    <td><?php echo $key->from_non_credit; ?></td>
+                                    <td><?php echo $key->total; ?></td>
+                                    <td><?php echo $key->leave_from; ?></td>
+                                    <td><?php echo $key->leave_to; ?></td>
+                                    <td><?php echo $key->comments; ?></td>
+                                    <td><?php if($key->status == 1){echo "Approved";}elseif($key->status == 2){echo "Declined";}else{echo "Pending";} ?></td>
+                                    <td><?php echo $key->date; ?></td>
                                     <td>
                                        <a href="<?php echo base_url; ?>Leaves/approve_leave/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                                              <i class="mdi mdi-view-grid"></i> Approve </button></a>

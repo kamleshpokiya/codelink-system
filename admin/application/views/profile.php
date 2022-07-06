@@ -4,22 +4,9 @@
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <?php
-                        if (isset($_SESSION['status']) && $_SESSION != '') {
-                        ?>
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        <?php
-                            unset($_SESSION['status']);
-                        }
-                        ?>
                         <h4 class="card-title">User Leaves</h4>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="mytable table">
                                 <thead>
                                     <tr>
                                         <th> SR No.</th>

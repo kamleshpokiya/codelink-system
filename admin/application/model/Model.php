@@ -4,7 +4,7 @@ class Model
 	public $db;
 	public function __construct()
 	{
-		$this->db = new mysqli("localhost", "root", "", "codelink");
+		$this->db = new mysqli("localhost", "root", "", "emaiotoy_codelinkdb");
 	}
 	public function insert_data($data, $tbl)
 	{
@@ -15,7 +15,6 @@ class Model
 		$ins = "INSERT INTO $tbl ($fields) Values ($values)";
 		$query = $this->db->query($ins) or die("query failed");
 		return $query;
-		
 	}
 	public function select_data($select = null, $tbl, $option = null, $where = null)
 	{
@@ -80,8 +79,12 @@ class Model
 			$sel .= ' WHERE ' . $where;
 		}
 		$sql = $this->db->query($sel) or die("query failed");
-		while ($r = $sql->fetch_object()) {
-			$row[] = $r;
+		if(mysqli_num_rows($sql)> 0){
+			while ($r = $sql->fetch_object()) {
+				$row[] = $r;
+			}
+		}else{
+			$row[] = '';
 		}
 		return $row;
 	}
@@ -107,10 +110,15 @@ class Model
 			return sprintf("%s='%s'", $k, $v);
 		}, $set, array_keys($set)));
 		echo $upd = "UPDATE $tbl SET $string WHERE $fields='$values' ";
-		$query=$this->db->query($upd) or die("query not run");
+		$query = $this->db->query($upd) or die("query not run");
 		return $query;
 	}
-	public function escape_string($value){
-        return $this->db->real_escape_string($value);
-    }
+	public function escape_string($value)
+	{
+		return $this->db->real_escape_string($value);
+	}
+	public function reset_increament($id)
+	{
+
+	}
 }

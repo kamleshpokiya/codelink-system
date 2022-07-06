@@ -23,13 +23,16 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="<?php echo site_url; ?>css/style.css">
+    <link rel="stylesheet" href="<?php echo site_url; ?>css/style.css"> 
     <link rel="shortcut icon" href="<?php echo site_url; ?>images/favicon.png" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+    
+    <script src="<?php echo site_url; ?>js/jquery-min.js"></script>
   </head>
   <body>
     <div class="container-scroller">
       <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
+        <div class="col-md-12 p-0 m-0">  
           <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
             <div class="ps-lg-1">
               <div class="d-flex align-items-center justify-content-between">

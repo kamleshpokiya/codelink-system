@@ -32,13 +32,13 @@ if (isset($_SESSION['admin'])) {
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
                             <?php
-                            if (isset($_SESSION['status']) && $_SESSION != '') {
+                            if (isset($_SESSION['error_msg']) && $_SESSION != '') {
                             ?>
                                 <div class="alert alert-success " role="alert">
-                                     <?php echo $_SESSION['status']; ?>
+                                     <?php echo $_SESSION['error_msg']; ?>
                                 </div>
                             <?php
-                                unset($_SESSION['status']);
+                                unset($_SESSION['error_msg']);
                             }
                             ?>
                             <h3 class="card-title text-left mb-3">Reset Password</h3>

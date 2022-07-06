@@ -5,9 +5,9 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">Users Table</h4>
-            <a href="<?php echo base_url; ?>Users/add_users/<?php if(isset($_SESSION['admin'])){echo $_SESSION['admin'][0]->email;} ?>"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
+            <a href="<?php echo base_url; ?>Users/add_users"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
             <div class="table-responsive">
-              <table class="table">
+              <table class="mytable table">
                 <thead>
                   <tr>
                     <th>
@@ -17,15 +17,14 @@
                         </label>
                       </div>
                     </th>
-                    <th> SR No.</th>
-                    <th> Full name</th>
-                    <th> email</th>
-                    <th> profile_pic </th>
-                    <th> User_role</th>
-                    <th> status </th>
-                    <th> View</th>
-                    <th> Edit </th>
-                    <th> Delete </th>
+                    <th>SR No.</th>
+                    <th>Full name</th>
+                    <th>email</th>
+                    <th>profile_pic </th>
+                    <th>User_role</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -43,54 +42,58 @@
                           </div>
                         </td>
                         <td><?php echo $key->id; ?></td>
-                        <td><?php echo $key->first_name . $key->last_name; ?></td>
+                        <td><?php echo $key->first_name . '  ' . $key->last_name; ?></td>
                         <td><?php echo $key->email; ?></td>
-                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;"  src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic;?>" alt=""></td>
-                        <td><?php if($key->role_as == 1){ echo "HR";}elseif($key->role_as == 2){ echo "Team Leader";} else {echo "Employee";} ?></td>
-                        <td><?php echo $key->is_deleted; ?></td>
+                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic; ?>" alt=""></td>
+                        <td><?php if ($key->role_as == 1) {
+                              echo "HR";
+                            } elseif ($key->role_as == 2) {
+                              echo "Team Leader";
+                            } else {
+                              echo "Employee";
+                            } ?></td>
                         <td>
-                        <a href="<?php echo base_url; ?>Users/single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text" >
-                            <i class="mdi mdi-view-grid"></i> View </button></a>
+                          <a href="<?php echo base_url; ?>Users/single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
+                              <i class="mdi mdi-view-grid"></i> View </button></a>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-primary btn-icon-text">
-                            <i class="mdi mdi-lead-pencil"></i> Edit </button>
+                          <a href="<?php echo base_url; ?>Users/edit_single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-primary btn-icon-text">
+                              <i class="mdi mdi-lead-pencil"></i> Edit </button></a>
                         </td>
                         <td>
                           <button type="button" class="btn btn-danger btn-icon-text" id="<?php echo $key->id; ?>" onclick="del(this.id)">
-                            <i class="mdi mdi-delete"></i> Delete </button></td>
-            
-            
-            </tr>
-          <?php
+                            <i class="mdi mdi-delete"></i> Delete </button>
+                        </td>
+                      </tr>
+                    <?php
                     }
                   } else {
-          ?> <tr>
-            <td style="color:white; font-size:large;">No record found</td>
-          </tr>
-        <?php
+                    ?> <tr>
+                      <td style="color:white; font-size:large;">No record found</td>
+                    </tr>
+                  <?php
                   }
-        ?>
-        </tbody>
-        </table>
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<script>
-  function del(s) {
-    $.ajax({
-      type: "post",
-      url: "<?php echo base_url; ?>Users/delete_user",
-      data: {
-        "did": s
-      },
-      success: function(data) {
-        location.reload();
-      }
-    });
-  }
-</script>
-<!-- content-wrapper ends -->
+  <script>
+    function del(s) {
+      $.ajax({
+        type: "post",
+        url: "<?php echo base_url; ?>Users/delete_user",
+        data: {
+          "did": s
+        },
+        success: function(data) {
+          location.reload();
+        }
+      });
+    }
+  </script>
+  <!-- content-wrapper ends -->
