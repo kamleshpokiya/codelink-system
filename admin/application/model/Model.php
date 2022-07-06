@@ -79,11 +79,11 @@ class Model
 			$sel .= ' WHERE ' . $where;
 		}
 		$sql = $this->db->query($sel) or die("query failed");
-		if(mysqli_num_rows($sql)> 0){
+		if (mysqli_num_rows($sql) > 0) {
 			while ($r = $sql->fetch_object()) {
 				$row[] = $r;
 			}
-		}else{
+		} else {
 			$row[] = '';
 		}
 		return $row;
@@ -119,6 +119,5 @@ class Model
 	}
 	public function reset_increament($id)
 	{
-
 	}
 }

@@ -19,8 +19,8 @@
             </div>
             <div class="form-group">
               <label for="exampleInputName1">Comment</label>
-             <!-- <input type="text" class="form-control" name="description" id="description" placeholder="leave status description"> -->
-              <textarea name="comment" class="form-control" id="comment"  cols="50" rows="6"></textarea>
+              <!-- <input type="text" class="form-control" name="description" id="description" placeholder="leave status description"> -->
+              <textarea name="comment" class="form-control" id="comment" cols="50" rows="6"></textarea>
             </div>
             <button type="submit" name="edit" class="btn btn-primary me-2">Submit</button>
             <button type="reset" class="btn btn-dark">Reset</button>

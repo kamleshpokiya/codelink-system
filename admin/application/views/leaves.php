@@ -6,7 +6,7 @@
                <div class="card-body">
                   <h4 class="card-title">User Leaves</h4>
                   <div class="table-responsive">
-                     <table class="mytable table">
+                     <table class="table">
                         <thead>
                            <tr>
                               <th> Employee name</th>
@@ -33,8 +33,18 @@
                            ?>
                                  <tr>
                                     <td><?php echo $key->first_name; ?></td>
-                                    <td><?php if($key->leave_type == 1){echo "fullday";}else{echo "halfday";} ?></td>
-                                    <td><?php if($key->half_leave_type == 1){echo "pre-lunch";}elseif($key->half_leave_type == 2){echo "post-lunch";}else{echo "-";} ?></td>
+                                    <td><?php if ($key->leave_type == 1) {
+                                             echo "fullday";
+                                          } else {
+                                             echo "halfday";
+                                          } ?></td>
+                                    <td><?php if ($key->half_leave_type == 1) {
+                                             echo "pre-lunch";
+                                          } elseif ($key->half_leave_type == 2) {
+                                             echo "post-lunch";
+                                          } else {
+                                             echo "-";
+                                          } ?></td>
                                     <td><?php echo $key->leave_subject; ?></td>
                                     <td><?php echo $key->from_credit; ?></td>
                                     <td><?php echo $key->from_non_credit; ?></td>
@@ -42,7 +52,13 @@
                                     <td><?php echo $key->leave_from; ?></td>
                                     <td><?php echo $key->leave_to; ?></td>
                                     <td><?php echo $key->comments; ?></td>
-                                    <td><?php if($key->status == 1){echo "Approved";}elseif($key->status == 2){echo "Declined";}else{echo "Pending";} ?></td>
+                                    <td><?php if ($key->status == 1) {
+                                             echo "Approved";
+                                          } elseif ($key->status == 2) {
+                                             echo "Declined";
+                                          } else {
+                                             echo "Pending";
+                                          } ?></td>
                                     <td><?php echo $key->date; ?></td>
                                     <td>
                                        <a href="<?php echo base_url; ?>Leaves/approve_leave/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">

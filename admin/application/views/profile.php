@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <h4 class="card-title">User Leaves</h4>
                         <div class="table-responsive">
-                            <table class="mytable table">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th> SR No.</th>
