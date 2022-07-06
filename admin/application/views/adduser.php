@@ -5,7 +5,7 @@
         <div class="card-body">
           <h4 class="card-title">User Registration Form</h4>
 
-          <form class="forms-sample" method="POST">
+          <form class="forms-sample" id="frm" method="POST">
             <div class="form-group">
               <label for="exampleInputName1">First name</label>
               <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name">
@@ -29,13 +29,13 @@
                   <div class="col-sm-4">
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="gender" id="membershipRadios1" value="male"> Male</label>
+                        <input type="radio" class="form-check-input" name="gender" id="gender" value="male"> Male</label>
                     </div>
                   </div>
                   <div class="col-sm-5">
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="gender" id="membershipRadios2" value="female"> Female </label>
+                        <input type="radio" class="form-check-input" name="gender" id="gender" value="female"> Female </label>
                     </div>
                   </div>
                 </div>
@@ -60,4 +60,39 @@
       </div>
     </div>
   </div>
+  <script>
+    jQuery('#frm').validate({
+      rules: {
+        first_name: "required",
+        last_name: "required",
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 12
+        },
+        gender: "required",
+        role: "required",
+      },
+      messages: {
+        first_name: "Please enter your first_name",
+        last_name: "Please enter your last_name",
+        email: {
+          required: "Please enter email",
+          email: "Please enter valid email",
+        },
+        password: {
+          required: "Please enter your password",
+          minlength: "Password must be 12 char long"
+        },
+        gender:"Please select gender",
+      },
+      submitHandler: function(form) {
+        form.submit();
+      }
+    });
+  </script>
+
   <!-- content-wrapper ends -->

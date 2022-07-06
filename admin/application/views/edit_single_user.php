@@ -202,44 +202,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Credit Leaves</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" id ="credit_leaves" value="<?php echo $key->credit_leave; ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Extra Leaves</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" id ="extra_leaves" value="<?php echo $key->extra_leave; ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Profile create date</label>
-                                            <div class="col-sm-9">
-                                            <input type="text" id ="modify_date" value="<?php $date = $key->created_on;
-                                                                                        echo date("d-D-m-Y", strtotime($date)); ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">profile modify date</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" id ="modify_date" value="<?php $date = $key->updated_on;
-                                                                                            echo date("d-D-m-Y", strtotime($date)); ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="col-md-1">
                                     <div class="form-group row">
                                         <button type="button" id="<?php echo $key->id; ?>" onclick="update_user(this.id)" name="edit_single_user" class="btn btn-info btn-icon-text">
@@ -254,13 +216,8 @@
         </div>
     </div>
 </div>
-
 <!-- content-wrapper ends -->
-
 <!-- Jquery start -->
-
-
-
 <script>
     // For updating user profile
     function update_user($id) {
@@ -588,8 +545,5 @@
 
             });
         }
-
-
-
     }
 </script>

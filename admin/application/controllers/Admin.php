@@ -11,7 +11,7 @@ class Admin extends loadFile
 		$this->db = $this->model('Model');
 	}
 
-	//admin login
+	//admin login  
 	public function login()
 	{
 		$this->single_view("login",  array("title" => "Admin login page"));

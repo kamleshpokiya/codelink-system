@@ -12,7 +12,7 @@ class Users extends loadFile
 	//users detail page
 	public function users()
 	{
-		$tbl = 'users';  
+		$tbl = 'users';
 		$select = '';
 		$option = '';
 		$where = 'role_as != 0';
@@ -45,10 +45,10 @@ class Users extends loadFile
 		}
 	}
 	//delete user
-	public function delete_user()  
+	public function delete_user()
 	{
 		if (isset($_REQUEST['did'])) {
-			$id = $_REQUEST['did'];  
+			$id = $_REQUEST['did'];
 			if (empty($id)) {
 				echo "no record found to delete";
 			} else {
@@ -77,9 +77,6 @@ class Users extends loadFile
 			$this->view("single_user", array("title" => "User detail page", "data" => $records));
 		}
 	}
-
-
-	
 	// For showing user profile
 	public function edit_single_user($id)
 	{
@@ -95,13 +92,11 @@ class Users extends loadFile
 
 		}
 	}
-
 	// For update user profile
 	public function edit_user_profile()
 	{
-
 		if (isset($_POST)) {
-			
+
 			$data = [
 				$array = [
 					"field" => "first_name",
@@ -200,6 +195,4 @@ class Users extends loadFile
 			}
 		}
 	}
-
-	
 }

@@ -7,7 +7,7 @@
             <h4 class="card-title">Users Table</h4>
             <a href="<?php echo base_url; ?>Users/add_users"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
             <div class="table-responsive">
-              <table class="mytable table">
+              <table class="table">
                 <thead>
                   <tr>
                     <th>
