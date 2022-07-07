@@ -79,13 +79,10 @@ class Model
 		}
 		$sel .= $group_by;
 		$sql = $this->db->query($sel) or die("query failed");
-		if (mysqli_num_rows($sql) > 0) {
+		$row = [];
 			while ($r = $sql->fetch_object()) {
 				$row[] = $r;
 			}
-		} else {
-			$row[] = '';
-		}
 		return $row;
 	}
 	public function delete_data($tbl, $condition)
