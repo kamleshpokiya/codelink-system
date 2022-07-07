@@ -377,4 +377,58 @@ class Users extends loadFile
 	public function notFound(){
 		$this -> view('sdklsfjkf');
 	}
+
+
+	// To clock in user
+	public function CheckIn($id){
+
+		$data = array(
+			'user_id' => $id
+		);
+
+		if($this -> db -> insert_data($data, 'check_in_out')){
+			$msg['check_in_success'] = 'Checked in successfully..';
+		}else{
+			$msg['check_in_failed'] = 'Checked in failed..';
+		}
+
+		if(isset($msg)){
+			echo json_encode($msg);
+		}
+	}
+
+
+	// To clock out user
+	public function CheckOut($id){
+
+		$tbl = 'check_in_out';
+		$select = 'id';
+		$option = '';
+		$where = "user_id	 = $id";
+		$get_user_id = ($this->db->select_data($select, $tbl, $option, $where));
+
+		if(mysqli_num_rows($get_user_id) > 0){
+
+			while($row = mysqli_fetch_assoc($get_user_id)){
+				$u_id = $row['id'];
+			}
+		}
+		$condition = array(
+			'id' => $u_id
+		);
+
+		$set = array(
+			'check_out_time' => date('Y-m-d H:i:s')
+		);
+
+		if($this -> db -> update_data('check_in_out', $set, $condition)){
+			$msg['check_out_success'] = 'Checked out successfully..';
+		}else{
+			$msg['check_out_failed'] = 'Checked out failed..';
+		}
+
+		if(isset($msg)){
+			echo json_encode($msg);
+		}
+	}
 }
