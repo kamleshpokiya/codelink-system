@@ -63,6 +63,51 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+
+    // For check in
+    $(document).on('click', '#checked_in', function(){
+      $id = $('#checked_in').val();
+      console.log($id);
+      $.ajax({
+        url : '<?php echo base_url; ?>Users/CheckIn/'+$id,
+        success : function(response){
+          jsonResponse = JSON.parse(response);
+          if(jsonResponse.check_in_success){
+            console.log('idskdlsfkd');
+            $('#checked_in').attr('id','checked_out');
+            $('#checked_out').hover(function(){
+              $('#checked_out').text('Check Out');
+            }, function(){
+              $('#checked_out').html('<time datetime="2020-06-19">June 19, 2020</time>');
+            });
+
+          }
+        }
+      });
+    });
+
+
+    // For check out
+    $(document).on('click', '#checked_out', function(){
+      $id = $('#checked_out').val();
+      console.log($id);
+      $.ajax({
+        url : '<?php echo base_url; ?>Users/CheckOut/'+$id,
+        success : function(response){
+          jsonResponse = JSON.parse(response);
+          if(jsonResponse.check_out_success){
+            console.log('idskdlsfkd');
+            $('#checked_out').attr('id','checked_in');
+            $('#checked_in').text('Check In');
+          }
+        }
+      });
+    });
+  });
+</script>
 </body>
 
 </html>

@@ -56,9 +56,11 @@
         <span class="mdi mdi-menu"></span>
       </button>
       <ul class="navbar-nav w-100">
-        <!--blank-->
       </ul>
       <ul class="navbar-nav navbar-nav-right">
+        <button type="button" class="btn btn-outline-danger btn-fw me-5 text-uppercase px-3 py-3" id="checked_in" value="<?php if (isset($data['users']['id'])) {
+                                                                                                                              echo $data['users']['id'];
+                                                                                                                          } ?>">Check In</button>
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
             <div class="navbar-profile">
