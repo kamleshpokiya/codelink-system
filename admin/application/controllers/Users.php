@@ -68,11 +68,24 @@ class Users extends loadFile
 	public function single_user($id)
 	{
 		if (isset($id)) {
-			$user_id = $id;
+			$select = array("users.id", "users.first_name", "users.last_name","users.gender", "users.email", "users.dob", "users.contact", "users.alt_contact", "users.address", "users.profile_pic", "users.role_as", "(users.credits - SUM(leaves.from_credit)) as total_credits");
 			$tbl = 'users';
-			$select = '';
-			$option = '';
-			$where = 'id =' . $user_id;
+			$option = array(
+				"join" => array(
+					array(
+						"type" => "INNER JOIN",
+						"table" => "leaves",
+						"condition" => "users.id = leaves.user_id"
+					)
+				)
+				// "GROUP_BY" => array("users.id")
+				// "HAVING" => array("salary > 20000"),
+				// "ORDER_BY" => array("first_name ASC"),
+				//"LIMIT" => array("3"),
+				//"OFFSET" => ""
+			);
+			$user_id = $id;
+			$where = 'users.id =' . $user_id;
 			$records = $this->db->select_data($select, $tbl, $option, $where);
 			$this->view("single_user", array("title" => "User detail page", "data" => $records));
 		}

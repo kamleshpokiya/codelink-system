@@ -125,50 +125,11 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">user Credits</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="user_status" value="<?php echo $key->credits; ?>" class="form-control" />
+                                                <input type="text" name="user_status" value="<?php if($key->total_credits ==""){echo "12";}else{echo $key->total_credits;} ?>" class="form-control" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Credit Leaves</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="credit_leaves" value="<?php echo $key->credit_leave; ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Extra Leaves</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="extra_leaves" value="<?php echo $key->extra_leave; ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Profile create date</label>
-                                            <div class="col-sm-9">
-                                            <input type="text" name="modify_date" value="<?php $date = $key->created_on;
-                                                                                            echo date("d-D-m-Y", strtotime($date)); ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">profile modify date</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="modify_date" value="<?php $date = $key->updated_on;
-                                                                                                echo date("d-D-m-Y", strtotime($date)); ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
                             </form>
                     <?php }
                     } ?>

@@ -9,10 +9,10 @@ class Leaves extends loadFile
         session_start();
         $this->db = $this->model('Model');
     }
-//leave details 
+    //leave details 
     public function leaves()
     {
-        $select = array("leaves.id", "users.first_name", "leaves.leave_type", "leaves.half_leave_type", "leaves.leave_subject", "leaves.from_credit", "leaves.from_non_credit","leaves.total","leaves.leave_from","leaves.leave_to","leaves.comments","leaves.status","leaves.date");
+        $select = array("leaves.id", "users.first_name", "leaves.leave_type", "leaves.half_leave_type", "leaves.leave_subject", "leaves.from_credit", "leaves.from_non_credit", "leaves.total", "leaves.leave_from", "leaves.leave_to", "leaves.comments", "leaves.status", "leaves.date");
         $tbl = 'leaves';
         $option = array(
             "join" => array(
@@ -36,11 +36,25 @@ class Leaves extends loadFile
     public function approve_leave($id)
     {
         $leave_id = $id;
-        $this->view("approve_leave", array("title" => "approve leave"));
+        $select_date = "";
+        $tbl = "leaves";
+        $option = "";
+        $where = "id =" . $leave_id;
+        $sel_date = $this->db->select_data($select_date, $tbl, $option, $where);
+        $data = array_values($sel_date);
+        $currentdate = date("y-m-d");
+        // $newDate = date('Y-m-d', strtotime($currentdate . ' + 4 months'));
+        $month = date("m", strtotime($currentdate));
+        $this->view("approve_leave", array("title" => "approve leave", "data" => $sel_date));
         if (isset($_POST['edit'])) {
             $leave_status = $this->db->escape_string($_POST['status']);
             $comment = $this->db->escape_string($_POST['comment']);
-            $set = array("status" => $leave_status, "comments" => $comment);
+            $credit_leave = $this->db->escape_string($_POST['credits']);
+            if (date("m", strtotime($data[0]->date)) == $month) {
+                $set = array("status" => $leave_status, "comments" => $comment, "from_credit" => $credit_leave);
+            } else {
+                $set = array("status" => $leave_status, "comments" => $comment);
+            }
             $condition = array("id" => $leave_id);
             $upd = $this->db->update_data('leaves', $set, $condition);
             if ($upd) {

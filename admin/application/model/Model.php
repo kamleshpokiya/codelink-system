@@ -70,7 +70,6 @@ class Model
 			}
 		}
 		$sel .= $join;
-		$sel .= $group_by;
 		$sel .= $having;
 		$sel .= $order_by;
 		$sel .= $limit;
@@ -78,6 +77,7 @@ class Model
 		if ($where != null) {
 			$sel .= ' WHERE ' . $where;
 		}
+		$sel .= $group_by;
 		$sql = $this->db->query($sel) or die("query failed");
 		if (mysqli_num_rows($sql) > 0) {
 			while ($r = $sql->fetch_object()) {

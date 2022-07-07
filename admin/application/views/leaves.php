@@ -48,7 +48,7 @@
                                     <td><?php echo $key->leave_subject; ?></td>
                                     <td><?php echo $key->from_credit; ?></td>
                                     <td><?php echo $key->from_non_credit; ?></td>
-                                    <td><?php echo $key->total; ?></td>
+                                    <td><?php echo $key->total = $key->from_credit+$key->from_non_credit; ?></td>
                                     <td><?php echo $key->leave_from; ?></td>
                                     <td><?php echo $key->leave_to; ?></td>
                                     <td><?php echo $key->comments; ?></td>
