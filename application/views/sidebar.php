@@ -58,9 +58,12 @@
       <ul class="navbar-nav w-100">
       </ul>
       <ul class="navbar-nav navbar-nav-right">
-        <button type="button" class="btn btn-outline-danger btn-fw me-5 text-uppercase px-3 py-3" id="checked_in" value="<?php if (isset($data['users']['id'])) {
-                                                                                                                              echo $data['users']['id'];
-                                                                                                                          } ?>">Check In</button>
+        <div>
+          <!-- <textarea  style="font-size: 18px; color:chartreuse; height:35px; background-color: black; padding-left:16px; padding-right: 12px;  width:115px; border: groove; border-width: 4px; border-color: goldenrod; border-radius: 3px; resize:none; overflow:hidden"></textarea> -->
+        </div>
+        <button type="button" class="btn btn-outline-danger btn-fw me-5 text-uppercase px-3 py-2" id="checked_in" value="<?php if (isset($data['users']['id'])) {
+                                                                                                                            echo $data['users']['id'];
+                                                                                                                          } ?>">Check In  <time id="displayarea" style="display: none;">00:00:00.000</time> </button>
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
             <div class="navbar-profile">

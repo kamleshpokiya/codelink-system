@@ -55,7 +55,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body myModal_content">
-       Hii this is boostrap modal for comments
+        Hii this is boostrap modal for comments
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -65,25 +65,90 @@
 </div>
 
 <script>
-  $(document).ready(function(){
+  var timer;
+  var startTime;
+
+  function start() {
+    startTime = parseInt(localStorage.getItem('startTime') || Date.now());
+    localStorage.setItem('startTime', startTime);
+    timer = setInterval(clockTick, 100);
+  }
+
+  function stop() {
+    clearInterval(timer);
+  }
+
+  function reset() {
+    clearInterval(timer);
+    localStorage.removeItem('startTime');
+    document.getElementById('displayarea').innerHTML = "00:00:00.000";
+  }
+
+  function clockTick() {
+    var currentTime = Date.now(),
+      timeElapsed = new Date(currentTime - startTime),
+      hours = timeElapsed.getUTCHours(),
+      mins = timeElapsed.getUTCMinutes(),
+      secs = timeElapsed.getUTCSeconds(),
+      ms = timeElapsed.getUTCMilliseconds(),
+      display = document.getElementById("displayarea");
+
+    display.innerHTML =
+      (hours > 9 ? hours : "0" + hours) + ":" +
+      (mins > 9 ? mins : "0" + mins) + ":" +
+      (secs > 9 ? secs : "0" + secs);
+  };
+
+  // var user = "<%= Session['user']%>";
+  // var check_in = "<%= Session['checked_in']%>";
+
+  // if (user != null && check_in != null) {
+  //   start();
+  // } else {
+  //   localStorage.setItem('startTime', "00:00:00.000");
+  // }
+
+
+
+
+
+
+  $(document).ready(function() {
+
+    if (localStorage.getItem('checked_in') != null) {
+      $('#checked_in').attr('id', 'checked_out');
+      $('#checked_out').text('');
+      $('#displayarea').css('display','block');
+      start();
+    }
+
+    if (localStorage.getItem('checked_out' != null)) {
+      $('#checked_out').attr('id', 'checked_in');
+      $('#checked_in').text('Check In');
+      $('#displayarea').css('display','none');
+      // reset();
+      stop(); 
+    }
+
+
 
     // For check in
-    $(document).on('click', '#checked_in', function(){
+    $(document).on('click', '#checked_in', function() {
       $id = $('#checked_in').val();
-      console.log($id);
       $.ajax({
-        url : '<?php echo base_url; ?>Users/CheckIn/'+$id,
-        success : function(response){
+        url: '<?php echo base_url; ?>Users/CheckIn/' + $id,
+        success: function(response) {
           jsonResponse = JSON.parse(response);
-          if(jsonResponse.check_in_success){
-            console.log('idskdlsfkd');
-            $('#checked_in').attr('id','checked_out');
-            $('#checked_out').hover(function(){
-              $('#checked_out').text('Check Out');
-            }, function(){
-              $('#checked_out').html('<time datetime="2020-06-19">June 19, 2020</time>');
-            });
-
+          if (jsonResponse.check_in_success) {
+            localStorage.setItem('checked_in', 'yes');
+            if (localStorage.getItem('checked_out') != null) {
+              localStorage.removeItem('checked_out');
+            }
+            $('#checked_in').attr('id', 'checked_out');
+            $('#checked_out').text('');
+            $('#displayarea').css('display','block');
+            reset();
+            start();
           }
         }
       });
@@ -91,17 +156,22 @@
 
 
     // For check out
-    $(document).on('click', '#checked_out', function(){
+    $(document).on('click', '#checked_out', function() {
       $id = $('#checked_out').val();
-      console.log($id);
       $.ajax({
-        url : '<?php echo base_url; ?>Users/CheckOut/'+$id,
-        success : function(response){
+        url: '<?php echo base_url; ?>Users/CheckOut/' + $id,
+        success: function(response) {
           jsonResponse = JSON.parse(response);
-          if(jsonResponse.check_out_success){
-            console.log('idskdlsfkd');
-            $('#checked_out').attr('id','checked_in');
+          if (jsonResponse.check_out_success) {
+            localStorage.setItem('checked_out', 'yes');
+            if (localStorage.getItem('checked_in') != null) {
+              localStorage.removeItem('checked_in');
+            }
+            $('#checked_out').attr('id', 'checked_in');
             $('#checked_in').text('Check In');
+            $('#displayarea').css('display','none');
+            stop();
+            reset();
           }
         }
       });

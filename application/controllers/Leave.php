@@ -103,7 +103,7 @@ class Leave extends loadFile
                 );
 
                 $condition = array(
-                    'id' => $user_id.'<br>'
+                    'id' => $user_id
                 );
                 $updatecredit = $this->db->update_data('users', $set, $condition);
                 if ($updatecredit) {

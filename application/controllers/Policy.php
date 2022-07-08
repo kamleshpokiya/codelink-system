@@ -37,21 +37,17 @@ class Policy extends loadFile
             while ($row = mysqli_fetch_assoc($records)) {
                 // echo '<pre>';
                 // print_r($row);
-                if ($row['policy_image'] != '') {
-                    $img['policy_image'] = $row['policy_image'];
-                } else {
-                    $img['policy_image'] = 'placeholder.png';
-                }
                 $output .= "<tr>
             <td class='serial'>$i</td>
             <td><a style = 'color: wheat;
             text-decoration: none;
             cursor: pointer;' href = " . $row['policy_link'] . " target = '_blank'>" . $row['policy_title'] . "</a></td>
-            <td><img src = '" . base_url . "admin/public/assets/images/policyImages/" . $img['policy_image'] . "'style = 'width: 50px;height: 50px;'></td>
             <td style='overflow: hidden;white-space:nowrap; '>" . $row['policy_desc'] . "</td>
         </tr>";
                 $i++;
             }
+        }else{
+            $output = '';
         }
 
         $this->view("policyList", array("title" => "Company Policy", "policy_data" => $output, 'users' => $user_records));

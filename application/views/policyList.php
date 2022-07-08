@@ -17,7 +17,6 @@
                                     <tr style="height:1em;">
                                         <th> Sno. </th>
                                         <th> Policy Title </th>
-                                        <th> Image </th>
                                         <th> Policy Description </th>
                                         <!-- <th> <img src='<?php echo base_url?>/admin/public/assets/images/policyImages/<?php echo $row['policy_image']?>'></th> -->
                                     </tr>

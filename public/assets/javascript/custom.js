@@ -18,7 +18,10 @@ $(document).ready(function () {
             $('#options_half_day_input').css({ 'display': 'block' })
             $('#half_day_date').css({ 'display': 'none' })
             $('#from_to_date').css({ 'display': 'none' })
-            $('#half_leave_type_option').css({ 'display': 'block' })
+            $('#half_leave_type_option').css({ 'display': 'block' });
+            $('#non_credit').text('0.5').prop("disabled", true);
+            $('#non_credit').val(0.5);
+            $('.credit_val').prop('disabled', true);
         }
     });
 
@@ -29,6 +32,8 @@ $(document).ready(function () {
             $('#options_half_day_input').css({ 'display': 'none' })
             $('#from_to_date').css({ 'display': 'block' })
             $('#half_leave_type_option').css({ 'display': 'none' })
+            $('#non_credit').text('0').prop("disabled", false);
+            $('.credit_val').prop('disabled', false);
 
         }
     });
@@ -41,7 +46,7 @@ $(document).ready(function () {
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
                 // console.log('this');
-            }else{
+            } else {
                 if ($('.credit_val').removeClass('active')) {
                     $(this).addClass('active');
                     console.log('any active');
@@ -61,12 +66,13 @@ $(document).ready(function () {
         if ($('#leave_type_full_day').is(':checked')) {
 
             $leave_type = parseInt($('input[name="leave_type"]:checked').val());
-            $half_leave_type = parseInt('');
+            $half_leave_type = parseInt('0');
             $from_date = $('#from_date').val();
             $to_date = $('#to_date').val();
             $subject = $('textarea#subject').val();
             $credit = parseInt($('.credit_val.active').text());
             $non_credit = parseInt($('#non_credit').val());
+            // $non_credit.toFixed(2);
         } else if ($('#leave_type_half_day').is(':checked')) {
 
             $leave_type = parseInt($('input[name="leave_type"]:checked').val());
@@ -74,8 +80,9 @@ $(document).ready(function () {
             $from_date = $('#half_day_from_date').val();
             $to_date = '';
             $subject = $('textarea#subject').val();
-            $credit = parseInt($('.credit_val.active').text());
-            $non_credit = parseInt($('#non_credit').val());
+            $credit = parseInt('0');
+            $non_credit = $('#non_credit').val();
+            // $non_credit.toFixed(2);
         }
 
 
@@ -115,10 +122,10 @@ $(document).ready(function () {
         }
 
 
-        if(isNaN($credit)){
+        if (isNaN($credit)) {
             $credit = parseInt('0');
         }
-        if(isNaN($non_credit)){
+        if (isNaN($non_credit)) {
             $non_credit = parseInt('0');
         }
 
@@ -130,7 +137,15 @@ $(document).ready(function () {
         fd.append('leave_subject', $subject);
         fd.append('from_credit', $credit);
         fd.append('from_non_credit', $non_credit);
-        fd.append('total', $credit + $non_credit);
+        if ($('#leave_type_half_day').is(':checked')) {
+            fd.append('total', $non_credit);
+        }
+
+        if ($('#leave_type_full_day').is(':checked')) {
+            $total = ($credit + $non_credit).toFixed(1);
+            fd.append('total',  $total);
+        }
+
         fd.append('credit_score', $credit_score);
 
         if (is_valid) {
