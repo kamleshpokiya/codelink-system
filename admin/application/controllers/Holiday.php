@@ -46,7 +46,50 @@ class Holiday extends loadFile
 		$option = '';
 		$where = 'id=' . $id;
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		$this->view("add_holiday", array("title" => "this is holiday page", "data" => $records));
+		$this->view("edit_holiday", array("title" => "this is holiday page", "data" => $records));
+		if (isset($_POST['edit'])) {
+			$h_id = $this->db->escape_string($_POST['id']);
+			$date = $this->db->escape_string($_POST['date']);
+			$title = $this->db->escape_string($_POST['title']);
+			$description = $this->db->escape_string($_POST['description']);
+			$old_image = $_POST['old_image'];
+			$file_name = $_FILES['image']['name'];
+			$file_size = $_FILES['image']['size'];
+			$file_tmp = $_FILES['image']['tmp_name'];
+			$file_type = $_FILES['image']['type'];
+			if ($file_name != '') {
+				$upload_file = $file_name;
+				if (file_exists("assets/images/holiday_img/" . $upload_file)) {
+					$_SESSION['h_msg'] = "image already exist" . $upload_file;
+					header("location:" . base_url . "Holiday/edit_holidays/$id");
+				} else {
+					if ($upload_file != '') {
+						move_uploaded_file($file_tmp, "assets/images/holiday_img/" . $upload_file);
+						unlink("assets/images/holiday_img/" . $old_image);
+						$set = array("date" => $date, "title" => $title, "description" => $description, "image" => $upload_file);
+						$condition = array("id" => $h_id);
+						$upd = $this->db->update_data('holiday_tbl', $set, $condition);
+						if ($upd) {
+							header("location:" . base_url . "Holiday/holidays");
+						} else {
+							$_SESSION['h_msg'] = "Data Not updated";
+							header("location:" . base_url . "Holiday/edit_holidays/$id");
+						}
+					}
+				}
+			} else {
+				$upload_file = $old_image;
+				$set = array("date" => $date, "title" => $title, "description" => $description, "image" => $upload_file);
+				$condition = array("id" => $h_id);
+				$upd = $this->db->update_data('holiday_tbl', $set, $condition);
+				if ($upd) {
+					header("location:" . base_url . "Holiday/holidays");
+				} else {
+					$_SESSION['h_msg'] = "Data Not updated";
+					header("location:" . base_url . "Holiday/edit_holidays/$id");
+				}
+			}
+		}
 	}
 	public function delete_holidays()
 	{

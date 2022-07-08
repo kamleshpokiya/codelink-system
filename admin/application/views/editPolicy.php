@@ -35,10 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Policy Image</label>
-                                <img style="height: 150px;
-    width: 40%;
-    border-radius: 10px;
-    margin: 10px 0px;" class="col-md-12" src="<?php echo site_url . "images/policyImages/" . $data['policy_data'][0]->policy_image; ?>">
+                                <img style="height:150px; width:40%; border-radius:10px; margin: 10px 0px;" class="col-md-12" src="<?php echo site_url . "images/policyImages/" . $data['policy_data'][0]->policy_image; ?>">
                             </div>
                             <div class="form-group">
                                 <label>Upload New Image</label>

@@ -54,14 +54,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Password</label>
-                                            <div class="col-sm-9">
-                                                <input type="password" value="<?php echo $key->password; ?>" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -89,7 +81,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Date of Birth</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="<?php echo $key->dob; ?>" placeholder="dd/mm/yyyy" />
+                                                <input type="date" class="form-control" value="<?php echo $key->dob; ?>" placeholder="dd/mm/yyyy" />
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +117,11 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">user Credits</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="user_status" value="<?php if($key->total_credits ==""){echo "12";}else{echo $key->total_credits;} ?>" class="form-control" />
+                                                <input type="text" name="user_status" value="<?php if ($key->total_credits == "") {
+                                                                                                    echo "12";
+                                                                                                } else {
+                                                                                                    echo $key->total_credits;
+                                                                                                } ?>" class="form-control" />
                                             </div>
                                         </div>
                                     </div>
