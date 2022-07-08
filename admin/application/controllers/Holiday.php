@@ -95,19 +95,8 @@ class Holiday extends loadFile
 	{
 		if (isset($_REQUEST['did'])) {
 			$id = $_REQUEST['did'];
-			if (empty($id)) {
-				echo "no record found to delete";
-			} else {
 				$wh = array("id" => $id);
-
 				$del = $this->db->delete_data("users", $wh);
-				if ($del) {
-
-					$this->holidays();
-				} else {
-					echo "query failed";
-				}
-			}
 		}
 	}
 }

@@ -4,6 +4,16 @@
       <div class="col-12 grid-margin">
         <div class="card">
           <div class="card-body">
+            <?php
+            if (isset($_SESSION['user_msg']) && $_SESSION != '') {
+            ?>
+              <div class="alert alert-success" role="alert">
+                <?php echo $_SESSION['user_msg']; ?>
+              </div>
+            <?php
+              unset($_SESSION['user_msg']);
+            }
+            ?>
             <h4 class="card-title">Users Table</h4>
             <a href="<?php echo base_url; ?>Users/add_users"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
             <div class="table-responsive">
@@ -44,7 +54,7 @@
                         <td><?php echo $key->id; ?></td>
                         <td><?php echo $key->first_name . '  ' . $key->last_name; ?></td>
                         <td><?php echo $key->email; ?></td>
-                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic; ?>" alt=""></td>
+                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic; ?>" alt="<?php echo $key->first_name; ?>"></td>
                         <td><?php if ($key->role_as == 1) {
                               echo "HR";
                             } elseif ($key->role_as == 2) {
@@ -84,16 +94,33 @@
   </div>
   <script>
     function del(s) {
-      $.ajax({
-        type: "post",
-        url: "<?php echo base_url; ?>Users/delete_user",
-        data: {
-          "did": s
-        },
-        success: function(data) {
-          location.reload();
-        }
-      });
+      swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this Record",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+              type: "post",
+              url: "<?php echo base_url; ?>Users/delete_user",
+              data: {
+                "did": s
+              },
+              success: function(data) {
+                swal("Data deleted successfully.!", {
+                  icon: "success",
+                }).then((result) => {
+                  location.reload();
+                });
+              }
+            });
+
+          }
+        });
+
     }
   </script>
   <!-- content-wrapper ends -->

@@ -70,7 +70,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Date of Birth</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="dob" value="<?php echo $key->dob; ?>" placeholder="dd/mm/yyyy" />
+                                                <input type="date" class="form-control" name="dob" value="<?php echo $key->dob; ?>" placeholder="dd/mm/yyyy" />
                                             </div>
                                         </div>
                                     </div>

@@ -14,10 +14,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-md-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="policy_created" style="display: none;">
-                                Policy created successfully..
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
                             <h4 class="card-title">New Policy</h4>
                             <div class="form-group">
                                 <label>Policy Title</label>
@@ -52,7 +48,7 @@
 
     <script>
         $(document).ready(function() {
-
+  
             $is_valid = true;
             $(document).on('click', '#add_policy_btn', function() {
 
@@ -68,17 +64,17 @@
                         $("#img_msg").text('Only (jpeg, jpg, png) image files are allowed').css({
                             'color': 'red'
                         });
-                        console.log('Only (jpeg, jpg, png) image files are allowed');
+                        // console.log('Only (jpeg, jpg, png) image files are allowed');
                     } else {
                         $("#img_msg").text('');
                     }
-                    $("#img_msg").text('');
+                    // $("#img_msg").text('');
                 } else {
                     $is_valid = false;
                     $("#img_msg").text('Please select your policy image file').css({
                         'color': 'red'
                     });
-                    console.log('Please select your policy image file');
+                    // console.log('Please select your policy image file');
                 }
 
                 // return false;
@@ -148,7 +144,9 @@
                         }
 
                     });
-                };
+                }else{
+                    console.log('form is not valid');
+                }
 
 
             });

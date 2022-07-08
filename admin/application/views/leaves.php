@@ -89,17 +89,34 @@
       </div>
    </div>
    <script>
-      function del(s) {
-         $.ajax({
-            type: "post",
-            url: "<?php echo base_url; ?>Leaves/delete_leaves",
-            data: {
-               "did": s
-            },
-            success: function(data) {
-               location.reload();
-            }
-         });
-      }
-   </script>
+    function del(s) {
+      swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this Record",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+              type: "post",
+              url: "<?php echo base_url; ?>Leaves/delete_leaves",
+              data: {
+                "did": s
+              },
+              success: function(data) {
+                swal("Data deleted successfully.!", {
+                  icon: "success",
+                }).then((result) => {
+                  location.reload();
+                });
+              }
+            });
+
+          }
+        });
+
+    }
+  </script>
    <!-- content-wrapper ends -->

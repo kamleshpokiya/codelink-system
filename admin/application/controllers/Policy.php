@@ -10,8 +10,6 @@ class Policy extends loadFile
     $this->db = $this->model('Model');
   }
 
-
-
   // To show all policies
   public function managePolicy()
   {
@@ -30,14 +28,14 @@ class Policy extends loadFile
     $this->view("addPolicy", array("title" => "Manage Policy"));
   }
 
-
   // To add new policy
   public function addNewPolicy()
   {
     if (isset($_POST)) {
       $_POST['policy_image'] = $_FILES['file']['name'];
-      // echo "<pre?";
-      // print_r($_POST);
+      echo "<pre?";
+      print_r($_POST);
+      exit;
 
       $data = [
         $array = [
@@ -93,16 +91,13 @@ class Policy extends loadFile
     }
   }
 
-
   // To delete policy
   public function delPolicy($id)
   {
     $condition = array(
       'id' => $id
     );
-
     if ($this->db->delete_data('companypolicy', $condition)) {
-
       $msg['success'] = 'Policy deleted..';
       echo json_encode($msg);
     }

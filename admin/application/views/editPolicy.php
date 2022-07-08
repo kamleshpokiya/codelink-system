@@ -14,11 +14,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-md-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="policy_created" style="display: none;">
-                                Policy created successfully..
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            <h4 class="card-title">New Policy</h4>
+                            <h4 class="card-title">New Policy</h4>  
                             <div class="form-group">
                                 <label>Policy Title</label>
                                 <input type="text" class="form-control" id="policy_title" value="<?php if (isset($data['policy_data'])) {
