@@ -15,6 +15,7 @@
                     <div class="card-body">
                         <div class="col-md-12">
                             <h4 class="card-title">New Policy</h4>
+                            <form class="forms-sample" enctype="multipart/form-data" method="POST">
                             <div class="form-group">
                                 <label>Policy Title</label>
                                 <input type="text" class="form-control" id="policy_title">
@@ -38,6 +39,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary me-2" id="add_policy_btn">Add Policy</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -57,7 +59,6 @@
                 $policy_link = $('#policy_link').val();
                 if ($('#policy_img').val() != '') {
                     var file = $('#policy_img')[0].files[0]
-                    // console.log(file.type);
                     var img_types = ['image/jpeg', 'image/jpg', 'image/png'];
                     if (jQuery.inArray(file.type, img_types)) {
                         $is_valid = false;
@@ -68,7 +69,7 @@
                     } else {
                         $("#img_msg").text('');
                     }
-                    // $("#img_msg").text('');
+                    $("#img_msg").text('');
                 } else {
                     $is_valid = false;
                     $("#img_msg").text('Please select your policy image file').css({

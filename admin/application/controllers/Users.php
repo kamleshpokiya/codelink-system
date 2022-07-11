@@ -24,7 +24,6 @@ class Users extends loadFile
 	{
 		$this->view("adduser", array("title" => "adduser form"));
 		if (isset($_POST['submit'])) {
-
 			$first_name = $this->db->escape_string($_POST['first_name']);
 			$last_name = $this->db->escape_string($_POST['last_name']);
 			$email = $this->db->escape_string($_POST['email']);
@@ -52,12 +51,6 @@ class Users extends loadFile
 			$id = $_REQUEST['did'];
 			$wh = array("id" => $id);
 			$del = $this->db->delete_data("users", $wh);
-			// if ($del) {
-			// 	// $_SESSION['user_msg'] = "User deleted successfully!";
-			// 	// header("location:" . base_url . "Users/users");
-			// } else {
-			// 	// echo "query failed";
-			// }
 		}
 	}
 	// single user detail page
