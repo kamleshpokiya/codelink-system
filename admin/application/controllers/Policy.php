@@ -33,9 +33,6 @@ class Policy extends loadFile
   {
     if (isset($_POST)) {
       $_POST['policy_image'] = $_FILES['file']['name'];
-      echo "<pre?";
-      print_r($_POST);
-      exit;
 
       $data = [
         $array = [
@@ -79,10 +76,10 @@ class Policy extends loadFile
           $name = $_FILES['file']['name'];
           // $uploads_dir = site_url.'images/policyImages/'.$name;
           $tmp_name = $_FILES['file']['tmp_name'];
-          if (file_exists(".././public/assets/images/policyImages/$name")) {
-            if (unlink(".././public/assets/images/policyImages/$name"));
+          if (file_exists("assets/images/policyImages/" . $name)) {
+            if (unlink("assets/images/policyImages/" . $name));
           }
-          if (move_uploaded_file($tmp_name, ".././public/assets/images/policyImages/$name")) {
+          if (move_uploaded_file($tmp_name, "assets/images/policyImages/" . $name)) {
             $msg['ins_policy_success'] = 'Policy Created successfully';
             echo json_encode($msg);
           }
@@ -92,16 +89,15 @@ class Policy extends loadFile
   }
 
   // To delete policy
-  public function delPolicy($id)
+  public function delPolicy()
   {
-    $condition = array(
-      'id' => $id
-    );
-    if ($this->db->delete_data('companypolicy', $condition)) {
-      $msg['success'] = 'Policy deleted..';
-      echo json_encode($msg);
+    if (isset($_REQUEST['did'])) {
+      $id = $_REQUEST['did'];
+      $wh = array("id" => $id);
+      $this->db->delete_data("companypolicy", $wh);
     }
   }
+  
 
 
   // To show edit policy
@@ -114,7 +110,6 @@ class Policy extends loadFile
     $records = $this->db->select_data($select, $tbl, $option, $where);
     $this->view("editPolicy", array("title" => "Update Your Policy", "policy_data" => $records));
   }
-
 
   // To edit old policy
   public function editOldPolicy()
