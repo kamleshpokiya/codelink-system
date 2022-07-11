@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+
+    // To view pop on leave table on click (view)
     $(".view_user_comments").click(function () {
         $comments = $(this).find('span').text();
         $(".myModal_content").text($comments);
@@ -11,6 +13,8 @@ $(document).ready(function () {
         $(".myModal_content").text($comments);
         $("#myModal").modal('show');
     });
+
+
     //Event when (half day) option checked
     $('#leave_type_half_day').click(function () {
         if ($('#leave_type_half_day').is(':checked')) {
@@ -55,6 +59,15 @@ $(document).ready(function () {
         } else {
             $(this).addClass('active');
         }
+    });
+
+
+
+    // To hide the Half Day Options when click on Reset button
+    $(document).on('click', '#resetForm', function(){
+        console.log('reset button clicked');
+        $('#options_half_day_label').css({ 'display': 'none' })
+        $('#options_half_day_input').css({ 'display': 'none' })
     });
 
 
@@ -158,14 +171,22 @@ $(document).ready(function () {
                 success: function (response) {
                     jsonResponse = JSON.parse(response);
                     if (jsonResponse.insert_success) {
-                        $('#success_msg').html(`<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Congrats !</strong> Your leave applied successfully.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`);
+                        $('#applyLeave').trigger("reset");
+                        $('#options_half_day_label').css({ 'display': 'none' })
+                        $('#options_half_day_input').css({ 'display': 'none' })
+                        $heading = "Leave Applied !";
+                        $comments = "Hey ! Your Leave applied successfully !";
+                        $('#exampleModalLabel').text($heading);
+                        $(".myModal_content").text($comments);
+                        $("#myModal").modal('show');
                     }
                     console.log(response);
                 }
             });
         }
     });
+
+
 
 
     //Show change password fields

@@ -46,16 +46,26 @@
   Launch demo modal
 </button> -->
 
+<?php
+// $dt = new DateTime("now", new DateTimeZone('GMT'));
+
+// echo $dt->format('H:i:s');
+
+// if ( time() > strtotime( '04:57:00AM' ) && time() < strtotime( '04:57:20AM' ) ) {
+//     echo "<script> alert('this is good time to go'); </script>";
+// }
+?>
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">My Subject</h5>
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body myModal_content">
-        Hii this is boostrap modal for comments
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -117,17 +127,17 @@
 
     if (localStorage.getItem('checked_in') != null) {
       $('#checked_in').attr('id', 'checked_out');
-      $('#checked_out').text('');
-      $('#displayarea').css('display','block');
+      $('#checked_out').html('<time id="displayarea"  style = "font-size: 20px;">00:00:00</time>');
+      // $('#displayarea').css('display', 'block');
       start();
     }
 
     if (localStorage.getItem('checked_out' != null)) {
       $('#checked_out').attr('id', 'checked_in');
       $('#checked_in').text('Check In');
-      $('#displayarea').css('display','none');
+      // $('#displayarea').css('display', 'none');
       // reset();
-      stop(); 
+      stop();
     }
 
 
@@ -136,7 +146,7 @@
     $(document).on('click', '#checked_in', function() {
       $id = $('#checked_in').val();
       $.ajax({
-        url: '<?php echo base_url; ?>Users/CheckIn/' + $id,
+        url: '<?php echo base_url; ?>WorkHours/CheckIn/' + $id,
         success: function(response) {
           jsonResponse = JSON.parse(response);
           if (jsonResponse.check_in_success) {
@@ -145,8 +155,10 @@
               localStorage.removeItem('checked_out');
             }
             $('#checked_in').attr('id', 'checked_out');
-            $('#checked_out').text('');
-            $('#displayarea').css('display','block');
+            // $('#checked_out').hover(() => {
+            //   $('#checked_out').html('Check Out');
+            // });
+            $('#checked_out').html('<time id="displayarea" style = "font-size: 20px;">00:00:00</time>');
             reset();
             start();
           }
@@ -159,7 +171,7 @@
     $(document).on('click', '#checked_out', function() {
       $id = $('#checked_out').val();
       $.ajax({
-        url: '<?php echo base_url; ?>Users/CheckOut/' + $id,
+        url: '<?php echo base_url; ?>WorkHours/CheckOut/' + $id,
         success: function(response) {
           jsonResponse = JSON.parse(response);
           if (jsonResponse.check_out_success) {
@@ -169,7 +181,7 @@
             }
             $('#checked_out').attr('id', 'checked_in');
             $('#checked_in').text('Check In');
-            $('#displayarea').css('display','none');
+            $('#displayarea').css('display', 'none');
             stop();
             reset();
           }
