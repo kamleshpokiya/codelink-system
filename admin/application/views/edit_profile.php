@@ -8,10 +8,8 @@
                     ?>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Hey!</strong> <?php echo $_SESSION['status']; ?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                         </div>
+                        
                     <?php
                         unset($_SESSION['status']);
                     }
@@ -72,7 +70,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Date of Birth</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" name="dob" value="<?php echo $key->dob; ?>" placeholder="dd/mm/yyyy" />
+                                                <input type="date" class="form-control" name="dob" value="<?php echo $key->dob; ?>" placeholder="dd/mm/yyyy" />
                                             </div>
                                         </div>
                                     </div>

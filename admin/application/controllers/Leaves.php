@@ -67,18 +67,8 @@ class Leaves extends loadFile
     {
         if (isset($_REQUEST['did'])) {
             $id = $_REQUEST['did'];
-            if (empty($id)) {
-                echo "no record found to delete";
-            } else {
-                $wh = array("id" => $id);
-
-                $del = $this->db->delete_data("leaves", $wh);
-                if ($del) {
-                    $this->leaves();
-                } else {
-                    echo "query failed";
-                }
-            }
+            $wh = array("id" => $id);
+            $del = $this->db->delete_data("leaves", $wh);
         }
     }
 }

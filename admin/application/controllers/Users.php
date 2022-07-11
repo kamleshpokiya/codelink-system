@@ -40,6 +40,7 @@ class Users extends loadFile
 			$data = array("first_name" => $first_name, "last_name" => $last_name, "email" => $email, "password" => $password, "gender" => $gender, "role_as" => $role);
 			$ins = $this->db->insert_data($data, 'users');
 			if ($ins) {
+				$_SESSION['user_msg'] = "User add successfully";
 				header("location:" . base_url . "Users/users");
 			}
 		}
@@ -49,26 +50,21 @@ class Users extends loadFile
 	{
 		if (isset($_REQUEST['did'])) {
 			$id = $_REQUEST['did'];
-			if (empty($id)) {
-				echo "no record found to delete";
-			} else {
-				$wh = array("id" => $id);
-
-				$del = $this->db->delete_data("users", $wh);
-				if ($del) {
-
-					$this->users();
-				} else {
-					echo "query failed";
-				}
-			}
+			$wh = array("id" => $id);
+			$del = $this->db->delete_data("users", $wh);
+			// if ($del) {
+			// 	// $_SESSION['user_msg'] = "User deleted successfully!";
+			// 	// header("location:" . base_url . "Users/users");
+			// } else {
+			// 	// echo "query failed";
+			// }
 		}
 	}
 	// single user detail page
 	public function single_user($id)
 	{
 		if (isset($id)) {
-			$select = array("users.id", "users.first_name", "users.last_name","users.gender", "users.email", "users.dob", "users.contact", "users.alt_contact", "users.address", "users.profile_pic", "users.role_as", "(users.credits - SUM(leaves.from_credit)) as total_credits");
+			$select = array("users.id", "users.first_name", "users.last_name", "users.gender", "users.email", "users.dob", "users.contact", "users.alt_contact", "users.address", "users.profile_pic", "users.role_as", "(users.credits - SUM(leaves.from_credit)) as total_credits");
 			$tbl = 'users';
 			$option = array(
 				"join" => array(
@@ -161,15 +157,9 @@ class Users extends loadFile
 					"value" => $_POST['address'],
 					"required" => true
 				],
-				$array = [
-					"field" => "credits",
-					"value" => $_POST['credits'],
-					"required" => true,
-					"is_number" => true
-				],
 			];
 
-			if (isset($_FILES['file'])) {
+			if (isset($_FILES['file']['name'])) {
 				$array1 = [
 					"field" => "size",
 					"value" => $_FILES['file']['size'],
@@ -193,7 +183,7 @@ class Users extends loadFile
 				$id = $_POST['id'];
 				unset($_POST['id']);
 
-				if (isset($_FILES['file'])) {
+				if (isset($_FILES['file']['name'])) {
 					$_POST['profile_pic'] = $_FILES['file']['name'];
 				}
 				$condition = array(

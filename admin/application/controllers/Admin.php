@@ -124,16 +124,7 @@ class Admin extends loadFile
 	{
 		$this->view('index', array("title" => "Admin dashboard"));
 	}
-	//admin profile detail
-	public function profile($id)
-	{
-		$select = '';
-		$tbl = 'users';
-		$option = '';
-		$where = 'id =' . $id;
-		$records = $this->db->select_data($select, $tbl, $option, $where);
-		$this->view("profile", array("title" => "this is admin profile", "data" => $records));
-	}
+	
 	//update admin profile by id 
 	public function update_profile($id)
 	{
@@ -166,7 +157,8 @@ class Admin extends loadFile
 						$condition = array("id" => $uid);
 						$upd = $this->db->update_data('users', $set, $condition);
 						if ($upd) {
-							header("location:" . base_url . "Admin/profile/$id");
+							$_SESSION['status'] = "Data updated successfully";
+							header("location:" . base_url . "Admin/update_profile/$id");
 						} else {
 							$_SESSION['status'] = "Data Not updated";
 							header("location:" . base_url . "Admin/update_profile/$id");
@@ -179,7 +171,8 @@ class Admin extends loadFile
 				$condition = array("id" => $uid);
 				$upd = $this->db->update_data('users', $set, $condition);
 				if ($upd) {
-					header("location:" . base_url . "Admin/profile/$id");
+					$_SESSION['status'] = "Data updated successfully";
+					header("location:" . base_url . "Admin/update_profile/$id");
 				} else {
 					$_SESSION['status'] = "Data Not updated";
 					header("location:" . base_url . "Admin/update_profile/$id");

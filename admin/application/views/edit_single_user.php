@@ -4,10 +4,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="col-md-12">
-                        <div class="alert alert-success" id="success_update" role="alert" style="display: none;">
-                            Profile updated successfully..
-                        </div>
-                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
                     </div>
                     <h4 class="card-title">User detail</h4>
                     <?php
@@ -86,7 +82,7 @@
                                             <div class="col-sm-4">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="gender" id="membershipRadios1" value="male" <?php if (isset($key->gender) && $key->gender == 'male') {
+                                                        <input type="radio" class="form-check-input" name="gender" id="gender" value="male" <?php if (isset($key->gender) && $key->gender == 'male') {
                                                                                                                                                             echo "checked";
                                                                                                                                                         } ?>> Male</label>
                                                 </div>
@@ -94,7 +90,7 @@
                                             <div class="col-sm-5">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="gender" id="membershipRadios2" value="female" <?php if (isset($key->gender) && $key->gender == 'female') {
+                                                        <input type="radio" class="form-check-input" name="gender" id="gender" value="female" <?php if (isset($key->gender) && $key->gender == 'female') {
                                                                                                                                                                 echo "checked";
                                                                                                                                                             } ?>> Female </label>
                                                 </div>
@@ -104,27 +100,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <!-- <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Gender</label>
-                                            <div class="col-sm-4">
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" id ="gender" id="membershipRadios1" value="male" <?php if (isset($key->gender) && $key->gender == 'male') {
-                                                                                                                                                            echo "checked";
-                                                                                                                                                        } ?>> Male</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" id ="gender" id="membershipRadios2" value="female" <?php if (isset($key->gender) && $key->gender == 'female') {
-                                                                                                                                                            echo "checked";
-                                                                                                                                                        } ?>> Female </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                     <div class="col-md-6">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Date of Birth</label>
@@ -138,13 +113,6 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Role As</label>
                                             <div class="col-sm-9">
-                                                <!-- <input type="text" id=" " value="<?php if ($key->role_as == 1) {
-                                                                                            echo "HR";
-                                                                                        } elseif ($key->role_as == 2) {
-                                                                                            echo "Team Leader";
-                                                                                        } else {
-                                                                                            echo "Employees";
-                                                                                        } ?>" class="form-control" /> -->
                                                 <select name="role_as" id="role_as">
                                                     <option value="1" <?php if ($key->role_as == 1) {
                                                                             echo "selected";
@@ -192,15 +160,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">user Credits</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" id="credits" value="<?php echo $key->credits; ?>" class="form-control" />
-                                                <span id="credits_msg"></span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-1">
                                     <div class="form-group row">
@@ -232,7 +191,6 @@
         $contact = $('#contact').val();
         $alt_contact = $('#alt_contact').val();
         $address = $('#address').val();
-        $credits = $('#credits').val();
 
         // user profile validation
 
@@ -332,19 +290,6 @@
             });
         }
 
-        // 8. Credits
-        if ($credits == '') {
-            $is_valid = false;
-            $("input[id='credits']").css({
-                'border': '1px solid red'
-            });
-        } else {
-            $("input[id='credits']").css({
-                'border': '1px solid #2a3038'
-            });
-        }
-
-
         if ($is_valid) {
             var fd = new FormData;
             fd.append('first_name', $first_name);
@@ -356,7 +301,6 @@
             fd.append('contact', $contact);
             fd.append('alt_contact', $alt_contact);
             fd.append('address', $address);
-            fd.append('credits', $credits);
             fd.append('id', $id);
 
             if ($('#profile_pic').val() != '') {
@@ -378,26 +322,6 @@
 
                     // Profile Updated
                     if (jsonResponse.update_success) {
-                        // function myFunction() {
-                        //     $('#success_update').css({'display':'block'});
-                        //     console.log('inside myFunction ');
-                        // }
-
-                        // window.onload = function() {
-                        //     var reloading = sessionStorage.getItem("reloading");
-                        //     if (reloading) {
-                        //         sessionStorage.removeItem("reloading");
-                        //         myFunction();
-                        //         console.log('inside onload function');
-                        //     }
-                        // }
-
-                        // function reloadP() {
-                        //     sessionStorage.setItem("reloading", "true");
-                        //     document.location.reload();
-                        //     console.log('inside reloadP function');
-                        // }
-
                         location.reload();
                     }
 
@@ -511,20 +435,6 @@
                         });
                     } else {
                         $('#address_msg').text('');
-                    }
-
-                    // Credits 
-                    if (jsonResponse.req_credits) {
-                        $('#credits_msg').text(jsonResponse.req_credits).css({
-                            'color': 'red'
-                        });
-                    }
-                    if (jsonResponse.invalid_credits) {
-                        $('#credits_msg').text(jsonResponse.invalid_credits).css({
-                            'color': 'red'
-                        });
-                    } else {
-                        $('#credits_msg').text('');
                     }
 
                     // Profile Picture 

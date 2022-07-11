@@ -4,7 +4,7 @@ class Model
 	public $db;
 	public function __construct()
 	{
-		$this->db = new mysqli("localhost", "root", "", "emaiotoy_codelinkdb");
+		$this->db = new mysqli("localhost", "root", "", "codelink");
 	}
 	public function insert_data($data, $tbl)
 	{
@@ -106,7 +106,7 @@ class Model
 		$string = implode(', ', array_map(function ($v, $k) {
 			return sprintf("%s='%s'", $k, $v);
 		}, $set, array_keys($set)));
-		echo $upd = "UPDATE $tbl SET $string WHERE $fields='$values' ";
+		$upd = "UPDATE $tbl SET $string WHERE $fields='$values' ";
 		$query = $this->db->query($upd) or die("query not run");
 		return $query;
 	}

@@ -42,6 +42,13 @@
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo site_url; ?>js/datatable.js"></script>
 <!--end data table js plugin -->
+<script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+</script>
 </body>
 
 </html>
