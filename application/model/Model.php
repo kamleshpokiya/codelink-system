@@ -75,12 +75,13 @@ class Model
 		$sel .= $join;
 		$sel .= $group_by;
 		$sel .= $having;
-		$sel .= $order_by;
+		
 		$sel .= $limit;
 		$sel .= $offset;
 		if ($where != null) {
 			$sel .= ' WHERE ' . $where;
 		}
+		$sel .= $order_by;
 		$sql = $this->db->query($sel) or die("query failed");
 		// while ($r = $sql->fetch_object()) {
 		// 	$row[] = $r;

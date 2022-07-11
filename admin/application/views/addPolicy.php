@@ -72,7 +72,7 @@
                     } else {
                         $("#img_msg").text('');
                     }
-                    $("#img_msg").text('');
+                    // $("#img_msg").text('');
                 } else {
                     $is_valid = false;
                     $("#img_msg").text('Please select your policy image file').css({

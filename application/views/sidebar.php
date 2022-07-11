@@ -41,6 +41,14 @@
         <span class="menu-title">Policies</span>
       </a>
     </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="<?php echo base_url; ?>WorkHours/workHours">
+        <span class="menu-icon">
+          <i class="mdi mdi-table-large"></i>
+        </span>
+        <span class="menu-title">Daily ( In / Out )</span>
+      </a>
+    </li>
 
   </ul>
 </nav>
@@ -63,7 +71,7 @@
         </div>
         <button type="button" class="btn btn-outline-danger btn-fw me-5 text-uppercase px-3 py-2" id="checked_in" value="<?php if (isset($data['users']['id'])) {
                                                                                                                             echo $data['users']['id'];
-                                                                                                                          } ?>">Check In  <time id="displayarea" style="display: none;">00:00:00.000</time> </button>
+                                                                                                                          } ?>">Check In </button>
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
             <div class="navbar-profile">
