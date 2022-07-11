@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title"> Manage Policies </h3>
-                        <a href="<?php echo base_url; ?>Policy/addPolicy"><button type="button" class="btn btn-primary btn-icon-text  mb-3 ms-2" style="position:absolute; top:5%; right:40px;"> Add New Policy </button></a>
+                        <a href="<?php echo base_url; ?>policy/addPolicy"><button type="button" class="btn btn-primary btn-icon-text  mb-3 ms-2" style="position:absolute; top:5%; right:40px;"> Add New Policy </button></a>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -62,7 +62,7 @@
                     if (willDelete) {
                         $.ajax({
                             type: "post",
-                            url: "<?php echo base_url; ?>Policy/delPolicy",
+                            url: "<?php echo base_url; ?>policy/delPolicy",
                             data: {
                                 "did": s
                             },

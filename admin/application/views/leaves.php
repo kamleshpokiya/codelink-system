@@ -61,7 +61,7 @@
                                           } ?></td>
                                     <td><?php echo $key->date; ?></td>
                                     <td>
-                                       <a href="<?php echo base_url; ?>Leaves/approve_leave/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
+                                       <a href="<?php echo base_url; ?>leaves/approve_leave/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                                              <i class="mdi mdi-view-grid"></i> Approve </button></a>
                                     </td>
                                     <td>
@@ -101,7 +101,7 @@
           if (willDelete) {
             $.ajax({
               type: "post",
-              url: "<?php echo base_url; ?>Leaves/delete_leaves",
+              url: "<?php echo base_url; ?>leaves/delete_leaves",
               data: {
                 "did": s
               },
@@ -116,7 +116,6 @@
 
           }
         });
-
     }
   </script>
    <!-- content-wrapper ends -->

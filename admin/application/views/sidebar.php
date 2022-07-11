@@ -1,12 +1,12 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-    <a class="sidebar-brand brand-logo" href="<?php echo base_url; ?>Admin/home"><img src="<?php echo site_url; ?>images/codelink.svg" style="height:50px ;" alt="logo" /></a>
-    <a class="sidebar-brand brand-logo-mini" href="<?php echo base_url; ?>Admin/home"><img src="<?php echo site_url; ?>images/logo-mini.svg" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo" href="<?php echo base_url; ?>admin/home"><img src="<?php echo site_url; ?>images/codelink.svg" style="height:50px ;" alt="logo" /></a>
+    <a class="sidebar-brand brand-logo-mini" href="<?php echo base_url; ?>admin/home"><img src="<?php echo site_url; ?>images/logo-mini.svg" alt="logo" /></a>
   </div>
   <ul class="nav">
     <li class="nav-item menu-items">
-      <a class="nav-link" href="<?php echo base_url; ?>Admin/home">
+      <a class="nav-link" href="<?php echo base_url; ?>admin/home">
         <span class="menu-icon">
           <i class="mdi mdi-speedometer"></i>
         </span>
@@ -15,7 +15,7 @@
     </li>
 
     <li class="nav-item menu-items">
-      <a class="nav-link" href="<?php echo base_url; ?>Users/users">
+      <a class="nav-link" href="<?php echo base_url; ?>users/users">
         <span class="menu-icon">
           <i class="mdi mdi-account-multiple"></i>
         </span>
@@ -23,7 +23,7 @@
       </a>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="<?php echo base_url; ?>Leaves/leaves">
+      <a class="nav-link" href="<?php echo base_url; ?>leaves/leaves">
         <span class="menu-icon">
           <i class="mdi mdi-table-large"></i>
         </span>
@@ -31,7 +31,7 @@
       </a>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="<?php echo base_url; ?>Policy/managePolicy">
+      <a class="nav-link" href="<?php echo base_url; ?>policy/managePolicy">
         <span class="menu-icon">
           <i class="mdi mdi-table-large"></i>
         </span>
@@ -39,7 +39,7 @@
       </a>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="<?php echo base_url; ?>Holiday/holidays">
+      <a class="nav-link" href="<?php echo base_url; ?>holiday/holidays">
         <span class="menu-icon">
           <i class="mdi mdi-table-large"></i>
         </span>
@@ -62,7 +62,7 @@
   <!-- partial:partials/_navbar.html -->
   <nav class="navbar p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-      <a class="navbar-brand brand-logo-mini" href="<?php echo base_url; ?>Admin/home"><img src="<?php echo site_url; ?>images/codelink.svg" alt="logo" /></a>
+      <a class="navbar-brand brand-logo-mini" href="<?php echo base_url; ?>admin/home"><img src="<?php echo site_url; ?>images/codelink.svg" alt="logo" /></a>
     </div>
     <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -175,7 +175,7 @@
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
             <h6 class="p-3 mb-0">Profile</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item" href="<?php echo base_url; ?>Admin/update_profile/<?php if (isset($_SESSION['admin'])) {
+            <a class="dropdown-item preview-item" href="<?php echo base_url; ?>admin/update_profile/<?php if (isset($_SESSION['admin'])) {
                                                                                                 echo $_SESSION['admin'][0]->id;
                                                                                               } ?>">
               <div class="preview-thumbnail">
@@ -188,7 +188,7 @@
               </div>
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item preview-item" href="<?php echo base_url; ?>Admin/logout">
+            <a class="dropdown-item preview-item" href="<?php echo base_url; ?>admin/logout">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>

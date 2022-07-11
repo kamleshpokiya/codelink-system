@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['admin'])) {
-    header("location:" . base_url . "Admin/home");
+    header("location:" . base_url . "admin/home");
 } ?>
 <!DOCTYPE html>
 <html lang="en">

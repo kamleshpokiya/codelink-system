@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ob_clean();
-class Policy extends loadFile
+class policy extends loadFile
 {
   public $db;
   public function __construct()

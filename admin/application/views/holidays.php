@@ -4,7 +4,7 @@
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <a href="<?php echo base_url; ?>Holiday/add_holidays"><button class="btn btn-warning btn-fw" style="position:absolute; top:30%; right:40px;" id="adduser" class="card-title">Add Holiday</button></a>
+                        <a href="<?php echo base_url; ?>holiday/add_holidays"><button class="btn btn-warning btn-fw" style="position:absolute; top:30%; right:40px;" id="adduser" class="card-title">Add Holiday</button></a>
                         <h4 class="card-title">Holidays</h4>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                                                 <td><?php echo $key->description; ?></td>
                                                 <td><img class="img-xs rounded-circle" style="height:100px; width:200px; border-radius: 5% !important;" src="<?php echo site_url; ?>images/holiday_img/<?php echo $key->image; ?>" alt="<?php echo $key->image; ?>"></td>
                                                 <td>
-                                                    <a href="<?php echo base_url; ?>Holiday/edit_holidays/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
+                                                    <a href="<?php echo base_url; ?>holiday/edit_holidays/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                                                             <i class="mdi mdi-view-grid"></i> Edit </button></a>
                                                 </td>
                                                 <td>
@@ -77,7 +77,7 @@
           if (willDelete) {
             $.ajax({
               type: "post",
-              url: "<?php echo base_url; ?>Holiday/delete_holidays",
+              url: "<?php echo base_url; ?>holiday/delete_holidays",
               data: {
                 "did": s
               },

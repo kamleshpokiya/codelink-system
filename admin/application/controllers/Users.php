@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ob_clean();
-class Users extends loadFile
+class users extends loadFile
 {
 	public $db;
 	public function __construct()
@@ -40,7 +40,7 @@ class Users extends loadFile
 			$ins = $this->db->insert_data($data, 'users');
 			if ($ins) {
 				$_SESSION['user_msg'] = "User add successfully";
-				header("location:" . base_url . "Users/users");
+				header("location:" . base_url . "users/users");
 			}
 		}
 	}

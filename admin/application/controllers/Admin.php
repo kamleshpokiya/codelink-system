@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ob_clean();
-class Admin extends loadFile
+class admin extends loadFile
 {
 	public $db;
 	//include model file by creating object
@@ -55,7 +55,7 @@ class Admin extends loadFile
 				}
 				if ($total == 1 && $total2 == 1) {
 					$_SESSION['admin'] = $record;
-					header("location:" . base_url . "Admin/home");
+					header("location:" . base_url . "admin/home");
 				}
 			}
 		}
@@ -67,7 +67,7 @@ class Admin extends loadFile
 		if (isset($_POST['getemail'])) {
 			if ($_POST['email'] == '') {
 				$_SESSION['error'] = "Please enter your email address";
-				header("location:" . base_url . "Admin/forget_password");
+				header("location:" . base_url . "admin/forget_password");
 			} else {
 				$email = $this->db->escape_string($_POST['email']);
 				$where = "email = '$email'  AND role_as = 0";
@@ -76,10 +76,10 @@ class Admin extends loadFile
 				$record = $this->db->select_data($rows, 'users', $option, $where);
 				$total = count($record);
 				if ($total == 1) {
-					header("location:" . base_url . "Admin/reset_password/$email");
+					header("location:" . base_url . "admin/reset_password/$email");
 				} else {
 					$_SESSION['error'] = "email is not exist";
-					header("location:" . base_url . "Admin/forget_password");
+					header("location:" . base_url . "admin/forget_password");
 				}
 			}
 		}
@@ -91,13 +91,13 @@ class Admin extends loadFile
 		if (isset($_POST['setpassword'])) {
 			if (($_POST['password']) == '') {
 				$_SESSION['error_msg'] = "Enter your password";
-				header("location:" . base_url . "Admin/reset_password/$email");
+				header("location:" . base_url . "admin/reset_password/$email");
 			} elseif (($_POST['cnf_password']) == '') {
 				$_SESSION['error_msg'] = "Reenter your password";
-				header("location:" . base_url . "Admin/reset_password/$email");
+				header("location:" . base_url . "admin/reset_password/$email");
 			} elseif (($_POST['password']) != ($_POST['cnf_password'])) {
 				$_SESSION['error_msg'] = "confirm password is not match with password";
-				header("location:" . base_url . "Admin/reset_password/$email");
+				header("location:" . base_url . "admin/reset_password/$email");
 			} else {
 				$password = $this->db->escape_string(md5($_POST['password']));
 				$set = array("password" => $password);
@@ -105,10 +105,10 @@ class Admin extends loadFile
 				$upd = $this->db->update_data('users', $set, $condition);
 				if ($upd) {
 					$_SESSION['error_msg'] = "your password update successfully";
-					header("location:" . base_url . "Admin/reset_password/$email");
+					header("location:" . base_url . "admin/reset_password/$email");
 				} else {
 					$_SESSION['error_msg'] = "your password is not updated";
-					header("location:" . base_url . "Admin/reset_password/$email");
+					header("location:" . base_url . "admin/reset_password/$email");
 				}
 			}
 		}
@@ -148,7 +148,7 @@ class Admin extends loadFile
 				$upload_file = $file_name;
 				if (file_exists("assets/images/admin/" . $upload_file)) {
 					$_SESSION['status'] = "image already exist" . $upload_file;
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				} else {
 					if ($upload_file != '') {
 						move_uploaded_file($file_tmp, "assets/images/admin/" . $_FILES['profile_pic']['name']);
@@ -158,10 +158,10 @@ class Admin extends loadFile
 						$upd = $this->db->update_data('users', $set, $condition);
 						if ($upd) {
 							$_SESSION['status'] = "Data updated successfully";
-							header("location:" . base_url . "Admin/update_profile/$id");
+							header("location:" . base_url . "admin/update_profile/$id");
 						} else {
 							$_SESSION['status'] = "Data Not updated";
-							header("location:" . base_url . "Admin/update_profile/$id");
+							header("location:" . base_url . "admin/update_profile/$id");
 						}
 					}
 				}
@@ -172,43 +172,43 @@ class Admin extends loadFile
 				$upd = $this->db->update_data('users', $set, $condition);
 				if ($upd) {
 					$_SESSION['status'] = "Data updated successfully";
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				} else {
 					$_SESSION['status'] = "Data Not updated";
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				}
 			}
 		} else {
 			if (isset($_POST['changepassword'])) {
 				if (($_POST['old_password']) == '') {
 					$_SESSION['change_status'] = "Enter your old password";
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				} elseif (($_POST['password']) == '') {
 					$_SESSION['change_status'] = "Enter your new password";
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				} elseif (($_POST['cnf_password']) == '') {
 					$_SESSION['change_status'] = "Enter confirm password";
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				} elseif (($_POST['password']) != ($_POST['cnf_password'])) {
 					$_SESSION['change_status'] = "confirm password is not match with password";
-					header("location:" . base_url . "Admin/update_profile/$id");
+					header("location:" . base_url . "admin/update_profile/$id");
 				} else {
 					$old_password = $this->db->escape_string(md5($_POST['old_password']));
 					$password = $this->db->escape_string(md5($_POST['password']));
 					$database_pass = $_POST['pass'];
 					if ($old_password != $database_pass) {
 						$_SESSION['change_status'] = "Entered old password is not exist";
-						header("location:" . base_url . "Admin/update_profile/$id");
+						header("location:" . base_url . "admin/update_profile/$id");
 					} else {
 						$set = array("password" => $password);
 						$condition = array("password" => $database_pass);
 						$upd = $this->db->update_data('users', $set, $condition);
 						if ($upd) {
 							$_SESSION['change_status'] = "your password update successfully";
-							header("location:" . base_url . "Admin/update_profile/$id");
+							header("location:" . base_url . "admin/update_profile/$id");
 						} else {
 							$_SESSION['change_status'] = "your password is not updated";
-							header("location:" . base_url . "Admin/update_profile/$id");
+							header("location:" . base_url . "admin/update_profile/$id");
 						}
 					}
 				}

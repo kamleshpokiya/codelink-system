@@ -2,7 +2,7 @@
 class rout
 {
     //default controller,method,params
-    public $controller = "Admin";
+    public $controller = "admin";
     public $method = "login";
     public $params = [];
     public function __construct()

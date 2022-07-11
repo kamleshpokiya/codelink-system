@@ -15,7 +15,7 @@
             }
             ?>
             <h4 class="card-title">Users Table</h4>
-            <a href="<?php echo base_url; ?>Users/add_users"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
+            <a href="<?php echo base_url; ?>users/add_users"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -63,11 +63,11 @@
                               echo "Employee";
                             } ?></td>
                         <td>
-                          <a href="<?php echo base_url; ?>Users/single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
+                          <a href="<?php echo base_url; ?>users/single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                               <i class="mdi mdi-view-grid"></i> View </button></a>
                         </td>
                         <td>
-                          <a href="<?php echo base_url; ?>Users/edit_single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-primary btn-icon-text">
+                          <a href="<?php echo base_url; ?>users/edit_single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-primary btn-icon-text">
                               <i class="mdi mdi-lead-pencil"></i> Edit </button></a>
                         </td>
                         <td>
@@ -105,7 +105,7 @@
           if (willDelete) {
             $.ajax({
               type: "post",
-              url: "<?php echo base_url; ?>Users/delete_user",
+              url: "<?php echo base_url; ?>users/delete_user",
               data: {
                 "did": s
               },

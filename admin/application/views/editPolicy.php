@@ -146,7 +146,7 @@
 
 
                     $.ajax({
-                        url: "<?php echo base_url; ?>Policy/editOldPolicy",
+                        url: "<?php echo base_url; ?>policy/editOldPolicy",
                         type: 'post',
                         data: fd,
                         processData: false,

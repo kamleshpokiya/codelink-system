@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ob_clean();
-class Leaves extends loadFile
+class leaves extends loadFile
 {
     public $db;
     public function __construct()
@@ -58,7 +58,7 @@ class Leaves extends loadFile
             $condition = array("id" => $leave_id);
             $upd = $this->db->update_data('leaves', $set, $condition);
             if ($upd) {
-                header("location:" . base_url . "Leaves/leaves");
+                header("location:" . base_url . "leaves/leaves");
             }
         }
     }

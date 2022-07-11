@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ob_clean();
-class Holiday extends loadFile
+class holiday extends loadFile
 {
 	public $db;
 	public function __construct()
@@ -35,7 +35,7 @@ class Holiday extends loadFile
 			$data = array("date" => $date, "title" => $title, "description" => $description, "image" => $file_name);
 			$ins = $this->db->insert_data($data, 'holiday_tbl');
 			if ($ins) {
-				header("location:" . base_url . "Holiday/holidays");
+				header("location:" . base_url . "holiday/holidays");
 			}
 		}
 	}
@@ -61,7 +61,7 @@ class Holiday extends loadFile
 				$upload_file = $file_name;
 				if (file_exists("assets/images/holiday_img/" . $upload_file)) {
 					$_SESSION['h_msg'] = "image already exist" . $upload_file;
-					header("location:" . base_url . "Holiday/edit_holidays/$id");
+					header("location:" . base_url . "holiday/edit_holidays/$id");
 				} else {
 					if ($upload_file != '') {
 						move_uploaded_file($file_tmp, "assets/images/holiday_img/" . $upload_file);
@@ -70,10 +70,10 @@ class Holiday extends loadFile
 						$condition = array("id" => $h_id);
 						$upd = $this->db->update_data('holiday_tbl', $set, $condition);
 						if ($upd) {
-							header("location:" . base_url . "Holiday/holidays");
+							header("location:" . base_url . "holiday/holidays");
 						} else {
 							$_SESSION['h_msg'] = "Data Not updated";
-							header("location:" . base_url . "Holiday/edit_holidays/$id");
+							header("location:" . base_url . "holiday/edit_holidays/$id");
 						}
 					}
 				}
@@ -83,10 +83,10 @@ class Holiday extends loadFile
 				$condition = array("id" => $h_id);
 				$upd = $this->db->update_data('holiday_tbl', $set, $condition);
 				if ($upd) {
-					header("location:" . base_url . "Holiday/holidays");
+					header("location:" . base_url . "holiday/holidays");
 				} else {
 					$_SESSION['h_msg'] = "Data Not updated";
-					header("location:" . base_url . "Holiday/edit_holidays/$id");
+					header("location:" . base_url . "holiday/edit_holidays/$id");
 				}
 			}
 		}

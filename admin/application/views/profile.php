@@ -30,7 +30,7 @@
                                                 <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/admin/<?php echo $key->profile_pic; ?>" alt=""></td>
                                                 <td><?php echo $key->dob; ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url; ?>Admin/update_profile/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
+                                                    <a href="<?php echo base_url; ?>admin/update_profile/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                                                             <i class="mdi mdi-view-grid"></i> Edit </button></a>
                                                 </td>
                                             </tr>

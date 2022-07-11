@@ -303,7 +303,7 @@
             }
 
             $.ajax({
-                url: "<?php echo base_url; ?>Users/edit_user_profile",
+                url: "<?php echo base_url; ?>users/edit_user_profile",
                 type: 'post',
                 data: fd,
                 processData: false,

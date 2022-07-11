@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['admin'])) {
-  header("location:" . base_url . "Admin/home");
+  header("location:" . base_url . "admin/home");
 } ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +61,7 @@ if (isset($_SESSION['admin'])) {
                     <label class="form-check-label">
                       <input type="checkbox" name="remember" class="form-check-input"> Remember me </label>
                   </div>
-                  <a href="<?php echo base_url; ?>Admin/forget_password" class="forgot-pass">Forgot password</a>
+                  <a href="<?php echo base_url; ?>admin/forget_password" class="forgot-pass">Forgot password</a>
                 </div>
                 <div class="text-center">
                   <input type="submit" class="btn btn-primary btn-block enter-btn" name="login" value="Login">

@@ -35,7 +35,7 @@
               </div>
               <div class="row mt-5">
                 <div class="col-12 text-center mt-xl-2">
-                  <a class="text-white font-weight-medium" href="<?php echo base_url; ?>Admin/home">Back to home</a>
+                  <a class="text-white font-weight-medium" href="<?php echo base_url; ?>admin/home">Back to home</a>
                 </div>
               </div>
             </div>
