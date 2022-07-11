@@ -78,7 +78,6 @@ class Model
 			$sel .= ' WHERE ' . $where;
 		}
 		$sel .= $group_by;
-		echo $sel;
 		$sql = $this->db->query($sel) or die("query failed");
 		$row = [];
 			while ($r = $sql->fetch_object()) {

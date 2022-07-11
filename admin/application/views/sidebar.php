@@ -46,6 +46,14 @@
         <span class="menu-title">Manage Holidays</span>
       </a>
     </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="<?php echo base_url; ?>checkinout/managecheckinout">
+        <span class="menu-icon">
+          <i class="mdi mdi-table-large"></i>
+        </span>
+        <span class="menu-title">Manage Check User In/Out</span>
+      </a>
+    </li>
 
   </ul>
 </nav>
