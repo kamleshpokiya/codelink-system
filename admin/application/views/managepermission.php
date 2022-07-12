@@ -25,17 +25,17 @@
                                     }
                         if (!empty($data['data'])) {
                               $Permission = $data['data'];
-                              echo "<pre>";
-                              print_r($Permission);
+                            //   echo "<pre>";
+                            //   print_r($Permission);
                             //   exit;
                             foreach ($Permission as $key => $value){
                                 ?>
                                         <tbody>
                                             <tr>
                                                 <label for="" class="form-check-label">
-                                                    <th> <input type="checkbox" class="" name="permission['<?php echo $key; ?>']"
-                                                            class="form-check-input" value="<?php echo $key;?>" />
-                                                        <?php echo $key; ?></th>
+                                                    <th> <input type="checkbox" name="permission['<?php echo $key; ?>']"
+                                                            class="form-check-input default_chaked"
+                                                            value="<?php echo $key;?>" /> <?php echo $key; ?></th>
                                                 </label>
                                             </tr>
 
@@ -47,9 +47,10 @@
                                             <tr>
                                                 <td></td>
                                                 <label for="" class="form-check-label">
-                                                    <td> <input type="checkbox" class="form-check-input"
+                                                    <td> <input type="checkbox" class="form-check-input "
                                                             name="permission['<?php echo $key; ?>'][] "
-                                                            value="<?php echo $v?>" /><?php echo $k;?></th>
+                                                            value="<?php echo $v?>"
+                                                            id="<?php echo $key.'_'.$v?>" /><?php echo $k;?></th>
                                                 </label>
                                             </tr>
                                             <?php } ?>
@@ -60,8 +61,9 @@
                                         </tbody>
                                         <input type="hidden" name="id" value="<?php echo $role_id; ?>">
                                     </table>
-                                    <a href="<?php echo base_url; ?>permission/updatepermission/<?php echo $id = "4"; ?>"><button
-                                            type="submit" class="btn btn-info" name="update">UPDATED </button></a>
+                                    <a
+                                        href="<?php echo base_url; ?>permission/updatepermission/<?php echo $id = "4"; ?>"><button
+                                            type="submit" class="btn btn-info" name="update">UPDATE </button></a>
 
                                 </form>
 
@@ -72,3 +74,19 @@
             </div>
         </div>
     </div>
+    <script>
+    $(document).ready(function() {
+        $('.default_chaked').change(function() {
+            if ($(":checkbox[value=User]").prop('checked')) {
+                $('#User_1').prop('checked', true);
+                $('#User_3').prop('checked', true);
+                $('#User_4').prop('checked', true);
+                console.log('user_1 checked');
+            }else{
+                $('#User_1').prop('checked', false);
+                $('#User_3').prop('checked', false);
+                $('#User_4').prop('checked', false);
+            }
+        })
+    });
+    </script>

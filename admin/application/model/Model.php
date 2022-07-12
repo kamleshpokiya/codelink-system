@@ -107,6 +107,10 @@ class Model
 			return sprintf("%s='%s'", $k, $v);
 		}, $set, array_keys($set)));
 		$upd = "UPDATE $tbl SET $string WHERE $fields='$values' ";
+		// echo $upd;
+		// return $upd;
+		// die;
+
 		$query = $this->db->query($upd) or die("query not run");
 		return $query;
 	}
