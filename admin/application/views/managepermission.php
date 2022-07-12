@@ -19,10 +19,11 @@
                                             </tr>
                                         </thead>
                                         <?php
-                                    $role_id = $data['id'];
-                                    if ($role_id == "2"){
-                                        echo "HR PERMISSIONS";
-                                    }
+                                        $records = array_values($data['records']);
+                                        echo '<pre>';
+                                        $role_id = $data['id'];
+                                        print_r($records);
+                                    
                         if (!empty($data['data'])) {
                               $Permission = $data['data'];
                             //   echo "<pre>";
@@ -32,11 +33,25 @@
                                 ?>
                                         <tbody>
                                             <tr>
-                                                <label for="" class="form-check-label">
+                                                <?php if(in_array('id',$records)){
+                                                    echo 'chaked';
+                                                }
+                                                if(in_array($key,$records)){  echo 'chaked';?>
+                                                    <label for="" class="form-check-label">
+                                                    <th> <input type="checkbox" checked="checked" name="permission['<?php echo $key; ?>']"
+                                                            class="form-check-input default_chaked"
+                                                            value="<?php echo $key;?>" /> <?php echo $key; ?></th>
+                                                </label>
+                                                <?php
+                                                }else{ ?>
+                                                    <label for="" class="form-check-label">
                                                     <th> <input type="checkbox" name="permission['<?php echo $key; ?>']"
                                                             class="form-check-input default_chaked"
                                                             value="<?php echo $key;?>" /> <?php echo $key; ?></th>
                                                 </label>
+                                                    <?php
+                                                }  
+                                                    ?>
                                             </tr>
 
                                             <?php 

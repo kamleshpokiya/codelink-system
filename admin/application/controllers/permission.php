@@ -17,12 +17,14 @@ class permission extends loadFile
     public function managepermission($id)
     {
         $role_id = $id;
-        $tbl = 'permission';
+        $tbl = 'permissions';
 		$select = '';
 		$option = '';
-		// $where = 'role_id = .$id';
-        // echo $where;
-		// $records = $this->db->select_data($select, $tbl, $option, $where);
+		$where = 'role_id =' .$role_id;
+
+		$records = $this->db->select_data($select, $tbl, $option, $where);
+        // echo '<pre>';
+        // print_r($records);
         
         $permissions = array(
             "User" => array("view user" => 1, "edit user" => 2, "delate user" => 3, "add user" => 4),
@@ -30,7 +32,7 @@ class permission extends loadFile
             "Policy" => array("add Policy" => 1, "edit Policy" => 2, "view Policy" => 3, "delete Policy" => 4)
         );
 
-        $this->view("managepermission", array("title" => "Manage Permission", "data" => $permissions, "id" => $role_id));
+        $this->view("managepermission", array("title" => "Manage Permission", "data" => $permissions, "id" => $role_id, 'records'=> $records));
     }
     public function updatepermission($id = null)
     {
