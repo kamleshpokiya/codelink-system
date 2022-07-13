@@ -78,9 +78,10 @@
   var timer;
   var startTime;
 
-  function start() {
+  function start($id) {
     startTime = parseInt(localStorage.getItem('startTime') || Date.now());
     localStorage.setItem('startTime', startTime);
+    // console.log(localStorage.startTime);
     timer = setInterval(clockTick, 100);
   }
 
@@ -160,7 +161,7 @@
             // });
             $('#checked_out').html('<time id="displayarea" style = "font-size: 20px;">00:00:00</time>');
             reset();
-            start();
+            start($id);
           }
         }
       });

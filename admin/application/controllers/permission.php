@@ -38,11 +38,13 @@ class permission extends loadFile
     {
         $id = $_POST['id'];
         if (isset($_POST['update'])) {
-            $this->db->delete_data('permissions', array('role_id' => 2));
+            $this->db->delete_data('permissions', array('role_id' => $id));
             $permissions = $_POST['permission'];
             foreach ($permissions as $key => $value) {
-                $modules = $this->db->escape_string($key);
-                $insert_array = array("moduls" => $modules, "options" => implode(',', $value), "role_id" => 2);
+                $modules = $key;
+                // $modules = str_replace("'", "", $key);
+                // print_r($key);
+                $insert_array = array("moduls" => $modules, "options" => implode(',', $value), "role_id" => $id);
                 $this->db->insert_data($insert_array, 'permissions');
             }
             header("location:" . base_url . "/permission/permissionview");

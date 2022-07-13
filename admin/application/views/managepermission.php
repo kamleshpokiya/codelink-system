@@ -19,66 +19,69 @@
                                             </tr>
                                         </thead>
                                         <?php
-                                        $records = array_values($data['records']);
-                                        echo '<pre>';
                                         $role_id = $data['id'];
-                                        print_r($records);
-                                    
-                        if (!empty($data['data'])) {
-                              $Permission = $data['data'];
-                            //   echo "<pre>";
-                            //   print_r($Permission);
-                            //   exit;
-                            foreach ($Permission as $key => $value){
-                                ?>
-                                        <tbody>
-                                            <tr>
-                                                <?php if(in_array('id',$records)){
-                                                    echo 'chaked';
-                                                }
-                                                if(in_array($key,$records)){  echo 'chaked';?>
-                                                    <label for="" class="form-check-label">
-                                                    <th> <input type="checkbox" checked="checked" name="permission['<?php echo $key; ?>']"
-                                                            class="form-check-input default_chaked"
-                                                            value="<?php echo $key;?>" /> <?php echo $key; ?></th>
-                                                </label>
-                                                <?php
-                                                }else{ ?>
-                                                    <label for="" class="form-check-label">
-                                                    <th> <input type="checkbox" name="permission['<?php echo $key; ?>']"
-                                                            class="form-check-input default_chaked"
-                                                            value="<?php echo $key;?>" /> <?php echo $key; ?></th>
-                                                </label>
-                                                    <?php
-                                                }  
-                                                    ?>
-                                            </tr>
-
-                                            <?php 
-                                    // echo "<pre>";
-                                    // print_r($value);
-                                    foreach ($value as $k => $v){
+                                        $p_recode = array_values($data['records']);
+                                        // echo '<pre>';
+                                        // print_r($p_recode);
+                                        // $p_option = explode(',', $p_recode[1]->options);
+                                        // echo '<pre>';
+                                        // print_r($p_option);
+                                        $count = 0;
+                                        if (!empty($data['data'])) {
+                                            $Permission = $data['data'];
+                                            foreach ($Permission as $key => $value) {
                                         ?>
-                                            <tr>
-                                                <td></td>
-                                                <label for="" class="form-check-label">
-                                                    <td> <input type="checkbox" class="form-check-input "
-                                                            name="permission['<?php echo $key; ?>'][] "
-                                                            value="<?php echo $v?>"
-                                                            id="<?php echo $key.'_'.$v?>" /><?php echo $k;?></th>
-                                                </label>
-                                            </tr>
-                                            <?php } ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <?php if ($p_recode[$count]->moduls == "$key") { ?>
+                                                            <label for="" class="form-check-label">
+                                                                <th> <input type="checkbox" checked name="permission['<?php echo $key; ?>']" class="form-check-input default_chaked" value="<?php echo $key; ?>" /> <?php echo $key; ?></th>
+                                                            </label>
+                                                        <?php } else { ?>
+                                                            <label for="" class="form-check-label">
+                                                                <th> <input type="checkbox" name="permission['<?php echo $key; ?>']" class="form-check-input default_chaked" value="<?php echo $key; ?>" /> <?php echo $key; ?></th>
+                                                            </label>
+                                                        <?php }
+                                                        ?>
+                                                    </tr>
+                                                   
+                                                    
+                                                    <?php
+                                                    $p_option = explode(',', $p_recode[$count]->options);
+                                                    // echo '<pre>';
+                                                    // print_r($p_option);
+                                                    // die;
+                                                    $count++;
+                                                    
+                                                    foreach ($value as $k => $v) {
+                                                        if (in_array($v, $p_option)) {
+                                                    ?>         
+                                                        <tr>
+                                                            <td></td>
+                                                            <label for="" class="form-check-label">
+                                                                <td> <input type="checkbox" checked class="form-check-input <?php echo $key ?> " name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?></th>
+                                                            </label>
+                                                        </tr>
+                                                        <?php } else { ?>
+                                                            <tr>
+                                                            <td></td>
+                                                            <label for="" class="form-check-label">
+                                                                <td> <input type="checkbox" class="form-check-input <?php echo $key ?>" name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>"  /><?php echo $k; ?></th>
+                                                            </label>
+                                                        </tr>
+                                                        <?php }
+                                                        ?>
+                                                    </tr>
+                                                    <?php }   ?>
+                                                    
                                             <?php
-                                }
-                            }
-                                ?>
-                                        </tbody>
-                                        <input type="hidden" name="id" value="<?php echo $role_id; ?>">
+                                            }
+                                        }
+                                            ?>
+                                                </tbody>
+                                                <input type="hidden" name="id" value="<?php echo $role_id; ?>">
                                     </table>
-                                    <a
-                                        href="<?php echo base_url; ?>permission/updatepermission/<?php echo $id = "4"; ?>"><button
-                                            type="submit" class="btn btn-info" name="update">UPDATE </button></a>
+                                    <a href="<?php echo base_url; ?>permission/updatepermission/<?php echo $id = "4"; ?>"><button type="submit" class="btn btn-info" name="update">UPDATE </button></a>
 
                                 </form>
 
@@ -90,18 +93,23 @@
         </div>
     </div>
     <script>
-    $(document).ready(function() {
-        $('.default_chaked').change(function() {
-            if ($(":checkbox[value=User]").prop('checked')) {
-                $('#User_1').prop('checked', true);
-                $('#User_3').prop('checked', true);
-                $('#User_4').prop('checked', true);
-                console.log('user_1 checked');
-            }else{
-                $('#User_1').prop('checked', false);
-                $('#User_3').prop('checked', false);
-                $('#User_4').prop('checked', false);
-            }
-        })
-    });
+        $(document).ready(function() {
+            $('.default_chaked').change(function() {
+                if ($(":checkbox[value=User]").prop('checked')) {
+                    $('.User').prop('checked', true);
+                } else {
+                    $('.User').prop('checked', false);
+                }
+                if ($(":checkbox[value=Leaves]").prop('checked')) {
+                    $('.Leaves').prop('checked', true);
+                } else {
+                    $('.Leaves').prop('checked', false);
+                }
+                if ($(":checkbox[value=Policy]").prop('checked')) {
+                    $('.Policy').prop('checked', true);
+                } else {
+                    $('.Policy').prop('checked', false);
+                }
+            })
+        });
     </script>

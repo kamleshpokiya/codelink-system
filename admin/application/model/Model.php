@@ -10,9 +10,12 @@ class Model
 	{
 		$field = array_keys($data);
 		$fields = implode(", ", $field);
-		$value = array_values($data);
-		$values = "'" . implode("', '", $value) . "'";
+		$val = array_values($data);
+		$value = str_replace("'", "", $val);
+		$values = "'" . implode("','", $value) . "'";
 		$ins = "INSERT INTO $tbl ($fields) Values ($values)";
+		// echo $ins;
+		// die;
 		$query = $this->db->query($ins) or die("query failed");
 		return $query;
 	}
