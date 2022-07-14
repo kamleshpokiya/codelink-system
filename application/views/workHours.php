@@ -15,6 +15,7 @@
             <tbody>
 
                 <?php
+               
                 $all_days = [];
                 $per_day = [];
                 foreach ($data['workingHours'] as $key => $value) {
@@ -33,7 +34,7 @@
                         array_push($all_days[$indx], $value['id'], $value['time_in'], $value['time_out'], $value['date']);
                     }
                 }
-
+                
                 $particular_date_in_out = [];
                 foreach ($all_days as $key => $value) {
                     for ($i = 0; $i < count($per_day); $i++) {
@@ -42,6 +43,7 @@
                         }
                     }
                 }
+               
                 // echo '<pre>';
                 // print_r($particular_date_in_out);
 
@@ -59,16 +61,30 @@
                             $hours = 0;
                             $minutes = 0;
                             $seconds = 0;
-                            foreach ($particular_date_in_out[$value] as $key => $val) {
-                                $time_out = date_create($val[2]);
-                                $time_in = date_create($val[1]);
 
-                                // Calculating the difference between DateTime objects
-                                $interval = date_diff($time_out, $time_in);
-                                $hours  +=   $interval->h;
-                                $minutes +=  $interval->i;
-                                $seconds +=  $interval->s;
-                            }
+
+                            $in = $particular_date_in_out[$value][0][1];
+                            $out = end($particular_date_in_out[$value])[2];
+                            $time1 = new DateTime($in);
+                            $time2 = new DateTime($out);
+                            $time_diff = $time1->diff($time2);
+                            $hours = $time_diff->h;
+                            $minutes = $time_diff->i;
+                            $seconds = $time_diff->s;
+
+                            // foreach ($particular_date_in_out[$value] as $key => $val) {
+                            //     $time_out = date_create($val[2]);
+                            //     $time_in = date_create($val[1]);
+                            //     // Calculating the difference between DateTime objects
+                            //     // $interval = date_diff($time_out, $time_in);
+                            //     // $hours  +=   $interval->h;
+                            //     // $minutes +=  $interval->i;
+                            //     // $seconds +=  $interval->s;
+                            // }
+                            // echo "<pre>";
+                            // print_r($hours);
+                // echo round($minutes / 60,2). " minute";
+                           
                             if ($hours < 9) {
                                 $hours =  '0' . $hours;
                             }
@@ -92,7 +108,7 @@
                     </tr>
 
                 <?php
-                }
+                }   
                 ?>
             </tbody>
         </table>
@@ -104,19 +120,42 @@
     $(document).ready(function() {
 
         $(document).on('click', '.show_user_inout_onThisDate', function() {
-               $heading = '';
-               $content = '';
+               $heading = 'Show User in/out';
+        //        $content = '
+        //        <table class='table'>
+        //   <thead>
+        //     <tr>
+        //       <th>Sno.</th>
+        //       <th>Time - In </th>
+        //       <th>Time - Out</th>
+        //       <th>Option</th>
+        //     </tr>
+        //   </thead>
+        //   <tbody>
+        //     <tr>
+        //       <td>efrsf</td>
+        //       <td>efrsf</td>
+        //       <td>efrsf</td>
+        //       <td><button type='button' class='btn btn-primary'>Update</button></td>
+             
+        //     </tr>
+        //   </tbody>
+        // </table>
+        // ';
                 $('#exampleModalLabel').text($heading);
                 $(".myModal_content").text($content);
                 $("#myModal").modal('show');
 
 
+            $('#modal-title').html($heading);
+            $('#myModal_content').html($content);
             $KKDD = $(this).val();
             // console.log($KKDD);
             // console.log($.type($KKDD));
             $.each($KKDD, function(index, value) {
                 console.log('kdfklsf');
             });
+
         })
 
     });

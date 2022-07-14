@@ -78,21 +78,20 @@
   var timer;
   var startTime;
 
-  function start($id) {
-    startTime = parseInt(localStorage.getItem('startTime') || Date.now());
-    localStorage.setItem('startTime', startTime);
-    // console.log(localStorage.startTime);
-    timer = setInterval(clockTick, 100);
+  function start($id) { 
+        startTime = parseInt(localStorage.getItem('startTime_'+$id) || Date.now());
+        localStorage.setItem('startTime_'+$id, startTime);
+        timer = setInterval(clockTick, 100);
   }
 
   function stop() {
     clearInterval(timer);
   }
 
-  function reset() {
+  function reset($id =! null) {
     clearInterval(timer);
-    localStorage.removeItem('startTime');
-    document.getElementById('displayarea').innerHTML = "00:00:00.000";
+    localStorage.removeItem('startTime_'+$id);
+    $('#displayarea').html('00:00:00.000');
   }
 
   function clockTick() {
@@ -102,46 +101,31 @@
       mins = timeElapsed.getUTCMinutes(),
       secs = timeElapsed.getUTCSeconds(),
       ms = timeElapsed.getUTCMilliseconds(),
-      display = document.getElementById("displayarea");
+      display = $('#displayarea').html();
 
-    display.innerHTML =
+      $('#displayarea').html(
       (hours > 9 ? hours : "0" + hours) + ":" +
       (mins > 9 ? mins : "0" + mins) + ":" +
-      (secs > 9 ? secs : "0" + secs);
+      (secs > 9 ? secs : "0" + secs));
   };
 
-  // var user = "<%= Session['user']%>";
-  // var check_in = "<%= Session['checked_in']%>";
-
-  // if (user != null && check_in != null) {
-  //   start();
-  // } else {
-  //   localStorage.setItem('startTime', "00:00:00.000");
-  // }
-
-
-
-
-
-
   $(document).ready(function() {
-
-    if (localStorage.getItem('checked_in') != null) {
+    $id = $('#checked_out').val();
+    $id = $('#checked_in').val();
+    if (localStorage.getItem('checked_in_'+$id) != null) {
+      //user are checked_in
       $('#checked_in').attr('id', 'checked_out');
       $('#checked_out').html('<time id="displayarea"  style = "font-size: 20px;">00:00:00</time>');
       // $('#displayarea').css('display', 'block');
-      start();
+      // $id = $('#checked_out').val();
+      start($id);
     }
-
-    if (localStorage.getItem('checked_out' != null)) {
+    if (localStorage.getItem('checked_out_'+$id != null)) {
+      //user are checked_out
       $('#checked_out').attr('id', 'checked_in');
       $('#checked_in').text('Check In');
-      // $('#displayarea').css('display', 'none');
-      // reset();
-      stop();
+      start($id);
     }
-
-
 
     // For check in
     $(document).on('click', '#checked_in', function() {
@@ -151,16 +135,14 @@
         success: function(response) {
           jsonResponse = JSON.parse(response);
           if (jsonResponse.check_in_success) {
-            localStorage.setItem('checked_in', 'yes');
-            if (localStorage.getItem('checked_out') != null) {
-              localStorage.removeItem('checked_out');
+            localStorage.setItem('checked_in_'+$id, 'yes');
+            localStorage.setItem('user_id_'+$id, $id);
+            if (localStorage.getItem('checked_out_'+$id) != null) {
+              localStorage.removeItem('checked_out_'+$id);
             }
             $('#checked_in').attr('id', 'checked_out');
-            // $('#checked_out').hover(() => {
-            //   $('#checked_out').html('Check Out');
-            // });
             $('#checked_out').html('<time id="displayarea" style = "font-size: 20px;">00:00:00</time>');
-            reset();
+            reset($id);
             start($id);
           }
         }
@@ -176,15 +158,16 @@
         success: function(response) {
           jsonResponse = JSON.parse(response);
           if (jsonResponse.check_out_success) {
-            localStorage.setItem('checked_out', 'yes');
-            if (localStorage.getItem('checked_in') != null) {
-              localStorage.removeItem('checked_in');
+            localStorage.setItem('checked_out_'+$id, 'yes');
+            if (localStorage.getItem('checked_in_'+$id) != null) {
+              localStorage.removeItem('checked_in_'+$id);
+              localStorage.removeItem('user_id_'+$id);
             }
             $('#checked_out').attr('id', 'checked_in');
             $('#checked_in').text('Check In');
             $('#displayarea').css('display', 'none');
-            stop();
-            reset();
+            reset($id);
+            start($id);
           }
         }
       });
