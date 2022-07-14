@@ -99,7 +99,8 @@
                             ?>
                         </td>
                         <td>
-                            <?php echo $value; ?>
+                        
+                            <?php echo $value;?>
                         </td>
                         <td>
                             <button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value="<?php print_r($particular_date_in_out[$value]); ?>"> View <i class='mdi mdi-file-check btn-icon-append'></i>
@@ -115,33 +116,29 @@
     </div>
 </div>
 
-
+<table class="table" border="1px">
+        <thead >
+            <tr>
+              <th>Sno.</th>
+              <th>Time - In </th>
+              <th>Time - Out</th>
+              <th>Option</th>
+            
+          </thead>
+          <tbody>
+              <td>efrffsfsfssf</td>
+              <td>efrsf</td>
+              <td>efrsf</td>
+              <td><button type='button' class='btn btn-primary'>Update</button></td>
+            </tr>
+          </tbody>
+        </table>
 <script>
     $(document).ready(function() {
 
         $(document).on('click', '.show_user_inout_onThisDate', function() {
                $heading = 'Show User in/out';
-        //        $content = '
-        //        <table class='table'>
-        //   <thead>
-        //     <tr>
-        //       <th>Sno.</th>
-        //       <th>Time - In </th>
-        //       <th>Time - Out</th>
-        //       <th>Option</th>
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     <tr>
-        //       <td>efrsf</td>
-        //       <td>efrsf</td>
-        //       <td>efrsf</td>
-        //       <td><button type='button' class='btn btn-primary'>Update</button></td>
-             
-        //     </tr>
-        //   </tbody>
-        // </table>
-        // ';
+               $content = '';
                 $('#exampleModalLabel').text($heading);
                 $(".myModal_content").text($content);
                 $("#myModal").modal('show');
