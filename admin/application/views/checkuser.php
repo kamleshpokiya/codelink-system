@@ -29,12 +29,11 @@
                     </th>
                     <th>SR No.</th>
                     <th>Full name</th>
-                    <th>email</th>
-                    <th>profile_pic </th>
-                    <th>User_role</th>
-                    <th>View</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Time - In</th>
+                    <th>Time - Out </th>
+                    <th>Total ( Hours )</th>
+                    <th>Date</th>
+                    <th>chaked in/out</th>
                   </tr>
                 </thead>
                 <tbody>

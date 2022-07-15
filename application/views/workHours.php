@@ -15,7 +15,7 @@
             <tbody>
 
                 <?php
-               
+
                 $all_days = [];
                 $per_day = [];
                 foreach ($data['workingHours'] as $key => $value) {
@@ -34,7 +34,7 @@
                         array_push($all_days[$indx], $value['id'], $value['time_in'], $value['time_out'], $value['date']);
                     }
                 }
-                
+
                 $particular_date_in_out = [];
                 foreach ($all_days as $key => $value) {
                     for ($i = 0; $i < count($per_day); $i++) {
@@ -43,7 +43,7 @@
                         }
                     }
                 }
-               
+
                 // echo '<pre>';
                 // print_r($particular_date_in_out);
 
@@ -83,8 +83,8 @@
                             // }
                             // echo "<pre>";
                             // print_r($hours);
-                // echo round($minutes / 60,2). " minute";
-                           
+                            // echo round($minutes / 60,2). " minute";
+
                             if ($hours < 9) {
                                 $hours =  '0' . $hours;
                             }
@@ -99,61 +99,103 @@
                             ?>
                         </td>
                         <td>
-                        
-                            <?php echo $value;?>
+
+                            <?php echo $value; ?>
                         </td>
                         <td>
-                            <button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value="<?php print_r($particular_date_in_out[$value]); ?>"> View <i class='mdi mdi-file-check btn-icon-append'></i>
+                            <?
+                            
+
+                            ?>
+
+                            <button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value="<?php echo $value; ?>"> View <i class='mdi mdi-file-check btn-icon-append'></i>
                             </button>
                         </td>
                     </tr>
 
                 <?php
-                }   
+                }
                 ?>
             </tbody>
         </table>
     </div>
 </div>
-
-<table class="table" border="1px">
-        <thead >
-            <tr>
-              <th>Sno.</th>
-              <th>Time - In </th>
-              <th>Time - Out</th>
-              <th>Option</th>
-            
-          </thead>
-          <tbody>
-              <td>efrffsfsfssf</td>
-              <td>efrsf</td>
-              <td>efrsf</td>
-              <td><button type='button' class='btn btn-primary'>Update</button></td>
-            </tr>
-          </tbody>
-        </table>
 <script>
     $(document).ready(function() {
 
+
         $(document).on('click', '.show_user_inout_onThisDate', function() {
-               $heading = 'Show User in/out';
-               $content = '';
-                $('#exampleModalLabel').text($heading);
-                $(".myModal_content").text($content);
-                $("#myModal").modal('show');
-
-
-            $('#modal-title').html($heading);
-            $('#myModal_content').html($content);
-            $KKDD = $(this).val();
-            // console.log($KKDD);
-            // console.log($.type($KKDD));
-            $.each($KKDD, function(index, value) {
-                console.log('kdfklsf');
+            $heading = 'Show User in/out';
+            $content = '';
+            $date = $(this).val();
+            $.ajax({
+                url: '<?php echo base_url; ?>WorkHours/show_today_time/' + $date,
+                success: function(response) {
+                        console.log(response);
+                    // jsonResponse = JSON.parse(response);
+                    // if (jsonResponse.check_out_success) {
+                    //     localStorage.setItem('checked_out_' + $id, 'yes');
+                    //     if (localStorage.getItem('checked_in_' + $id) != null) {
+                    //         localStorage.removeItem('checked_in_' + $id);
+                    //         localStorage.removeItem('user_id_' + $id);
+                    //     }
+                    //     $('#checked_out').attr('id', 'checked_in');
+                    //     $('#checked_in').text('Check In');
+                    //     $('#displayarea').css('display', 'none');
+                    //     reset($id);
+                    //     start($id);
+                    // }
+                }
             });
+            
+            // $KKDD = $(this).val();
+           
+
+            // console.log($.type($KKDD));
+            // console.log($KKDD);
+
+            // $data = JSON.parse($KKDD);
+            // console.log($data);  
+
+            // var myArr = $.parseJSON($KKDD);
+            // console.log($.type(myArr));
+            // $.each($KKDD, function(index, value) {
+            //     console.log(index , value);
+            // });
+
+            // $.each($KKDD, function(index, value) {
+            //     console.log('ok');
+            // });
+
+            $content += "</tbody>";
+            $content += "</table>";
+
+            $('#exampleModalLabel').text($heading);
+            $(".myModal_content").html($content);
+            $("#myModal").modal('show');
 
         })
+
+//         $content += "<table class='table'>"
+// $content += "<thead >";
+// $content += "<tr>";
+// $content += "<th>Sno.</th>";
+// $content += "<th>Time - In </th>";
+// $content += "<th>Time - Out</th>";
+// // $content += "<th>Option</th>";
+// $content += "</thead>";
+// $content += "<tbody>";
+// var arrayFromPHP = <?php echo json_encode($data); ?>;
+// $.each(arrayFromPHP, function(i, value) {
+
+//     console.log(value);
+
+//     $content += '<tr><td>' + ++i + '</td>';
+//     $content += '<td>' + value[1] + '</td>';
+//     $content += '<td>' + value[2] + '</td>';
+//     // $content += '<td><button type="button" class="btn btn-success" data-bs-dismiss="modal">UPDATE</button></td></tr>';
+
+// });
 
     });
 </script>
