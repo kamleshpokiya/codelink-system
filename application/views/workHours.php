@@ -104,11 +104,11 @@
                         </td>
                         <td>
                             <?
-                            
+
 
                             ?>
 
-                            <button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value="<?php echo $value; ?>"> View <i class='mdi mdi-file-check btn-icon-append'></i>
+                            <button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value='<?php echo json_encode($particular_date_in_out[$value]); ?>'> View <i class='mdi mdi-file-check btn-icon-append'></i>
                             </button>
                         </td>
                     </tr>
@@ -123,50 +123,31 @@
 <script>
     $(document).ready(function() {
 
-
         $(document).on('click', '.show_user_inout_onThisDate', function() {
-            $heading = 'Show User in/out';
+            
             $content = '';
             $date = $(this).val();
-            $.ajax({
-                url: '<?php echo base_url; ?>WorkHours/show_today_time/' + $date,
-                success: function(response) {
-                        console.log(response);
-                    // jsonResponse = JSON.parse(response);
-                    // if (jsonResponse.check_out_success) {
-                    //     localStorage.setItem('checked_out_' + $id, 'yes');
-                    //     if (localStorage.getItem('checked_in_' + $id) != null) {
-                    //         localStorage.removeItem('checked_in_' + $id);
-                    //         localStorage.removeItem('user_id_' + $id);
-                    //     }
-                    //     $('#checked_out').attr('id', 'checked_in');
-                    //     $('#checked_in').text('Check In');
-                    //     $('#displayarea').css('display', 'none');
-                    //     reset($id);
-                    //     start($id);
-                    // }
-                }
+            $date = JSON.parse($date);
+            // console.log($date);
+            $content += "<table class='table'>"
+            $content += "<thead >";
+            $content += "<tr>";
+            $content += "<th>Sno.</th>";
+            $content += "<th>Time - In </th>";
+            $content += "<th>Time - Out</th>";
+            // $content += "<th>Option</th>";
+            $content += "</thead>";
+            $content += "<tbody>";
+            $.each($date, function(i, value) {
+            console.log(value);
+                $heading = 'Date : '+ value[3] +'';
+                $content += '<tr><td>' + ++i + '</td>';
+                $content += '<td>' + value[1] + '</td>';
+                $content += '<td>' + value[2] + '</td>';
+                // $content += '<td><button type="button" class="btn btn-success" data-bs-dismiss="modal">UPDATE</button></td></tr>';
+
             });
-            
-            // $KKDD = $(this).val();
            
-
-            // console.log($.type($KKDD));
-            // console.log($KKDD);
-
-            // $data = JSON.parse($KKDD);
-            // console.log($data);  
-
-            // var myArr = $.parseJSON($KKDD);
-            // console.log($.type(myArr));
-            // $.each($KKDD, function(index, value) {
-            //     console.log(index , value);
-            // });
-
-            // $.each($KKDD, function(index, value) {
-            //     console.log('ok');
-            // });
-
             $content += "</tbody>";
             $content += "</table>";
 
@@ -176,26 +157,7 @@
 
         })
 
-//         $content += "<table class='table'>"
-// $content += "<thead >";
-// $content += "<tr>";
-// $content += "<th>Sno.</th>";
-// $content += "<th>Time - In </th>";
-// $content += "<th>Time - Out</th>";
-// // $content += "<th>Option</th>";
-// $content += "</thead>";
-// $content += "<tbody>";
-// var arrayFromPHP = <?php echo json_encode($data); ?>;
-// $.each(arrayFromPHP, function(i, value) {
 
-//     console.log(value);
-
-//     $content += '<tr><td>' + ++i + '</td>';
-//     $content += '<td>' + value[1] + '</td>';
-//     $content += '<td>' + value[2] + '</td>';
-//     // $content += '<td><button type="button" class="btn btn-success" data-bs-dismiss="modal">UPDATE</button></td></tr>';
-
-// });
 
     });
 </script>
