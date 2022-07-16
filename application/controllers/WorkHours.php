@@ -128,24 +128,6 @@ class WorkHours extends loadFile
             echo json_encode($msg);
         }
     }
-    public function show_today_time($date)
-    {
-        $tbl = "user_in_out";
-        $id = 24;
-        $where ="date = '$date'";
-        $where1 = "user_id = '$id'"; 
-        $select = '';
-        $option = '';
-        // $option = array(
-        //     'ORDER_BY' => array(
-        //        'date DESC'
-        //     )
-        // );
-       $recode =  mysqli_fetch_assoc($this->db->select_data($select, $tbl, $option, $where, $where1));
-       echo '<pre>';
-       print_r($recode);
-
-    //    return $recode;
-    }
+    
 
 }

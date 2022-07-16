@@ -38,6 +38,9 @@
                 </thead>
                 <tbody>
                   <?php
+                  if(!empty($data['workingHours'])){
+                    print_r($data['workingHours']);
+                  }
                   if (!empty($data['data'])) {
                     $records = array_values($data['data']);
                     foreach ($records as $key) {
