@@ -23,8 +23,8 @@ class Model
 	{
 		$join = $group_by = $having = $order_by = $limit = $offset = '';
 		if ($select != null) {
-			// $row_fields = implode(', ', $select);
-			$sel = 'SELECT ' . $select . ' FROM ' . $tbl;
+			$row_fields = implode(', ', $select);
+			$sel = 'SELECT ' . $row_fields . ' FROM ' . $tbl;
 		} else {
 			$select = '*';
 			$sel = 'SELECT ' . $select . ' FROM ' . $tbl;

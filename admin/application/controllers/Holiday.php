@@ -16,6 +16,8 @@ class holiday extends loadFile
 		$option = '';
 		$where = '';
 		$records = $this->db->select_data($select, $tbl, $option, $where);
+		print_r($records);
+		die;
 		$this->view("holidays", array("title" => "this is holiday list", "data" => $records));
 	}
 	public function add_holidays()
