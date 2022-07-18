@@ -13,9 +13,9 @@
             <?php
               unset($_SESSION['user_msg']);
             }
+            
             ?>
             <h4 class="card-title">Users Table</h4>
-            <a href="<?php echo base_url; ?>users/add_users"><button class="btn btn-warning btn-fw" style="position:absolute; top:5%; right:40px;" id="adduser">Add User</button></a>
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -32,18 +32,34 @@
                     <th>Time - In</th>
                     <th>Time - Out </th>
                     <th>Total ( Hours )</th>
-                    <th>Date</th>
-                    <th>chaked in/out</th>
+                    <th>User Holiday</th>
+                    <th>Leave From</th>
+                    <th>Leave To</th>
+                    <th>Send Massege</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  if(!empty($data['workingHours'])){
-                    print_r($data['workingHours']);
-                  }
-                  if (!empty($data['data'])) {
-                    $records = array_values($data['data']);
-                    foreach ($records as $key) {
+                  if (!empty($data['users'])) {
+                    $records = array_values($data['users']);
+
+                    foreach ($records as $k =>$key) {
+                      $time1 = new DateTime($key->time_in);
+                            $time2 = new DateTime($key->time_out);
+                            $time_diff = $time1->diff($time2);
+                            $hours = $time_diff->h;
+                            $minutes = $time_diff->i;
+                            $seconds = $time_diff->s;
+
+                        if(!$key->leave_type == null){
+                          if($key->leave_type == 1){
+                            $leave_type ="<div class='badge badge-outline-warning'>Half Day</div>";
+                          }else {
+                          $leave_type ="<div class='badge badge-outline-danger'>Full Day</div>";
+                          }
+                        }else{
+                          $leave_type ="<div class='badge badge-outline-success'>No leave</div>";
+                        }
                   ?>
                       <tr>
                         <td>
@@ -53,29 +69,14 @@
                             </label>
                           </div>
                         </td>
-                        <td><?php echo $key->id; ?></td>
+                        <td><?php echo $k+1; ?></td>
                         <td><?php echo $key->first_name . '  ' . $key->last_name; ?></td>
-                        <td><?php echo $key->email; ?></td>
-                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic; ?>" alt="<?php echo $key->first_name; ?>"></td>
-                        <td><?php if ($key->role_as == 1) {
-                              echo "HR";
-                            } elseif ($key->role_as == 2) {
-                              echo "Team Leader";
-                            } else {
-                              echo "Employee";
-                            } ?></td>
-                        <td>
-                          <a href="<?php echo base_url; ?>users/single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
-                              <i class="mdi mdi-view-grid"></i> View </button></a>
-                        </td>
-                        <td>
-                          <a href="<?php echo base_url; ?>users/edit_single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-primary btn-icon-text">
-                              <i class="mdi mdi-lead-pencil"></i> Edit </button></a>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-danger btn-icon-text" id="<?php echo $key->id; ?>" onclick="del(this.id)">
-                            <i class="mdi mdi-delete"></i> Delete </button>
-                        </td>
+                        <td><?php if($key->time_in == null){echo "<div class='badge badge-outline-danger'>Not Check In</div>";}else{echo "$key->time_in";}?></td>
+                        <td><?php if($key->time_out == null){echo "<div class='badge badge-outline-danger'>Not Check out</div>";}else{echo "$key->time_out";}?></td>
+                        <td><?php if($key->time_in == null){echo '-';}else{echo "$hours:$minutes:$seconds Hours";}?></td>
+                        <td><?php echo $leave_type; ?></td>
+                        <td><?php if($key->leave_from == null){echo "<div class='badge badge-outline-danger'>not apllied</div>";}else{echo "$key->leave_from";}?></td>
+                        <td><?php if($key->leave_to == null){echo "<div class='badge badge-outline-danger'>not apllied</div>";}else{echo "$key->leave_to";}?></td>
                       </tr>
                     <?php
                     }

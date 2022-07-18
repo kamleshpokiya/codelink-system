@@ -18,6 +18,7 @@
 
                 $all_days = [];
                 $per_day = [];
+                if(!$data['workingHours']== null){
                 foreach ($data['workingHours'] as $key => $value) {
 
                     if (!in_array($value['date'], $all_days)) {
@@ -114,7 +115,7 @@
                     </tr>
 
                 <?php
-                }
+                } }
                 ?>
             </tbody>
         </table>

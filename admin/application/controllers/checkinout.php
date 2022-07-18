@@ -12,16 +12,34 @@ class checkinout extends loadFile
 	}
 
 	public function managecheckinout(){
-		//  $select = '`user_in_out`.*, `users`.`first_name`, `users`.`last_name`, `leaves`.*';
-		//  $tbl = '`user_in_out`, `users`'; 
-		 $select = array("user_in_out.*", "users.first_name", "users.last_name", "leaves.*");
-		 $tbl = 'user_in_out, users';
+
+		 $select = array("a.id","a.first_name","a.last_name","c.*","ul.*");
+		 $tbl = 'users a';
 		 $option = array(
 			 "join" => array(
 				 array(
 					 "type" => "LEFT JOIN",
-					 "table" => "leaves",
-					 "condition" => "leaves.user_id = users.id"
+					 "table" => "(
+						SELECT user_id,MAX(leaves.leave_from) leave_from,MAX(leaves.leave_to) leave_to,leaves.leave_type 
+						FROM leaves
+					GROUP BY
+						user_id
+					) ul",
+					 "condition" => "ul.user_id = a.id"
+					 ),
+				 array(
+					 "type" => "LEFT JOIN",
+					 "table" => "(
+						SELECT
+							user_id,MAX(user_in_out.time_in) time_in,MAX(user_in_out.time_out) time_out
+						FROM
+							user_in_out
+						WHERE
+							user_in_out.date = CURDATE()
+						GROUP BY
+							user_id
+					) c",
+					 "condition" => "c.user_id = a.id"
 				 )
 			 )
 			 //"GROUP_BY" => array("users.first_name")  
@@ -30,38 +48,13 @@ class checkinout extends loadFile
 			 //"LIMIT" => array("3"),
 			 //"OFFSET" => ""
 		 );
-// 		 SELECT user_in_out.*, users.first_name, users.last_name, leaves.*
-// FROM user_in_out, users 
-// LEFT JOIN leaves ON leaves.user_id = users.id;
 
-// SELECT  users.id, users.first_name, users.last_name, leaves.leave_type, leaves.leave_from, leaves.leave_to FROM leaves RIGHT JOIN users ON leaves.user_id=users.id
-
- 
-
-// $select = array("user_in_out.*", "users.first_name", "users.last_name", "leaves.*");
-//         $tbl = 'user_in_out, users';
-//         $option = array(
-//             "join" => array(
-//                 array(
-//                     "type" => "LEFT JOIN",
-//                     "table" => "leaves",
-//                     "condition" => "leaves.user_id = users.id"
-//                 )
-//             )
-//             //"GROUP_BY" => array("users.first_name")  
-//             // "HAVING" => array("salary > 20000"),
-//             // "ORDER_BY" => array("first_name ASC"),
-//             //"LIMIT" => array("3"),
-//             //"OFFSET" => ""
-//         );
 		 $where = '';
 
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		echo '<pre>';
-		print_r($records); 
-		die;
-        $user_in_out_obj = [];
-		$leaves_obj= [];
+		// echo '<pre>';
+		// print_r($records); 	
+		// die;
         
         $this->view("checkuser", array("title" => "User check in and out page", 'users' => $records));
     }

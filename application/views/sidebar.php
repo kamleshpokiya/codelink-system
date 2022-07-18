@@ -49,6 +49,14 @@
         <span class="menu-title">Daily ( In / Out )</span>
       </a>
     </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="<?php echo base_url; ?>holidays/viewholidays">
+        <span class="menu-icon">
+          <i class="mdi mdi-table-large"></i>
+        </span>
+        <span class="menu-title">Holidays</span>
+      </a>
+    </li>
 
   </ul>
 </nav>

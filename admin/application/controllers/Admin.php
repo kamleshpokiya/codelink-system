@@ -28,11 +28,11 @@ class admin extends loadFile
 			} else {
 				$email = $this->db->escape_string($_POST['email']);
 				$password = $this->db->escape_string(md5($_POST['password']));
-				$where = "email = '$email' AND role_as = 0";
+				$where = "email = '$email' AND role_as = 1";
 				$select = '';
 				$option = '';
 				$record = $this->db->select_data($select, 'users', $option, $where);
-				$wh = "password ='$password' AND email = '$email' AND role_as = 0";
+				$wh = "password ='$password' AND email = '$email' AND role_as = 1";
 				$rows = '';
 				$options = '';
 				$record2 = $this->db->select_data($rows, 'users', $options, $wh);
@@ -70,7 +70,7 @@ class admin extends loadFile
 				header("location:" . base_url . "admin/forget_password");
 			} else {
 				$email = $this->db->escape_string($_POST['email']);
-				$where = "email = '$email'  AND role_as = 0";
+				$where = "email = '$email'  AND role_as = 1";
 				$rows = '';
 				$option = '';
 				$record = $this->db->select_data($rows, 'users', $option, $where);
