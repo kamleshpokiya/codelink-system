@@ -33,8 +33,15 @@
       .error{
         color:red; 
         margin-top:15px;
-      
       }
+      .avatar-wrap { position: relative;
+        width: 45px;
+        height: 45px;
+        }
+      .avatar_cross_img { position: absolute;
+        right: 0px;
+        bottom: 0px;
+        }
     </style>
   </head>
   <body>

@@ -1,3 +1,4 @@
+
 <div class="card-body">
     <div class="table-responsive" style="margin-top: 40px;">
         <h4 class="card-title md-5" style=" margin-bottom:30px;">Daily ( In / Out )</h4>
@@ -18,6 +19,8 @@
 
                 $all_days = [];
                 $per_day = [];
+                print_r($data['permission']);
+                // die;
                 if(!$data['workingHours']== null){
                 foreach ($data['workingHours'] as $key => $value) {
 

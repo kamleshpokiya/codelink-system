@@ -86,6 +86,7 @@ class Model
 		// while ($r = $sql->fetch_object()) {
 		// 	$row[] = $r;
 		// }
+
 		return $sql;
 	}
 	public function delete_data($tbl, $condition)

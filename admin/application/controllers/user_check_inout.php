@@ -1,7 +1,7 @@
 <?php
 ob_start();
 ob_clean();
-class checkinout extends loadFile
+class user_check_inout extends loadFile
 {
 	public $db;
 	//include model file by creating object
@@ -11,9 +11,9 @@ class checkinout extends loadFile
 		$this->db = $this->model('Model');
 	}
 
-	public function managecheckinout(){
+	public function view_user_checkinout(){
 
-		 $select = array("a.id","a.first_name","a.last_name","c.*","ul.*");
+		 $select = array("a.id","a.first_name","a.last_name","a.profile_pic","c.*","ul.*");
 		 $tbl = 'users a';
 		 $option = array(
 			 "join" => array(

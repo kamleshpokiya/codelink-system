@@ -96,7 +96,7 @@ class holiday extends loadFile
 		if (isset($_REQUEST['did'])) {
 			$id = $_REQUEST['did'];
 				$wh = array("id" => $id);
-				$del = $this->db->delete_data("users", $wh);
+				$del = $this->db->delete_data("holiday_tbl", $wh);
 		}
 	}
 }

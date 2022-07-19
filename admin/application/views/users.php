@@ -54,7 +54,7 @@
                         <td><?php echo $key->id; ?></td>
                         <td><?php echo $key->first_name . '  ' . $key->last_name; ?></td>
                         <td><?php echo $key->email; ?></td>
-                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic; ?>" alt="<?php echo $key->first_name; ?>"></td>
+                        <td><img class="img-xs rounded-circle" style="height:35px; width:35px;" src="<?php echo site_url; ?>images/users/<?php echo $key->profile_pic; ?>" alt="<?php echo $key->first_name; ?>" onerror="this.onerror=null;this.src='<?php echo site_url; ?>images/users/default_img.png'"></td>
                         <td><?php if ($key->role_as == 1) {
                               echo "HR";
                             } elseif ($key->role_as == 2) {

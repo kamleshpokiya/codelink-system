@@ -125,7 +125,6 @@
                         fd.append('file', file);
                     }
 
-
                     $.ajax({
                         url: "<?php echo base_url; ?>policy/addNewPolicy",
                         type: 'post',
@@ -135,6 +134,7 @@
                         success: function(response) {
                             jsonResponse = JSON.parse(response);
 
+                            console.log(jsonResponse);
                             if (jsonResponse.ins_policy_success) {
                                 $('#policy_created').css({
                                     'display': 'block'
