@@ -27,7 +27,7 @@ class permission extends loadFile
         // print_r($records);
         
         $permissions = array(
-            "User" => array("view user" => 1, "edit user" => 2, "delate user" => 3, "add user" => 4),
+            "User" => array("View User" => 1, "Edit user" => 2, "Add user" => 3, "Delate User" => 4,"Extra"=> 5),
             "Leaves" => array("add leaves" => 1, "approve leaves" => 2, "delete leaves" => 3),
             "Policy" => array("add Policy" => 1, "edit Policy" => 2, "view Policy" => 3, "delete Policy" => 4)
         );

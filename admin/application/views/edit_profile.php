@@ -4,6 +4,9 @@
             <div class="card">
                 <div class="card-body">
                     <?php
+                    // if(in_array('4', $permission)){
+                    //         echo "not permission";
+                    // }
                     if (isset($_SESSION['status']) && $_SESSION != '') {
                     ?>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -11,6 +14,7 @@
                         </div>
                         
                     <?php
+
                         unset($_SESSION['status']);
                     }
                     ?>

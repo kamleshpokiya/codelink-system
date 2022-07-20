@@ -9,20 +9,15 @@ class WorkHours extends loadFile
         session_start();
         $this->db = $this->model('Model');
         
-        //creating permistion array using user_id
-        $id = $_SESSION['user']['id'];
-        $where = "id = '$id'";
-       $users_sql = $this->db->select_data('','users','', $where);
-       $user_details = mysqli_fetch_assoc($users_sql);
-       $user_role_as = $user_details['role_as'];
-       $role_where = "role_id = '2'";
-       $select = 'role_id , options, moduls';
-       $permission_sql = $this->db->select_data($select,'permissions','',$role_where);
+        //creating permistion array
+        $role_id = $_SESSION['user']['role_as'];
+        $where = "role_id = '2'";
+        $select = 'role_id , options, moduls';
+        $permission_sql = $this->db->select_data($select,'permissions','',$where);
        while ($r = $permission_sql->fetch_object()) {
 			$row[] = $r;
 		}
         $this->_auth = $row;
-     
     }
 
 

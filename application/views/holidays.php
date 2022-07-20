@@ -22,7 +22,7 @@
                                                 <td><?php echo $key->date; ?></td>
                                                 <td><?php echo $key->title; ?></td>
                                                 <td><?php echo $key->description; ?></td>
-                                                <td><img class="img-xs rounded-circle" style="height:100px; width:200px; border-radius: 5% !important;" src="<?php echo site_url; ?>images/holiday_img/<?php echo $key->image; ?>" alt="<?php echo $key->image; ?>"></td>
+                                                <td><img class="img-xs rounded-circle" style="height:100px; width:200px; border-radius: 5% !important;" src="http://localhost/codelink-system/admin/public/assets/images/holiday_img/<?php echo $key->image; ?>" alt="<?php echo $key->image; ?>"></td>
                                             </tr>
                                         <?php
                                         }
