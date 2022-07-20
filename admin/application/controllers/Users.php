@@ -9,23 +9,11 @@ class users extends loadFile
 		session_start();
 		$this->db = $this->model('Model');
 		$this->db = $this->model('Model');
-        
-        //creating permistion array
-        // $role_id = $_SESSION['admin'][0]->role_as;
-		
-        // $where = "role_id = '2'";
-        // $select = array('role_id','options','moduls');
-        // $row = $this->db->select_data($select,'permissions','',$where);
-        // $this->_auth = $row;
-		// $this->permission();
 
 		$all_permission_array = $this->permission();
 		$permition[] = $all_permission_array[0]->options;
 		$permition_option_array =explode(',',$permition[0]);
 		$this->_auth = $permition_option_array;
-
-  		//  print_r($permition);
-   		// die;
 	}
 	//users detail page
 	public function users()
@@ -229,15 +217,3 @@ class users extends loadFile
 		}
 	}
 }
-// <?php if(in_array('4', $permission)){  ?>
-
-//     <?php }?>
-// for contoler
-//     if(in_array('4', $this->_auth)){  
-// 		$this->view("users", array("title" => "this is user", "data" => $records, 'recode'=> $this->_auth));
-// 		}else {
-// 			$this->single_view("error");
-// 			}
-
-//     http://localhost/codelink-system/admin/users/edit_single_user/3
-//     http://localhost/codelink-system/admin/users/single_user/3

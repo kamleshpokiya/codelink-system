@@ -19,11 +19,6 @@
                                     <?php
                                     $role_id = $data['id'];
                                     $p_recode = array_values($data['records']);
-                                    // echo '<pre>';
-                                    // print_r($p_recode);
-                                    // $p_option = explode(',', $p_recode[1]->options);
-                                    // echo '<pre>';
-                                    // print_r($p_option);
                                     $count = 0;
                                     if (!empty($data['data'])) {
                                         $Permission = $data['data'];
@@ -44,9 +39,6 @@
 
                                                 <?php
                                                 $p_option = explode(',', $p_recode[$count]->options);
-                                                // echo '<pre>';
-                                                // print_r($p_option);
-                                                // die;
                                                 $count++;
                                                 foreach ($value as $k => $v) {
                                                     if (in_array($v, $p_option)) {
@@ -76,7 +68,7 @@
                                             </tbody>
                                             <input type="hidden" name="id" value="<?php echo $role_id; ?>">
                                 </table>
-                                <a href="<?php echo base_url; ?>permission/updatepermission/<?php echo $id = "4"; ?>"><button type="submit" class="btn btn-primary me-2" name="update">UPDATE </button></a>
+                                <a href="<?php echo base_url; ?>permission/updatepermission/ ?>"><button type="submit" class="btn btn-primary me-2" name="update">UPDATE </button></a>
                             </form>
                         </div>
                     </div>
@@ -102,6 +94,17 @@
                 } else {
                     $('.Policy').prop('checked', false);
                 }
+                if ($(":checkbox[value=Holiday]").prop('checked')) {
+                    $('.Holiday').prop('checked', true);
+                } else {
+                    $('.Holiday').prop('checked', false);
+                }
+                if ($(":checkbox[value=permission]").prop('checked')) {
+                    $('.permission').prop('checked', true);
+                } else {
+                    $('.permission').prop('checked', false);
+                }
+
             })
         });
     </script>

@@ -8,6 +8,10 @@ class leaves extends loadFile
     {
         session_start();
         $this->db = $this->model('Model');
+        $all_permission_array = $this->permission();
+		$permition[] = $all_permission_array[1]->options;
+		$permition_option_array =explode(',',$permition[0]);
+		$this->_auth = $permition_option_array;
     }
     //leave details 
     public function leaves()
@@ -30,7 +34,11 @@ class leaves extends loadFile
         );
         $where = '';
         $records = $this->db->select_data($select, $tbl, $option, $where);
-        $this->view("leaves", array("title" => "this is leaves", "data" => $records));
+        if(in_array('1', $this->_auth)){ 
+        $this->view("leaves", array("title" => "this is leaves", "data" => $records,'recode'=> $this->_auth));
+              }else {
+                 $this->single_view("error");
+         }
     }
     //approve by admin 
     public function approve_leave($id)
@@ -45,7 +53,11 @@ class leaves extends loadFile
         $currentdate = date("y-m-d");
         // $newDate = date('Y-m-d', strtotime($currentdate . ' + 4 months'));
         $month = date("m", strtotime($currentdate));
-        $this->view("approve_leave", array("title" => "approve leave", "data" => $sel_date));
+        if(in_array('2', $this->_auth)){  
+            $this->view("approve_leave", array("title" => "approve leave", "data" => $sel_date));
+        }else {
+           $this->single_view("error");
+   }
         if (isset($_POST['edit'])) {
             $leave_status = $this->db->escape_string($_POST['status']);
             $comment = $this->db->escape_string($_POST['comment']);
@@ -65,7 +77,7 @@ class leaves extends loadFile
     //delete leaves
     public function delete_leaves()
     {
-        if (isset($_REQUEST['did'])) {
+        if ((isset($_REQUEST['did'])) && (in_array('4', $this->_auth))) {
             $id = $_REQUEST['did'];
             $wh = array("id" => $id);
             $del = $this->db->delete_data("leaves", $wh);

@@ -4,7 +4,9 @@
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <a href="<?php echo base_url; ?>holiday/add_holidays"><button class="btn btn-warning btn-fw" style="position:absolute; top:30%; right:40px;" id="adduser" class="card-title">Add Holiday</button></a>
+                    <?php $permission = $data['recode'];if(in_array('3', $permission)){  ?>
+                      <a href="<?php echo base_url; ?>holiday/add_holidays"><button class="btn btn-warning btn-fw" style="position:absolute; top:30%; right:40px;" id="adduser" class="card-title">Add Holiday</button></a>
+                    <?php }?>
                         <h4 class="card-title">Holidays</h4>
                     </div>
                 </div>
@@ -19,8 +21,12 @@
                                         <th> Title </th>
                                         <th> Description</th>
                                         <th> Image</th>
-                                        <th> Edit </th>
-                                        <th> Delete </th>
+                                        <?php if(in_array('2', $permission)){  ?>
+                                          <th> Edit </th>
+                                        <?php }?>
+                                        <?php if(in_array('4', $permission)){  ?>
+                                          <th> Delete </th>
+                                        <?php }?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,16 +41,18 @@
                                                 <td><?php echo $key->title; ?></td>
                                                 <td><?php echo $key->description; ?></td>
                                                 <td><img class="img-xs rounded-circle" style="height:100px; width:200px; border-radius: 5% !important;" src="<?php echo site_url; ?>images/holiday_img/<?php echo $key->image; ?>" alt="<?php echo $key->image; ?>"></td>
-                                                <td>
+                                                <?php if(in_array('2', $permission)){  ?>
+                                                  <td>
                                                     <a href="<?php echo base_url; ?>holiday/edit_holidays/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                                                             <i class="mdi mdi-view-grid"></i> Edit </button></a>
                                                 </td>
-                                                <td>
+                                                <?php }?>
+                                                <?php if(in_array('4', $permission)){  ?>
+                                                  <td>
                                                     <button type="button" class="btn btn-danger btn-icon-text" id="<?php echo $key->id; ?>" onclick="del(this.id)">
                                                         <i class="mdi mdi-delete"></i> Delete </button>
                                                 </td>
-
-
+                                                <?php }?>
                                             </tr>
                                         <?php
                                         }

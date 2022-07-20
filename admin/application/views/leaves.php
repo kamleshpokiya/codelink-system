@@ -6,6 +6,7 @@
                <div class="card-body">
                   <h4 class="card-title">User Leaves</h4>
                   <div class="table-responsive">
+                     <?php $permission = $data['recode'];?>
                      <table class="table">
                         <thead>
                            <tr>
@@ -21,8 +22,12 @@
                               <th> Admin reason</th>
                               <th> Status</th>
                               <th> Date</th>
+                              <?php if(in_array('2', $permission)){  ?>
                               <th> Edit </th>
+                              <?php }?>
+                              <?php if(in_array('3', $permission)){  ?>
                               <th> Delete </th>
+                              <?php }?>
                            </tr>
                         </thead>
                         <tbody>
@@ -60,16 +65,18 @@
                                              echo "Pending";
                                           } ?></td>
                                     <td><?php echo $key->date; ?></td>
-                                    <td>
+                                    <?php if(in_array('2', $permission)){  ?>
+                                       <td>
                                        <a href="<?php echo base_url; ?>leaves/approve_leave/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                                              <i class="mdi mdi-view-grid"></i> Approve </button></a>
                                     </td>
-                                    <td>
+                                    <?php }?>
+                                    <?php if(in_array('3', $permission)){  ?>
+                                       <td>
                                        <button type="button" class="btn btn-danger btn-icon-text" id="<?php echo $key->id; ?>" onclick="del(this.id)">
                                           <i class="mdi mdi-delete"></i> Delete </button>
                                     </td>
-
-
+                                    <?php }?>
                                  </tr>
                               <?php
                               }

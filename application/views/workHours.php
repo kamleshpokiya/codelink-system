@@ -14,31 +14,23 @@
                 </tr>
             </thead>
             <tbody>
-
                 <?php
-
                 $all_days = [];
                 $per_day = [];
-                print_r($data['permission']);
-                // die;
                 if(!$data['workingHours']== null){
                 foreach ($data['workingHours'] as $key => $value) {
-
                     if (!in_array($value['date'], $all_days)) {
                         array_push($all_days, $value['date']);
                     }
-
                     if (!in_array($value['date'], $per_day)) {
                         array_push($per_day, $value['date']);
                     }
-
                     if (in_array($value['date'], $all_days)) {
                         $indx = array_search($value['date'], $all_days);
                         $all_days[$indx] = [];
                         array_push($all_days[$indx], $value['id'], $value['time_in'], $value['time_out'], $value['date']);
                     }
                 }
-
                 $particular_date_in_out = [];
                 foreach ($all_days as $key => $value) {
                     for ($i = 0; $i < count($per_day); $i++) {
@@ -47,26 +39,17 @@
                         }
                     }
                 }
-
-                // echo '<pre>';
-                // print_r($particular_date_in_out);
-
-
                 foreach ($per_day as $key => $value) {
-
                 ?>
                     <tr>
                         <td><?php echo $key + 1 ?></td>
                         <td><?php echo $particular_date_in_out[$value][0][1]; ?></td>
                         <td><?php echo end($particular_date_in_out[$value])[2]; ?></td>
-
                         <td>
                             <?php
                             $hours = 0;
                             $minutes = 0;
                             $seconds = 0;
-
-
                             $in = $particular_date_in_out[$value][0][1];
                             $out = end($particular_date_in_out[$value])[2];
                             $time1 = new DateTime($in);
@@ -75,20 +58,6 @@
                             $hours = $time_diff->h;
                             $minutes = $time_diff->i;
                             $seconds = $time_diff->s;
-
-                            // foreach ($particular_date_in_out[$value] as $key => $val) {
-                            //     $time_out = date_create($val[2]);
-                            //     $time_in = date_create($val[1]);
-                            //     // Calculating the difference between DateTime objects
-                            //     // $interval = date_diff($time_out, $time_in);
-                            //     // $hours  +=   $interval->h;
-                            //     // $minutes +=  $interval->i;
-                            //     // $seconds +=  $interval->s;
-                            // }
-                            // echo "<pre>";
-                            // print_r($hours);
-                            // echo round($minutes / 60,2). " minute";
-
                             if ($hours < 9) {
                                 $hours =  '0' . $hours;
                             }
@@ -98,25 +67,19 @@
                             if ($seconds < 9) {
                                 $seconds =  '0' . $seconds;
                             }
-
                             echo $hours . ' : ' . $minutes . ' : ' . $seconds;
                             ?>
                         </td>
                         <td>
-
                             <?php echo $value; ?>
                         </td>
                         <td>
                             <?
-
-
                             ?>
-
                             <button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value='<?php echo json_encode($particular_date_in_out[$value]); ?>'> View <i class='mdi mdi-file-check btn-icon-append'></i>
                             </button>
                         </td>
                     </tr>
-
                 <?php
                 } }
                 ?>
@@ -126,20 +89,16 @@
 </div>
 <script>
     $(document).ready(function() {
-
         $(document).on('click', '.show_user_inout_onThisDate', function() {
-            
             $content = '';
             $date = $(this).val();
             $date = JSON.parse($date);
-            // console.log($date);
             $content += "<table class='table'>"
             $content += "<thead >";
             $content += "<tr>";
             $content += "<th>Sno.</th>";
             $content += "<th>Time - In </th>";
             $content += "<th>Time - Out</th>";
-            // $content += "<th>Option</th>";
             $content += "</thead>";
             $content += "<tbody>";
             $.each($date, function(i, value) {
@@ -148,20 +107,12 @@
                 $content += '<tr><td>' + ++i + '</td>';
                 $content += '<td>' + value[1] + '</td>';
                 $content += '<td>' + value[2] + '</td>';
-                // $content += '<td><button type="button" class="btn btn-success" data-bs-dismiss="modal">UPDATE</button></td></tr>';
-
             });
-           
             $content += "</tbody>";
             $content += "</table>";
-
             $('#exampleModalLabel').text($heading);
             $(".myModal_content").html($content);
             $("#myModal").modal('show');
-
         })
-
-
-
     });
 </script>

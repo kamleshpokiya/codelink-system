@@ -8,10 +8,13 @@ class permission extends loadFile
     {
         session_start();
         $this->db = $this->model('Model');
+        $all_permission_array = $this->permission();
+		$permition[] = $all_permission_array[0]->options;
+		$permition_option_array =explode(',',$permition[0]);
+		$this->_auth = $permition_option_array;
     }
     public function permissionview()
     {
-
         $this->view("permission", array("title" => "Manage Permission"));
     }
     public function managepermission($id)
@@ -21,20 +24,17 @@ class permission extends loadFile
 		$select = '';
 		$option = '';
 		$where = 'role_id =' .$role_id;
-
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-        // echo '<pre>';
-        // print_r($records);
-        
         $permissions = array(
-            "User" => array("View User" => 1, "Edit user" => 2, "Add user" => 3, "Delate User" => 4,"Extra"=> 5),
-            "Leaves" => array("add leaves" => 1, "approve leaves" => 2, "delete leaves" => 3),
-            "Policy" => array("add Policy" => 1, "edit Policy" => 2, "view Policy" => 3, "delete Policy" => 4)
+            "User" => array("View User list" => 1, "Edit user" => 2, "Add user" => 3, "Delate User" => 4,"View User profile "=> 5),
+            "Leaves" => array("View leaves " => 1, "approve/decline leaves" => 2, "Delete leaves" => 3),
+            "Policy" => array("View Policy" => 1, "Edit Policy" => 2, "Add Policy" => 3, "delete Policy" => 4),
+			"Holiday" => array("View Holiday" => 1, "Edit Holiday" => 2, "Add Holiday" => 3, "Delete Holiday" => 4),
+			"permission" => array("Manage Permission" => 1)
         );
-
         $this->view("managepermission", array("title" => "Manage Permission", "data" => $permissions, "id" => $role_id, 'records'=> $records));
     }
-    public function updatepermission($id = null)
+    public function updatepermission()
     {
         $id = $_POST['id'];
         if (isset($_POST['update'])) {
@@ -42,8 +42,6 @@ class permission extends loadFile
             $permissions = $_POST['permission'];
             foreach ($permissions as $key => $value) {
                 $modules = $key;
-                // $modules = str_replace("'", "", $key);
-                // print_r($key);
                 $insert_array = array("moduls" => $modules, "options" => implode(',', $value), "role_id" => $id);
                 $this->db->insert_data($insert_array, 'permissions');
             }

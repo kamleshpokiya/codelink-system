@@ -35,7 +35,7 @@
                     <th>email</th>
                     <th>profile_pic </th>
                     <th>User_role</th>
-                    <?php if(in_array('1', $permission)){  ?>
+                    <?php if(in_array('5', $permission)){  ?>
                     <th>View</th>
                       <?php }?>
                     <?php if(in_array('2', $permission)){  ?>
@@ -72,7 +72,7 @@
                               echo "Employee";
                             } ?></td>
                         
-                        <?php if(in_array('1', $permission)){  ?>
+                        <?php if(in_array('5', $permission)){  ?>
                           <td>
                           <a href="<?php echo base_url; ?>users/single_user/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
                               <i class="mdi mdi-view-grid"></i> View </button></a></td>

@@ -28,11 +28,11 @@ class admin extends loadFile
 			} else {
 				$email = $this->db->escape_string($_POST['email']);
 				$password = $this->db->escape_string(md5($_POST['password']));
-				$where = "email = '$email' AND role_as = 1";
+				$where = "email = '$email' AND role_as = '2'";
 				$select = '';
 				$option = '';
 				$record = $this->db->select_data($select, 'users', $option, $where);
-				$wh = "password ='$password' AND email = '$email' AND role_as = 1";
+				$wh = "password ='$password' AND email = '$email' AND role_as = '2'";
 				$rows = '';
 				$options = '';
 				$record2 = $this->db->select_data($rows, 'users', $options, $wh);
