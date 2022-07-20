@@ -8,6 +8,24 @@ class users extends loadFile
 	{
 		session_start();
 		$this->db = $this->model('Model');
+		$this->db = $this->model('Model');
+        
+        //creating permistion array
+        // $role_id = $_SESSION['admin'][0]->role_as;
+		
+        // $where = "role_id = '2'";
+        // $select = array('role_id','options','moduls');
+        // $row = $this->db->select_data($select,'permissions','',$where);
+        // $this->_auth = $row;
+		// $this->permission();
+
+		$all_permission_array = $this->permission();
+		$permition[] = $all_permission_array[0]->options;
+		$permition_option_array =explode(',',$permition[0]);
+		$this->_auth = $permition_option_array;
+
+  		//  print_r($permition);
+   		// die;
 	}
 	//users detail page
 	public function users()
@@ -17,12 +35,20 @@ class users extends loadFile
 		$option = '';
 		$where = 'role_as != 0';
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		$this->view("users", array("title" => "this is user", "data" => $records));
+		if(in_array('1', $this->_auth)){  
+		$this->view("users", array("title" => "this is user", "data" => $records, 'recode'=> $this->_auth));
+		}else {
+			$this->single_view("error");
+		}
 	}
 	//add user method
 	public function add_users()
-	{
+	{	 
+		if(in_array('3', $this->_auth)){  
 		$this->view("adduser", array("title" => "adduser form"));
+		}else {
+			$this->single_view("error");
+		}
 		if (isset($_POST['submit'])) {
 			$first_name = $this->db->escape_string($_POST['first_name']);
 			$last_name = $this->db->escape_string($_POST['last_name']);
@@ -47,10 +73,12 @@ class users extends loadFile
 	//delete user
 	public function delete_user()
 	{
-		if (isset($_REQUEST['did'])) {
+		if ((isset($_REQUEST['did'])) && (in_array('4', $this->_auth))) {
 			$id = $_REQUEST['did'];
 			$wh = array("id" => $id);
 			$del = $this->db->delete_data("users", $wh);
+		}else {
+			$this->single_view("error");
 		}
 	}
 	// single user detail page
@@ -76,7 +104,11 @@ class users extends loadFile
 			$user_id = $id;
 			$where = 'users.id =' . $user_id;
 			$records = $this->db->select_data($select, $tbl, $option, $where);
+			if(in_array('5', $this->_auth)){  
 			$this->view("single_user", array("title" => "User detail page", "data" => $records));
+			}else {
+				$this->single_view("error");
+			}
 		}
 	}
 	// For showing user profile
@@ -89,7 +121,12 @@ class users extends loadFile
 			$option = '';
 			$where = 'id =' . $user_id;
 			$records = $this->db->select_data($select, $tbl, $option, $where);
+			// $permisstion = $this->_auth;
+			if(in_array('2', $this->_auth)){
 			$this->view("edit_single_user", array("title" => "Edit User Profile", "data" => $records));
+			}else {
+			$this->single_view("error");
+			}
 			// $this -> edit_user_profile();
 
 		}
@@ -192,3 +229,15 @@ class users extends loadFile
 		}
 	}
 }
+// <?php if(in_array('4', $permission)){  ?>
+
+//     <?php }?>
+// for contoler
+//     if(in_array('4', $this->_auth)){  
+// 		$this->view("users", array("title" => "this is user", "data" => $records, 'recode'=> $this->_auth));
+// 		}else {
+// 			$this->single_view("error");
+// 			}
+
+//     http://localhost/codelink-system/admin/users/edit_single_user/3
+//     http://localhost/codelink-system/admin/users/single_user/3

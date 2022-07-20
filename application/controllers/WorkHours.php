@@ -8,12 +8,23 @@ class WorkHours extends loadFile
     {
         session_start();
         $this->db = $this->model('Model');
+        
+        //creating permistion array
+        $role_id = $_SESSION['user']['role_as'];
+        $where = "role_id = '2'";
+        $select = 'role_id , options, moduls';
+        $permission_sql = $this->db->select_data($select,'permissions','',$where);
+       while ($r = $permission_sql->fetch_object()) {
+			$row[] = $r;
+		}
+        $this->_auth = $row;
     }
 
 
     // TO show User Working Hours
     public function workHours()
-    {
+    {   
+        
         if (isset($_SESSION)) {
             $id = $_SESSION['user']['id'];
             $users_where = "id = $id";
@@ -47,8 +58,8 @@ class WorkHours extends loadFile
         } else {
             $user_in_out_obj = '';
         }
-
-        $this->view('workHours', array("title" => 'User Working Hours',  'users' => $users_arr,  'workingHours' => $user_in_out_obj));
+       
+        $this->view('workHours', array("title" => 'User Working Hours',  'users' => $users_arr,  'workingHours' => $user_in_out_obj, 'permission'=>$this->_auth));
     }
 
 
@@ -128,6 +139,13 @@ class WorkHours extends loadFile
             echo json_encode($msg);
         }
     }
-    
+    public function permission(){
+        $id = $_SESSION['user']['id'];
+        $where = "role_id = $id";
+       $permission = $this->db->select_data('','permissions','', $where);
+       $r = mysqli_fetch_assoc($permission);
+              print_r($r);
+       
+    }
 
 }

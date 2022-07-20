@@ -68,6 +68,7 @@ class policy extends loadFile
         ]
       ];
 
+      
       $res = $this->Validate($data);
 
       if ($res == 1) {

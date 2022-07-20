@@ -55,11 +55,11 @@
             </a>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="<?php echo base_url; ?>checkinout/managecheckinout">
+      <a class="nav-link" href="<?php echo base_url; ?>user_check_inout/view_user_checkinout">
         <span class="menu-icon">
           <i class="mdi mdi-table-large"></i>
         </span>
-        <span class="menu-title">Manage User (In/Out)</span>
+        <span class="menu-title">User Check In/Out</span>
       </a>
     </li>
 
@@ -173,7 +173,7 @@
             <div class="navbar-profile">
               <img class="img-xs rounded-circle" src="<?php echo site_url; ?>images/admin/<?php if (isset($_SESSION['admin'])) {
                                                                                             echo $_SESSION['admin'][0]->profile_pic;
-                                                                                          } ?>" alt="">
+                                                                                          } ?>" alt="" onerror="this.onerror=null;this.src='<?php echo site_url; ?>images/users/default_img.png'">
               <p class="mb-0 d-none d-sm-block navbar-profile-name"><?php if (isset($_SESSION['admin'])) {
                                                                       echo $_SESSION['admin'][0]->first_name;
                                                                     } ?></p>

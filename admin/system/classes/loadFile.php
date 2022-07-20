@@ -1,6 +1,7 @@
 <?php
 class loadFile
 {
+    //viewname is page name
     public function view($viewName, $data = [])
     {
          if (file_exists("../application/views/" . $viewName . ".php")) {
@@ -29,7 +30,17 @@ class loadFile
             echo "$model this model not exist";
         }
     }
-
+    public function permission()
+    {
+        //permission  method
+        $role_id = $_SESSION['admin'][0]->role_as;
+        $where = "role_id = '$role_id'";
+        $select = array('role_id','options','moduls');
+        $row = $this->db->select_data($select,'permissions','',$where);
+        // $this->_auth = $row;
+        return $row;
+    }
+    
     public function Validate($data)
     {
         $img_types = array('image/jpg', 'image/png', 'image/jpeg');
