@@ -46,6 +46,7 @@
         <span class="menu-title">Manage Holidays</span>
       </a>
     </li>
+    <?php print_r($data['recode']); ?>
     <li class="nav-item menu-items">
             <a class="nav-link" href="<?php echo base_url; ?>permission/permissionview"">
               <span class="menu-icon">
@@ -54,6 +55,7 @@
               <span class="menu-title">Manage permission</span>
             </a>
     </li>
+
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>user_check_inout/view_user_checkinout">
         <span class="menu-icon">

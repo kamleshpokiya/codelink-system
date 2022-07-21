@@ -39,7 +39,7 @@
                                                 <td><?php echo $value->policy_desc; ?> </td>
                                                 <td> <?php echo $value->policy_link; ?> </td>
                                                 <td><img class="img-xs rounded-circle" style="height:40px; width:40px;" src="<?php echo site_url; ?>images/policyImages/<?php echo $value->policy_image; ?>" alt=" <?php echo $value->policy_image; ?>"></td>
-                                                <?php if(in_array('3', $permission)){  ?>
+                                                <?php if(in_array('2', $permission)){  ?>
                                                     <td><a href="<?php echo base_url; ?>Policy/editPolicy/<?php echo $value->id; ?>"><button type="button" class="btn btn-outline-primary btn-icon-text" id="edit_policy_btn" name="edit_policy_btn" value="<?php echo $value->id; ?>"><i class="mdi mdi-file-check btn-icon-prepend"></i> Edit </button></a></td>
                                                 <?php }?>
                                                 <?php if(in_array('4', $permission)){  ?>

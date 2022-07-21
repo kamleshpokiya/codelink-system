@@ -9,55 +9,58 @@ class admin extends loadFile
 	{
 		session_start();
 		$this->db = $this->model('Model');
+
+		$all_permission_array = $this->permission();
+		$permition[] = $all_permission_array[0]->options;
+		$permition_option_array =explode(',',$permition[0]);
+		$this->_auth = $permition_option_array;
 	}
 
 	//admin login  
 	public function login()
 	{
-		$this->single_view("login",  array("title" => "Admin login page"));
+		$msg = [];
 		if (isset($_POST['login'])) {
-			if ($_POST['email'] == '' && $_POST['password'] == '') {
-				$_SESSION['msg'] = "Please Enter email address and password";
-				header("location:" . base_url);
-			} elseif ($_POST['email'] == '') {
-				$_SESSION['msg'] = "Please Enter email address";
-				header("location:" . base_url);
-			} elseif ($_POST['password'] == '') {
-				$_SESSION['msg'] = "Please Enter password";
-				header("location:" . base_url);
-			} else {
-				$email = $this->db->escape_string($_POST['email']);
-				$password = $this->db->escape_string(md5($_POST['password']));
-				$where = "email = '$email' AND role_as = '2'";
-				$select = '';
-				$option = '';
-				$record = $this->db->select_data($select, 'users', $option, $where);
-				$wh = "password ='$password' AND email = '$email' AND role_as = '2'";
+			$email = $this->db->escape_string($_POST['email']);
+			$password = $this->db->escape_string(md5($_POST['password']));
+			if ($email == '' || $password == '') {
+				$msg['empty_field'] = 'Please enter your email and password';
+			}else {
 				$rows = '';
-				$options = '';
-				$record2 = $this->db->select_data($rows, 'users', $options, $wh);
-				if ($record == '') {
-					$_SESSION['msg'] = "email is not exist ";
-					header("location:" . base_url);
-				} elseif ($record2 == '') {
-					$_SESSION['msg'] = "password is invalid";
-					header("location:" . base_url);
-				} else {
-					$_SESSION['msg'] = "Enter valid email and password";
-					header("location:" . base_url);
-				}
+				$where = "email = '$email' AND role_as IN (1,2)";
+				$option = '';
+				$record = $this->db->select_data($rows, 'users', $option, $where);
+				if (!empty($record)) {
+					if ($password == $record[0]->password) {
+						$id = $record[0]->id;
+						$_SESSION['admin'] = $record;
+						if (isset($_POST['remember'])) {
+							setcookie("user_email", $email, time() + 3600, '/');
+							setcookie("user_password", $_POST['password'], time() + 3600, '/');
+						} else {
+							if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
 
-				$total = count($record);
-				$total2 = count($record2);
-				if (isset($_POST['remember'])) {
-					setcookie("email", $email, time() + 3600);
-					setcookie("password", $password, time() + 3600);
-				}
-				if ($total == 1 && $total2 == 1) {
-					$_SESSION['admin'] = $record;
-					header("location:" . base_url . "admin/home");
+								unset($_COOKIE['user_email']);
+								setcookie('user_email', '', time() - 3600, '/');
+								unset($_COOKIE['user_password']);
+								setcookie('user_password', '', time() - 3600, '/');
+							}
+						}
+					header("location:" . base_url . "admin/home/'recode'=> $this->_auth");
+
+					} else {
+						$msg['pass_not_match'] = 'Incorrect Password !';
+					}
+				} else {
+					$msg['User_not_exist'] = 'User does not exist';
 				}
 			}
+		}
+		if (isset($msg)) {
+		$this->single_view("login",  array("title" => "Admin login page","data" => $msg));
+		} 
+		else {
+		$this->single_view("login",  array("title" => "Admin login page"));
 		}
 	}
 	//this method for forget password 
@@ -122,7 +125,7 @@ class admin extends loadFile
 	// admin dash board
 	public function home()
 	{
-		$this->view('index', array("title" => "Admin dashboard"));
+		$this->view('index', array("title" => "Admin dashboard" ,'recode'=> $this->_auth));
 	}
 	
 	//update admin profile by id 

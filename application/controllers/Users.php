@@ -228,7 +228,7 @@ class Users extends loadFile
 				$msg['empty_field'] = 'Please enter your email and password';
 			} else {
 				$rows = '';
-				$where = "email = '$email' AND role_as IN (1,2,3)";
+				$where = "email = '$email' AND role_as IN (1,2,3,4)";
 				$option = '';
 				$record = $this->db->select_data($rows, 'users', $option, $where);
 				$row = $record->num_rows;
@@ -311,7 +311,6 @@ class Users extends loadFile
 
 		$this->view("recoverpassword", array("title" => "Recover Password"));
 	}
-
 
 	// Reset user password using new and confirm password through email
 	public function resetpassword()

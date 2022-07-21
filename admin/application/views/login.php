@@ -1,7 +1,8 @@
 <?php
 if (isset($_SESSION['admin'])) {
   header("location:" . base_url . "admin/home");
-} ?>
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,31 +32,49 @@ if (isset($_SESSION['admin'])) {
         <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
           <div class="card col-lg-4 mx-auto">
             <div class="card-body px-5 py-5">
-            <?php
-                            if (isset($_SESSION['msg']) && $_SESSION != '') {
-                            ?>
-                                <div class="alert alert-success " role="alert">
-                                     <?php echo $_SESSION['msg']; ?>
-                                </div>
-                            <?php
-                                unset($_SESSION['msg']);
-                            }
-                            ?>
+              <?php
+              if (isset($_SESSION['msg']) && $_SESSION != '') {
+              ?>
+                <div class="alert alert-success " role="alert">
+                  <?php echo $_SESSION['msg']; ?>
+                </div>
+              <?php
+                unset($_SESSION['msg']);
+              }
+
+              ?>
+              <span style="color: red; marging-bottom:3px;"><?php
+                                                            if (isset($data['data'])) {
+                                                              if (isset($data['data']['empty_field'])) {
+                                                                echo $data['data']['empty_field'];
+                                                              }
+                                                              if (isset($data['data']['User_not_exist'])) {
+                                                                echo $data['data']['User_not_exist'];
+                                                              }
+                                                            }
+                                                            ?></span>
               <h3 class="card-title text-left mb-3">Login</h3>
               <form method="post" autocomplete="TRUE">
                 <div class="form-group">
-                  <label>Email * </label> 
-                  <input type="text" name="email"  value="<?php if (isset($_COOCKIE['email'])) {
+                  <label>Email * </label>
+                  <input type="text" name="email" value="<?php if (isset($_COOCKIE['email'])) {
                                                             echo $_COOCKIE['email'];
                                                           } ?>" class="form-control p_input">
 
                 </div>
                 <div class="form-group">
-                  <label>Password *  </label> 
+                  <label>Password * </label>
                   <input type="password" name="password" value="<?php if (isset($_COOCKIE['password'])) {
                                                                   echo $_COOCKIE['password'];
                                                                 } ?>" class="form-control p_input">
                 </div>
+                <span id="error_msg" style="color: red;"><?php
+                                                          if (isset($data['data'])) {
+                                                            if (isset($data['data']['pass_not_match'])) {
+                                                              echo $data['data']['pass_not_match'];
+                                                            }
+                                                          }
+                                                          ?></span>
                 <div class="form-group d-flex align-items-center justify-content-between">
                   <div class="form-check">
                     <label class="form-check-label">

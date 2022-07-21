@@ -161,13 +161,14 @@
             localStorage.setItem('checked_out_'+$id, 'yes');
             if (localStorage.getItem('checked_in_'+$id) != null) {
               localStorage.removeItem('checked_in_'+$id);
+              // localStorage.removeItem('startTime_'+$id);
               localStorage.removeItem('user_id_'+$id);
             }
             $('#checked_out').attr('id', 'checked_in');
             $('#checked_in').text('Check In');
             $('#displayarea').css('display', 'none');
             reset($id);
-            start($id);
+            // start($id);
           }
         }
       });
