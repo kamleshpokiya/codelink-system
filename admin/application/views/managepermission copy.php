@@ -4,17 +4,8 @@
     }
 
     .form-check-input {
-        margin-right: 20px;
         margin: 0;
-    }
-
-        .td {
-            vertical-align: center;
-            border-bottom: 1px;
-        }
-    table {
-        border-bottom: 1pt solid black;
-
+        margin-right: 10px;
     }
 </style>
 <div class="main-panel">
@@ -28,9 +19,9 @@
                         <h3 class="card-title"> Manage permission </h3>
                         <div class="table-responsive">
                             <form action="<?php echo base_url; ?>permission/updatepermission" method="POST">
-                                <table class="table">
+                                <table class="table table-borderless">
                                     <thead>
-                                        <tr>
+                                        <tr style="border-bottom: 1px solid #D93384">
                                             <th>MODULS LIST</th>
                                             <th colspan="5">PERMISSION LIST</th>
                                         </tr>
@@ -44,7 +35,7 @@
                                         foreach ($Permission as $key => $value) {
                                     ?>
                                             <tbody>
-                                                <tr>
+                                                <tr style="border-bottom: 0.5px  solid #D93384">
                                                     <?php if ($p_recode[$count]->moduls == "$key") { ?>
                                                         <td><label class="form-check-label">
                                                                 <input type="checkbox" checked name="permission['<?php echo $key; ?>']" class="form-check-input default_chaked" id="<?php echo $key; ?>" value="<?php echo $key; ?>" /> <?php echo $key; ?></label></td>
@@ -63,17 +54,17 @@
                                                         if (in_array($v, $p_option)) {
                                                     ?>
 
-
-                                                            <label for="" class="form-check-label">
-                                                                <td> <input type="checkbox" checked class="form-check-input <?php echo $key ?> " name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?></td>
+                                                            <td>
+                                                                <label for="" class="form-check-label">
+                                                                    <input type="checkbox" checked class="form-check-input <?php echo $key ?> " name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?>
                                                             </label>
-
+                                                            </td>
                                                         <?php } else { ?>
 
-
+                                                            <td>
                                                             <label for="" class="form-check-label">
-                                                                <td> <input type="checkbox" class="form-check-input <?php echo $key ?>" name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?></td>
-                                                            </label>
+                                                             <input type="checkbox" class="form-check-input <?php echo $key ?>" name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?></td>
+                                                            </label></td>
 
                                                         <?php }
                                                         ?>

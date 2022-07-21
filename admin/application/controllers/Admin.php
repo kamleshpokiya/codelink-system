@@ -9,11 +9,12 @@ class admin extends loadFile
 	{
 		session_start();
 		$this->db = $this->model('Model');
-
+        if(isset($_SESSION['admin'])){
 		$all_permission_array = $this->permission();
 		$permition[] = $all_permission_array[0]->options;
 		$permition_option_array =explode(',',$permition[0]);
 		$this->_auth = $permition_option_array;
+		}
 	}
 
 	//admin login  

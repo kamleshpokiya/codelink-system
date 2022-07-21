@@ -33,12 +33,14 @@ class loadFile
     public function permission()
     {
         //permission  method
+        if(isset($_SESSION['admin'])){
         $role_id = $_SESSION['admin'][0]->role_as;
         $where = "role_id = '$role_id'";
         $select = array('role_id','options','moduls');
         $row = $this->db->select_data($select,'permissions','',$where);
         // $this->_auth = $row;
         return $row;
+    }
     }
     
     public function Validate($data)
