@@ -9,10 +9,14 @@ class policy extends loadFile
     session_start();
     $this->db = $this->model('Model');
 
-    $all_permission_array = $this->permission();
-		$permition[] = $all_permission_array[2]->options;
-		$permition_option_array =explode(',',$permition[0]);
-		$this->_auth = $permition_option_array;
+    $var = "";
+        $all_permission_array = $this->permission();
+        if(array_key_exists('Policy',$all_permission_array)){
+            $var = $all_permission_array['Policy'];
+        }
+        $this->_has = $all_permission_array;
+		$this->_auth = $var;
+    
   }
 
   // To show all policies
@@ -23,22 +27,32 @@ class policy extends loadFile
     $option = '';
     $where = '';
     $records = $this->db->select_data($select, $tbl, $option, $where);
-    if(in_array('1', $this->_auth)){  
-    $this->view("managePolicy", array("title" => "Manage Policy", "policy_data" => $records, 'recode'=> $this->_auth));
-    }else {
-     $this->single_view("error");
-}
+    if (array_key_exists('Policy',$this->_has)) {
+      if(in_array('1', $this->_auth)){
+        $this->view("managePolicy", array("title" => "Manage Policy", "policy_data" => $records, 'recode'=> $this->_auth));
+      }else {
+        $this->single_view("error");
+      }
+    } else {
+      $this->single_view("error");
+    }
+    
   }
 
 
   // To show add policy page
   public function addPolicy()
   {
-    if(in_array('3', $this->_auth)){  
-    $this->view("addPolicy", array("title" => "Manage Policy"));
-    }else {
-     $this->single_view("error");
-}
+    if (array_key_exists('Policy',$this->_has)) {
+      if(in_array('3', $this->_auth)){
+        $this->view("addPolicy", array("title" => "Manage Policy"));
+      }else {
+        $this->single_view("error");
+      }
+    } else {
+      $this->single_view("error");
+    }
+    
   }
 
   // To add new policy
@@ -122,11 +136,16 @@ class policy extends loadFile
     $option = '';
     $where = "id = $id";
     $records = $this->db->select_data($select, $tbl, $option, $where);
-    if(in_array('2', $this->_auth)){  
-    $this->view("editPolicy", array("title" => "Update Your Policy", "policy_data" => $records));
-    }else {
-     $this->single_view("error");
-}
+    if (array_key_exists('Policy',$this->_has)) {
+      if(in_array('2', $this->_auth)){
+        $this->view("editPolicy", array("title" => "Update Your Policy", "policy_data" => $records));
+      }else {
+        $this->single_view("error");
+      }
+    } else {
+      $this->single_view("error");
+    }
+    
   }
 
   // To edit old policy

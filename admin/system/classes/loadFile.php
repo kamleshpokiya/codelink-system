@@ -38,8 +38,11 @@ class loadFile
         $where = "role_id = '$role_id'";
         $select = array('role_id','options','moduls');
         $row = $this->db->select_data($select,'permissions','',$where);
-        // $this->_auth = $row;
-        return $row;
+        $var = array();
+        foreach ($row as $key => $value){
+			$var[$value->moduls] = explode(',',$value->options);
+		}
+        return $var;
     }
     }
     

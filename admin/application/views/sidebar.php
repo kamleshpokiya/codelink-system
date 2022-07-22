@@ -4,6 +4,11 @@
     <a class="sidebar-brand brand-logo" href="<?php echo base_url; ?>admin/home"><img src="<?php echo site_url; ?>images/codelink.svg" style="height:50px ;" alt="logo" /></a>
     <a class="sidebar-brand brand-logo-mini" href="<?php echo base_url; ?>admin/home"><img src="<?php echo site_url; ?>images/logo-mini.svg" alt="logo" /></a>
   </div>
+  <?php
+      if(isset($_SESSION['slider_permission'])){
+        $slider_permission = $_SESSION['slider_permission'];
+      }
+    ?>  
   <ul class="nav">
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>admin/home">
@@ -13,7 +18,7 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-
+   <?php if(array_key_exists('User' ,$slider_permission)){  ?>
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>users/users">
         <span class="menu-icon">
@@ -22,6 +27,8 @@
         <span class="menu-title">Users</span>
       </a>
     </li>
+    <?php }?>
+   <?php if(array_key_exists('Leaves' ,$slider_permission)){  ?>
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>leaves/leaves">
         <span class="menu-icon">
@@ -30,6 +37,8 @@
         <span class="menu-title">Leaves</span>
       </a>
     </li>
+    <?php }?>
+   <?php if(array_key_exists('Policy' ,$slider_permission)){  ?>
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>policy/managePolicy">
         <span class="menu-icon">
@@ -38,6 +47,8 @@
         <span class="menu-title">Manage Policy</span>
       </a>
     </li>
+    <?php }?>
+    <?php if(array_key_exists('Holiday' ,$slider_permission)){  ?>
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>holiday/holidays">
         <span class="menu-icon">
@@ -46,7 +57,8 @@
         <span class="menu-title">Manage Holidays</span>
       </a>
     </li>
-    <?php print_r($data['recode']); ?>
+    <?php }?>
+   <?php if(array_key_exists('permission' ,$slider_permission)){  ?>
     <li class="nav-item menu-items">
             <a class="nav-link" href="<?php echo base_url; ?>permission/permissionview"">
               <span class="menu-icon">
@@ -55,7 +67,7 @@
               <span class="menu-title">Manage permission</span>
             </a>
     </li>
-
+<?php }?>
     <li class="nav-item menu-items">
       <a class="nav-link" href="<?php echo base_url; ?>user_check_inout/view_user_checkinout">
         <span class="menu-icon">

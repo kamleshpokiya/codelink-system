@@ -8,10 +8,13 @@ class holiday extends loadFile
 	{
 		session_start();
 		$this->db = $this->model('Model');
-		$all_permission_array = $this->permission();
-		$permition[] = $all_permission_array[3]->options;
-		$permition_option_array =explode(',',$permition[0]);
-		$this->_auth = $permition_option_array;
+		$var = "";
+        $all_permission_array = $this->permission();
+        if(array_key_exists('Holiday',$all_permission_array)){
+            $var = $all_permission_array['Holiday'];
+        }
+        $this->_has = $all_permission_array;
+		$this->_auth = $var;
 	}
 	public function holidays()
 	{
@@ -20,17 +23,27 @@ class holiday extends loadFile
 		$option = '';
 		$where = '';
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		 if(in_array('1', $this->_auth)){ 
-			$this->view("holidays", array("title" => "this is holiday list", "data" => $records, 'recode'=> $this->_auth));
+			if (array_key_exists('Holiday',$this->_has)) {
+				if(in_array('1', $this->_auth)){
+					$this->view("holidays", array("title" => "this is holiday list", "data" => $records, 'recode'=> $this->_auth));
+				}else {
+					$this->single_view("error");
+				}
+			} else {
+				$this->single_view("error");
 			}
 	}
 	public function add_holidays()
 	{
-		if(in_array('3', $this->_auth)){  
-		$this->view("add_holiday", array("title" => "this is holiday page"));
-		}else {
-		   $this->single_view("error");
-   }
+		if (array_key_exists('Holiday',$this->_has)) {
+			if(in_array('3', $this->_auth)){
+				$this->view("add_holiday", array("title" => "this is holiday page"));
+			}else {
+				$this->single_view("error");
+			}
+		} else {
+			$this->single_view("error");
+		}
 		if (isset($_POST['submit'])) {
 			$date = $this->db->escape_string($_POST['date']);
 			$title = $this->db->escape_string($_POST['title']);
@@ -56,11 +69,16 @@ class holiday extends loadFile
 		$option = '';
 		$where = 'id=' . $id;
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		if(in_array('2', $this->_auth)){  
+		if (array_key_exists('Holiday',$this->_has)) {
+			if(in_array('2', $this->_auth)){
 		$this->view("edit_holiday", array("title" => "this is holiday page", "data" => $records));
-		}else {
-		   $this->single_view("error");
-   }
+			}else {
+				$this->single_view("error");
+			}
+		} else {
+			$this->single_view("error");
+		}
+		
 		if (isset($_POST['edit'])) {
 			$h_id = $this->db->escape_string($_POST['id']);
 			$date = $this->db->escape_string($_POST['date']);
@@ -107,7 +125,7 @@ class holiday extends loadFile
 	}
 	public function delete_holidays()
 	{
-		if ((isset($_REQUEST['did'])) && (in_array('4', $permission))) {
+		if ((isset($_REQUEST['did'])) && (in_array('4', $this->_auth))) {
 			$id = $_REQUEST['did'];
 				$wh = array("id" => $id);
 				$del = $this->db->delete_data("holiday_tbl", $wh);

@@ -11,9 +11,9 @@ class admin extends loadFile
 		$this->db = $this->model('Model');
         if(isset($_SESSION['admin'])){
 		$all_permission_array = $this->permission();
-		$permition[] = $all_permission_array[0]->options;
-		$permition_option_array =explode(',',$permition[0]);
-		$this->_auth = $permition_option_array;
+		// unset($_SESSION['slider_permission']);
+
+		$_SESSION['slider_permission']= $this->permission();
 		}
 	}
 
@@ -40,14 +40,13 @@ class admin extends loadFile
 							setcookie("user_password", $_POST['password'], time() + 3600, '/');
 						} else {
 							if (isset($_COOKIE['user_email']) && isset($_COOKIE['user_password'])) {
-
 								unset($_COOKIE['user_email']);
 								setcookie('user_email', '', time() - 3600, '/');
 								unset($_COOKIE['user_password']);
 								setcookie('user_password', '', time() - 3600, '/');
 							}
 						}
-					header("location:" . base_url . "admin/home/'recode'=> $this->_auth");
+					header("location:" . base_url . "admin/home/");
 
 					} else {
 						$msg['pass_not_match'] = 'Incorrect Password !';
@@ -126,7 +125,8 @@ class admin extends loadFile
 	// admin dash board
 	public function home()
 	{
-		$this->view('index', array("title" => "Admin dashboard" ,'recode'=> $this->_auth));
+		
+		$this->view('index', array("title" => "Admin dashboard"));
 	}
 	
 	//update admin profile by id 

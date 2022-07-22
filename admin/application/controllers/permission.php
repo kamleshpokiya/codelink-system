@@ -8,20 +8,29 @@ class permission extends loadFile
     {
         session_start();
         $this->db = $this->model('Model');
+        // $all_permission_array = $this->permission();
+        
+        // if(isset($all_permission_array[3]->options)){
+        //     $permition[] = $all_permission_array[3]->options;
+        //     $permition_option_array = explode(',', $permition[0]);
+        //     $this->_auth = $permition_option_array;
+        // }
+        $var = "";
         $all_permission_array = $this->permission();
-        
-        if(isset($all_permission_array[4]->options)){
-            $permition[] = $all_permission_array[4]->options;
-            $permition_option_array = explode(',', $permition[0]);
-            $this->_auth = $permition_option_array;
+        if(array_key_exists('permission',$all_permission_array)){
+            $var = $all_permission_array['permission'];
         }
-        
+        $this->_has = $all_permission_array;
+		$this->_auth = $var;
     }
     public function permissionview()
     {
-        if (isset($this->_auth)) {
+        
+        if (array_key_exists('permission',$this->_has)) {
             if(in_array('1', $this->_auth)){
             $this->view("permission", array("title" => "Manage Permission",'recode'=> $this->_auth ));
+            }else {
+                $this->single_view("error");
             }
         } else {
             $this->single_view("error");
@@ -42,9 +51,12 @@ class permission extends loadFile
             "Holiday" => array("View Holiday" => 1, "Edit Holiday" => 2, "Add Holiday" => 3, "Delete Holiday" => 4),
             "permission" => array("Manage Permission" => 1)
         );
-        if (isset($this->_auth)) {
+       
+        if (array_key_exists('permission', $this->_has)) {
             if(in_array('1', $this->_auth)){
             $this->view("managepermission copy", array("title" => "Manage Permission", "data" => $permissions, "id" => $role_id, 'records' => $records));
+            }else {
+                $this->single_view("error");
             }
         } else {
             $this->single_view("error");

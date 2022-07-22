@@ -8,12 +8,14 @@ class users extends loadFile
 	{
 		session_start();
 		$this->db = $this->model('Model');
-		$this->db = $this->model('Model');
 
-		$all_permission_array = $this->permission();
-		$permition[] = $all_permission_array[0]->options;
-		$permition_option_array =explode(',',$permition[0]);
-		$this->_auth = $permition_option_array;
+		$var = "";
+        $all_permission_array = $this->permission();
+        if(array_key_exists('User',$all_permission_array)){
+            $var = $all_permission_array['User'];
+        }
+        $this->_has = $all_permission_array;
+		$this->_auth = $var;
 	}
 	//users detail page
 	public function users()
@@ -23,20 +25,28 @@ class users extends loadFile
 		$option = '';
 		$where = 'role_as != 0';
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		if(in_array('1', $this->_auth)){  
+		if (array_key_exists('User',$this->_has)) {
+            if(in_array('1', $this->_auth)){
 		$this->view("users", array("title" => "this is user", "data" => $records, 'recode'=> $this->_auth));
-		}else {
-			$this->single_view("error");
-		}
+            }else {
+				$this->single_view("error");
+			}
+        } else {
+            $this->single_view("error");
+        }
 	}
 	//add user method
 	public function add_users()
 	{	 
-		if(in_array('3', $this->_auth)){  
-		$this->view("adduser", array("title" => "adduser form"));
-		}else {
-			$this->single_view("error");
-		}
+		if (array_key_exists('User',$this->_has)) {
+            if(in_array('3', $this->_auth)){
+			$this->view("adduser", array("title" => "adduser form"));
+            }else {
+				$this->single_view("error");
+			}
+        } else {
+            $this->single_view("error");
+        }
 		if (isset($_POST['submit'])) {
 			$first_name = $this->db->escape_string($_POST['first_name']);
 			$last_name = $this->db->escape_string($_POST['last_name']);
@@ -92,9 +102,13 @@ class users extends loadFile
 			$user_id = $id;
 			$where = 'users.id =' . $user_id;
 			$records = $this->db->select_data($select, $tbl, $option, $where);
-			if(in_array('5', $this->_auth)){  
-			$this->view("single_user", array("title" => "User detail page", "data" => $records));
-			}else {
+			if (array_key_exists('User',$this->_has)) {
+				if(in_array('5', $this->_auth)){
+					$this->view("single_user", array("title" => "User detail page", "data" => $records));
+				}else {
+					$this->single_view("error");
+				}
+			} else {
 				$this->single_view("error");
 			}
 		}
@@ -110,13 +124,16 @@ class users extends loadFile
 			$where = 'id =' . $user_id;
 			$records = $this->db->select_data($select, $tbl, $option, $where);
 			// $permisstion = $this->_auth;
-			if(in_array('2', $this->_auth)){
-			$this->view("edit_single_user", array("title" => "Edit User Profile", "data" => $records));
-			}else {
-			$this->single_view("error");
+			if (array_key_exists('User',$this->_has)) {
+				if(in_array('2', $this->_auth)){
+					$this->view("edit_single_user", array("title" => "Edit User Profile", "data" => $records));
+				}else {
+					$this->single_view("error");
+				}
+			} else {
+				$this->single_view("error");
 			}
 			// $this -> edit_user_profile();
-
 		}
 	}
 	// For update user profile

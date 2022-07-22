@@ -8,10 +8,14 @@ class leaves extends loadFile
     {
         session_start();
         $this->db = $this->model('Model');
+
+        $var = "";
         $all_permission_array = $this->permission();
-		$permition[] = $all_permission_array[1]->options;
-		$permition_option_array =explode(',',$permition[0]);
-		$this->_auth = $permition_option_array;
+        if(array_key_exists('Leaves',$all_permission_array)){
+            $var = $all_permission_array['Leaves'];
+        }
+        $this->_has = $all_permission_array;
+		$this->_auth = $var;
     }
     //leave details 
     public function leaves()
@@ -34,11 +38,17 @@ class leaves extends loadFile
         );
         $where = '';
         $records = $this->db->select_data($select, $tbl, $option, $where);
-        if(in_array('1', $this->_auth)){ 
-        $this->view("leaves", array("title" => "this is leaves", "data" => $records,'recode'=> $this->_auth));
-              }else {
-                 $this->single_view("error");
-         }
+        if (array_key_exists('Leaves',$this->_has)) {
+            if(in_array('1', $this->_auth)){
+                $this->view("leaves", array("title" => "this is leaves", "data" => $records,'recode'=> $this->_auth));
+
+            }else {
+                $this->single_view("error");
+            }
+        } else {
+            $this->single_view("error");
+        }
+       
     }
     //approve by admin 
     public function approve_leave($id)
@@ -53,11 +63,17 @@ class leaves extends loadFile
         $currentdate = date("y-m-d");
         // $newDate = date('Y-m-d', strtotime($currentdate . ' + 4 months'));
         $month = date("m", strtotime($currentdate));
-        if(in_array('2', $this->_auth)){  
-            $this->view("approve_leave", array("title" => "approve leave", "data" => $sel_date));
-        }else {
-           $this->single_view("error");
-   }
+        if (array_key_exists('Leaves',$this->_has)) {
+            if(in_array('2', $this->_auth)){
+                $this->view("approve_leave", array("title" => "approve leave", "data" => $sel_date));
+
+            }else {
+                $this->single_view("error");
+            }
+        } else {
+            $this->single_view("error");
+        }
+       
         if (isset($_POST['edit'])) {
             $leave_status = $this->db->escape_string($_POST['status']);
             $comment = $this->db->escape_string($_POST['comment']);
