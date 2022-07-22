@@ -71,8 +71,12 @@ class permission extends loadFile
             $permissions = $_POST['permission'];
             foreach ($permissions as $key => $value) {
                 $modules = $key;
-                $insert_array = array("moduls" => $modules, "options" => implode(',', $value), "role_id" => $id);
+                $val = implode(',', $value);
+                if(!empty($val)){ 
+                $insert_array = array("moduls" => $modules, "options" => $val, "role_id" => $id);
                 $this->db->insert_data($insert_array, 'permissions');
+                }
+                $val = '';
             }
             header("location:" . base_url . "/permission/permissionview");
         }

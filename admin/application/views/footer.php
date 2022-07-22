@@ -42,6 +42,7 @@
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo site_url; ?>js/datatable.js"></script>
 <!--end data table js plugin -->
+
 <script>
     window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -49,6 +50,24 @@
     });
 }, 2000);
 </script>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body myModal_content">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 
 </html>

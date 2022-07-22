@@ -12,16 +12,17 @@
                            <tr>
                               <th> Employee name</th>
                               <th> Leave type</th>
-                              <th> (After/Before) launch Leave </th>
+                              <th> Pre/Post Leave </th>
                               <th> Leave Subject</th>
-                              <th> Credit leave</th>
-                              <th> Non-credit leave</th>
-                              <th> Total leave</th>
+                              <th> Credit</th>
+                              <th> Non-credit</th>
+                              <th> Total</th>
                               <th> From Date</th>
                               <th> To date</th>
-                              <th> Admin reason</th>
+                              <!-- <th> Admin reason</th> -->
                               <th> Status</th>
-                              <th> Date</th>
+                              <th> View More</th>
+                              <!-- <th> Date</th> -->
                               <?php if(in_array('2', $permission)){  ?>
                               <th> Edit </th>
                               <?php }?>
@@ -56,7 +57,6 @@
                                     <td><?php echo $key->total = $key->from_credit+$key->from_non_credit; ?></td>
                                     <td><?php echo $key->leave_from; ?></td>
                                     <td><?php echo $key->leave_to; ?></td>
-                                    <td><?php echo $key->comments; ?></td>
                                     <td><?php if ($key->status == 1) {
                                              echo "Approved";
                                           } elseif ($key->status == 2) {
@@ -64,7 +64,8 @@
                                           } else {
                                              echo "Pending";
                                           } ?></td>
-                                    <td><?php echo $key->date; ?></td>
+                                    <td><button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value='<?php echo json_encode($key); ?>'> View <i class='mdi mdi-file-check btn-icon-append'></i>
+                            </button></td>
                                     <?php if(in_array('2', $permission)){  ?>
                                        <td>
                                        <a href="<?php echo base_url; ?>leaves/approve_leave/<?php echo $key->id; ?>"><button type="button" class="btn btn-info btn-icon-text">
@@ -124,5 +125,25 @@
           }
         });
     }
+    $(document).on('click', '.show_user_inout_onThisDate', function() {
+            $content = '';
+            $heading = 'Leaves information';
+            $date = $(this).val();
+            $recode = JSON.parse($date);
+            $content += "<table class='table'>"
+            $content += "<thead >";
+            $content += "<tr>";
+            $content += "<th>Admin reason</th>";
+            $content += "<th>Date</th>";
+            $content += "</thead>";
+            $content += "<tbody>";
+                $content += '<td>' + $recode['comments'] + '</td>';
+                $content += '<td>' + $recode['date'] + '</td>';
+            $content += "</tbody>";
+            $content += "</table>";
+            $('#exampleModalLabel').text($heading);
+            $(".myModal_content").html($content);
+            $("#myModal").modal('show');
+        })
   </script>
    <!-- content-wrapper ends -->

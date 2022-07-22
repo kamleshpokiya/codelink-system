@@ -14,6 +14,8 @@
                     <th>Full name</th>
                     <th>Time - In</th>
                     <th>Time - Out </th>
+                    <th>Total Time</th>
+                    <th>View</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,6 +48,9 @@
                             } else {
                               echo "$key->time_out";
                             } ?></td>
+                            <td>h</td>
+                             <td><button type='button' class="btn btn-outline-secondary btn-icon-text show_user_inout_onThisDate data-bs-toggle='modal' data-bs-target='#exampleModal'" id="user_inout_onThisDate" value='<?php echo json_encode($key); ?>'> View <i class='mdi mdi-file-check btn-icon-append'></i>
+                            </button></td>
                       </tr>
                     <?php
                     }

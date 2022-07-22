@@ -34,8 +34,8 @@
                                     $var = array();
 
                                     foreach ($p_recode as $key => $value) {
-                                        foreach($value as $k => $v){
-                                            $var[$value->moduls] = explode(',',$value->options);
+                                        foreach ($value as $k => $v) {
+                                            $var[$value->moduls] = explode(',', $value->options);
                                         }
                                     }
                                     if (!empty($data['data'])) {
@@ -53,17 +53,24 @@
                                                     <?php }
                                                     ?>
                                                     <?php
-                                                    
                                                     foreach ($value as $k => $v) {
-                                                        
-                                                        if (in_array($v, $var[$key])) {
+                                                        if (array_key_exists($key, $var)) {
+                                                            if (in_array($v, $var[$key])) {
                                                     ?>
-                                                            <td>
-                                                                <label for="" class="form-check-label">
-                                                                    <input type="checkbox" checked class="form-check-input <?php echo $key ?> " name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?>
-                                                                </label>
-                                                            </td>
-                                                        <?php } else { ?>
+                                                                <td>
+                                                                    <label for="" class="form-check-label">
+                                                                        <input type="checkbox" checked class="form-check-input <?php echo $key ?> " name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?>
+                                                                    </label>
+                                                                </td>
+                                                            <?php
+                                                            } else { ?>
+                                                                <td>
+                                                                    <label for="" class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input <?php echo $key ?>" name="permission['<?php echo $key; ?>'][] " value="<?php echo $v ?>" /><?php echo $k; ?>
+                                                                </td>
+                                                                </label></td>
+                                                            <?php }
+                                                        } else { ?>
 
                                                             <td>
                                                                 <label for="" class="form-check-label">
