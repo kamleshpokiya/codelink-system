@@ -52,11 +52,19 @@ class user_check_inout extends loadFile
 		 $where = '';
 
 		$records = $this->db->select_data($select, $tbl, $option, $where);
-		// echo '<pre>';
-		// print_r($records); 	
-		// die;
-        
         $this->view("checkuser", array("title" => "User check in and out page", 'users' => $records));
     }
+	public function user_time_details ()
+	{
+		// SELECT * FROM `user_in_out` WHERE date = CURRENT_DATE() and user_id = 31;
+		$id = $_POST['id'];
+		$tbl = 'user_in_out';
+		$where = "date = CURRENT_DATE() and user_id = $id";
+		$records = $this->db->select_data('', $tbl, '', $where);
+		print_r(json_encode($records));
+		// die;	
+		$data = json_encode($records);
+		return $data;
+	}
 	
 }

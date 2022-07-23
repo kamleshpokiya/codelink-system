@@ -67,7 +67,11 @@
                             if ($seconds < 9) {
                                 $seconds =  '0' . $seconds;
                             }
-                            echo $hours . ' : ' . $minutes . ' : ' . $seconds;
+                            if($out != '00:00:00'){
+                                echo $hours . ' : ' . $minutes . ' : ' . $seconds;
+                            }else {
+                                echo '--';
+                            }
                             ?>
                         </td>
                         <td>

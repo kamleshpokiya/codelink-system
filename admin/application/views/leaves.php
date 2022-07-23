@@ -75,7 +75,7 @@
                                     <?php if(in_array('3', $permission)){  ?>
                                        <td>
                                        <button type="button" class="btn btn-danger btn-icon-text" id="<?php echo $key->id; ?>" onclick="del(this.id)">
-                                          <i class="mdi mdi-delete"></i> Delete </button>
+                                          <i class="mdi mdi-delete"></i></button>
                                     </td>
                                     <?php }?>
                                  </tr>

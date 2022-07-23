@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php if (isset($data['leaves'])) {
+        <?php if (!empty($data['leaves'])) {
               if (sizeof($data['leaves']) > 0) {
                 foreach ($data['leaves'] as $key => $value) { ?>
                   <tr>
@@ -74,23 +74,30 @@
                                                                             } else if ($value['status'] == 2) {
                                                                               echo 'danger';
                                                                             } ?>"><?php if ($value['status'] == 0) {
-                                                                                  echo 'Pending';
-                                                                                } elseif ($value['status'] == 1) {
-                                                                                  echo 'Approved';
-                                                                                } else if ($value['status'] == 2) {
-                                                                                  echo 'Declined';
-                                                                                }
-                                                                              } ?></td>
+                                                                                    echo 'Pending';
+                                                                                  } elseif ($value['status'] == 1) {
+                                                                                    echo 'Approved';
+                                                                                  } else if ($value['status'] == 2) {
+                                                                                    echo 'Declined';
+                                                                                  }
+                                                                                } ?></td>
                     <td><button type="button" class="btn btn-outline-secondary btn-icon-text view_admin_comments data-bs-toggle='modal' data-bs-target='#exampleModal'"><?php echo 'View'; ?> <i class="mdi mdi-file-check btn-icon-append"></i>
                         <span hidden><?php if (isset($value['comments'])) {
                                         echo $value['comments'];
                                       } ?></span></button></td>
                     <td><?php echo $value['date']; ?></td>
                   </tr>
-            <?php  }
+              <?php  }
               }
-            } ?>
-
+            } else {
+              ?> 
+              <tr>
+           <td colspan="12"> <span style="font-size: 30px;">recode not found !</span></td>
+                <!-- <td style="color:white; font-size:large;">No record found</td> -->
+              </tr>
+            <?php
+            }
+            ?>
           </tbody>
         </table>
       </div>
